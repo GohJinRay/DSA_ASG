@@ -7,6 +7,7 @@ using namespace std;
 class Customer : public User
 {
 private:
+	LinkedList_Customer orderList;
 
 public:
 	Customer();

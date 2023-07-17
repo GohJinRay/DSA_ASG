@@ -4,10 +4,10 @@ using namespace std;
 
 class LinkedList_Customer
 {
-private:
+public:
 	struct Node
 	{
-		Order orderItem;
+		Order* orderItem;
 		Node* next;
 	};
 

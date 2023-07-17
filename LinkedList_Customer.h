@@ -1,7 +1,5 @@
 #pragma once
 #include "Order.h"
-#include <iostream>
-#include <string>
 using namespace std;
 
 class LinkedList_Customer

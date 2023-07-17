@@ -125,7 +125,6 @@ void LinkedList_Customer::print()
 		int orderID = order.getOrderID();
 		time_t orderDate = order.getOrderDate();
 		string status = order.getStatus();
-		Customer customer = order.getCustomer();
 
 		cout << "Order ID: " << orderID << endl;
 		cout << "Order Date: " << orderDate << endl;

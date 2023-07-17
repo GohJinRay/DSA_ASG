@@ -2,7 +2,6 @@
 #include <string>
 #include <ctime>
 #include "Customer.h"
-#include "FoodItem.h"
 #include "LinkedList_Order.h"
 using namespace std;
 
@@ -12,12 +11,11 @@ private:
 	int orderID;
 	time_t orderDate;
 	string status;
-	Customer customer;
 	LinkedList_Order foodItemList;
 
 public:
 	Order();
-	Order(int, time_t, string, Customer, LinkedList_Order);
+	Order(int, time_t, string, LinkedList_Order);
 	bool addFoodItem();
 	bool removeFoodItem();
 
@@ -28,6 +26,5 @@ public:
 	int getOrderID();
 	time_t getOrderDate();
 	string getStatus();
-	Customer getCustomer();
 	LinkedList_Order getFoodItemList();
 };

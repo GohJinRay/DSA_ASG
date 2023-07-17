@@ -11,8 +11,8 @@ private:
 	LinkedList_Customer orderList;
 
 public:
-	Customer() { }
-	Customer(LinkedList_Customer, int, string, string, int, bool) { }
+	Customer();
+	Customer(LinkedList_Customer, int, string, string, int, bool);
 	virtual bool login();
 	void viewMenu();
 	bool createOrder(Order);

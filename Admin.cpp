@@ -6,7 +6,7 @@ Admin::Admin(int UserID, string Name, string Password, int PhoneNum, bool IsAdmi
 
 bool Admin::login()
 {
-
+	return true;
 }
 
 void Admin::viewOrders()
@@ -16,7 +16,7 @@ void Admin::viewOrders()
 
 bool Admin::updateStatus() //Add parameters
 {
-
+	return true;
 }
 
 void Admin::viewCustInfo() //Add parameters

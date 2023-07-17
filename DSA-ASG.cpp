@@ -4,10 +4,16 @@
 #include <iostream>
 #include <string>
 #include "User.h"
+#include "Admin.h"
+#include "Customer.h"
+#include "FoodItem.h"
+#include "LinkedList_Customer.h"
+#include "LinkedList_Order.h"
 using namespace std;
 
 int main()
 {
-
+	cout << "Hello" << endl;
+	return 0;
 }
 

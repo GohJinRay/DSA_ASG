@@ -13,12 +13,12 @@ Order::Order(int OrderID, time_t OrderDate, string Status, Customer Customer, Li
 
 bool Order::addFoodItem(FoodItem ) //Finish parameters 
 {
-
+	return true;
 }
 
 bool Order::removeFoodItem(FoodItem) //Finish parameters
 {
-
+	return true;
 }
 
 void Order::setOrderID(int OrderID) { orderID = OrderID; }

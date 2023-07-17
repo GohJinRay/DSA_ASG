@@ -31,4 +31,3 @@ public:
 	Customer getCustomer();
 	LinkedList_Order getFoodItemList();
 };
-

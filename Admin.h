@@ -10,7 +10,7 @@ public:
 	Admin(int, string, string, int, bool);
 	virtual bool login();
 	void viewOrders();
-	bool updateStatus(); //Add parameters 
-	void viewCustInfo(); //Add parameters
+	bool updateStatus(); 
+	void viewCustInfo(); 
 };
 

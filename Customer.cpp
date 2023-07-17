@@ -2,7 +2,7 @@
 
 Customer::Customer() { }
 
-Customer::Customer(LinkedList_Customer OrderList, int UserID, string Name, string Password, int PhoneNum, bool IsAdmin): User(UserID, Name, Password, PhoneNum, IsAdmin) 
+Customer::Customer(LinkedList_Customer OrderList, int UserID, string Name, string Password, int PhoneNum, bool IsAdmin) : User(UserID, Name, Password, PhoneNum, IsAdmin)
 {
 	orderList = OrderList;
 }
@@ -17,12 +17,12 @@ void Customer::viewMenu()
 
 }
 
-//bool Customer::createOrder(Order ) //Finish parameters
-//{
-//	return true;
-//}
-//
-//bool Customer::cancelOrder(Order ) //Finish parameters
-//{
-//	return true;
-//}
+bool Customer::createOrder() 
+{
+	return true;
+}
+
+bool Customer::cancelOrder() 
+{
+	return true;
+}

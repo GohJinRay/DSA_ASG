@@ -15,7 +15,6 @@ public:
 	Customer(LinkedList_Customer, int, string, string, int, bool);
 	virtual bool login();
 	void viewMenu();
-	bool createOrder(Order);
-	bool cancelOrder(Order);
+	bool createOrder();
+	bool cancelOrder();
 };
-

@@ -2,7 +2,7 @@
 #include <string>
 using namespace std;
 
-class User 
+class User
 {
 private:
 	int userID;

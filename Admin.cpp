@@ -14,12 +14,12 @@ void Admin::viewOrders()
 
 }
 
-bool Admin::updateStatus() //Add parameters
+bool Admin::updateStatus() 
 {
 	return true;
 }
 
-void Admin::viewCustInfo() //Add parameters
+void Admin::viewCustInfo() 
 {
 
 }

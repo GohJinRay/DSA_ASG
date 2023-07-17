@@ -11,7 +11,7 @@ Order::Order(int OrderID, time_t OrderDate, string Status, Customer Customer, Li
 	foodItemList = FoodItemList;
 }
 
-bool Order::addFoodItem(FoodItem ) //Finish parameters 
+bool Order::addFoodItem(FoodItem) //Finish parameters 
 {
 	return true;
 }

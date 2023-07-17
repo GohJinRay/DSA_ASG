@@ -11,12 +11,12 @@ Order::Order(int OrderID, time_t OrderDate, string Status, Customer Customer, Li
 	foodItemList = FoodItemList;
 }
 
-bool Order::addFoodItem(FoodItem) //Finish parameters 
+bool Order::addFoodItem() 
 {
 	return true;
 }
 
-bool Order::removeFoodItem(FoodItem) //Finish parameters
+bool Order::removeFoodItem() 
 {
 	return true;
 }

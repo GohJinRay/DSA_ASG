@@ -18,8 +18,8 @@ private:
 public:
 	Order();
 	Order(int, time_t, string, Customer, LinkedList_Order);
-	bool addFoodItem(FoodItem);
-	bool removeFoodItem(FoodItem);
+	bool addFoodItem();
+	bool removeFoodItem();
 
 	void setOrderID(int);
 	void setOrderDate(time_t);

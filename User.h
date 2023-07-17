@@ -2,7 +2,7 @@
 #include <string>
 using namespace std;
 
-class User
+class User 
 {
 private:
 	int userID;
@@ -11,10 +11,9 @@ private:
 	int phoneNum;
 	bool isAdmin;
 
-public: 
+public:
 	User();
 	User(int, string, string, int, bool);
 	bool registerUser();
 	virtual bool login() = 0;
 };
-

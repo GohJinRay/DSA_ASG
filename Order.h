@@ -11,12 +11,13 @@ private:
 	int orderID;
 	time_t orderDate;
 	string status;
+	Customer customer;
 	LinkedList_Order foodItemList;
 
 public:
 	Order();
-	Order(int, time_t, string, LinkedList_Order);
-	bool addFoodItem();
+	Order(int, time_t, string, Customer);
+	bool addFoodItem(int);
 	bool removeFoodItem();
 
 	void setOrderID(int);
@@ -26,5 +27,6 @@ public:
 	int getOrderID();
 	time_t getOrderDate();
 	string getStatus();
+	Customer getCustomer();
 	LinkedList_Order getFoodItemList();
 };

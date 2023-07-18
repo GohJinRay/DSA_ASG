@@ -1,13 +1,11 @@
 #pragma once
-
-#include<string>
-#include<iostream>
+#include <string>
 using namespace std;
 
-class User 
+class User
 {
 private:
-	int id;
+	int userID;
 	string name;
 	string password;
 	int phoneNum;
@@ -17,6 +15,5 @@ public:
 	User();
 	User(int, string, string, int, bool);
 	bool registerUser();
-	bool login();
-
+	virtual bool login() = 0;
 };

@@ -2,9 +2,23 @@
 #include <iostream>
 using namespace std;
 
-LinkedList_Order::LinkedList_Order() { };
+LinkedList_Order::LinkedList_Order() 
+{ 
+	firstNode = NULL;
+	size = 0;
+}
 
-LinkedList_Order::~LinkedList_Order() { };
+LinkedList_Order::~LinkedList_Order() 
+{ 
+	Node* curr = firstNode;
+	Node* next;
+	while (curr != NULL)
+	{
+		next = curr->next;
+		delete curr;
+		curr = next;
+	}
+}
 
 bool LinkedList_Order::add(FoodItem foodItem)
 {

@@ -2,9 +2,9 @@
 
 Customer::Customer() { }
 
-Customer::Customer(int UserID, string Name, string Password, int PhoneNum, bool IsAdmin) : User(UserID, Name, Password, PhoneNum, IsAdmin)
+Customer::Customer(LinkedList_Customer OrderList,int UserID, string Name, string Password, int PhoneNum, bool IsAdmin) : User(UserID, Name, Password, PhoneNum, IsAdmin)
 {
-
+	orderList = OrderList;
 }
 
 bool Customer::login()

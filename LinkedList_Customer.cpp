@@ -3,11 +3,25 @@
 #include <iostream>
 using namespace std;
 
-LinkedList_Customer::LinkedList_Customer() { };
+LinkedList_Customer::LinkedList_Customer() 
+{ 
+	firstNode = NULL;
+	size = 0;
+}
 
-LinkedList_Customer::~LinkedList_Customer() { };
+LinkedList_Customer::~LinkedList_Customer() 
+{
+	Node* curr = firstNode;
+	Node* next;
+	while (curr != NULL)
+	{
+		next = curr->next;
+		delete curr;
+		curr = next;
+	}
+}
 
-bool LinkedList_Customer::add(Order orderItem)
+bool LinkedList_Customer::add(Order* orderItem)
 {
 	Node* newNode = new Node;
 	newNode->orderItem = orderItem;
@@ -28,7 +42,7 @@ bool LinkedList_Customer::add(Order orderItem)
 	return true;
 }
 
-bool LinkedList_Customer::add(int index, Order orderItem)
+bool LinkedList_Customer::add(int index, Order* orderItem)
 {
 	if (index >= 0 && index <= size)
 	{
@@ -88,7 +102,7 @@ void LinkedList_Customer::remove(int index)
 	}
 }
 
-Order LinkedList_Customer::get(int index)
+Order* LinkedList_Customer::get(int index)
 {
 	if (index >= 0 && index < size)
 	{
@@ -120,17 +134,16 @@ void LinkedList_Customer::print()
 
 	while (curr != NULL)
 	{
-		Order order = curr->orderItem;
-
-		int orderID = order.getOrderID();
-		time_t orderDate = order.getOrderDate();
-		string status = order.getStatus();
+		Order* order = curr->orderItem;
+		int orderID = order->getOrderID();
+		time_t orderDate = order->getOrderDate();
+		string status = order->getStatus();
 
 		cout << "Order ID: " << orderID << endl;
 		cout << "Order Date: " << orderDate << endl;
 		cout << "Status: " << status << endl;
 		
-		order.getFoodItemList().print();
+		order->getFoodItemList().print();
 
 		curr = curr->next;
 	}

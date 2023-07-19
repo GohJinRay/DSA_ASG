@@ -11,7 +11,7 @@ private:
 
 public:
 	Customer();
-	Customer(int, string, string, int, bool);
+	Customer(LinkedList_Customer, int, string, string, int, bool);
 	virtual bool login();
 	virtual void printDetails();
 	void viewMenu();

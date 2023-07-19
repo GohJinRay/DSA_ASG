@@ -16,4 +16,5 @@ public:
 	User(int, string, string, int, bool);
 	bool registerUser();
 	virtual bool login() = 0;
+	string getName();
 };

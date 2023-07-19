@@ -15,3 +15,8 @@ bool User::registerUser()
 {
 	return true;
 }
+
+string User::getName() 
+{
+	return name;
+}

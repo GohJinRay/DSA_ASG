@@ -9,6 +9,11 @@ bool Admin::login()
 	return true;
 }
 
+void Admin::printDetails()
+{
+	User::printDetails();
+}
+
 void Admin::viewOrders()
 {
 

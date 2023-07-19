@@ -10,17 +10,17 @@ LinkedList_Order::LinkedList_Order()
 
 LinkedList_Order::~LinkedList_Order() 
 { 
-	Node* curr = firstNode;
+	/*Node* curr = firstNode;
 	Node* next;
 	while (curr != NULL)
 	{
 		next = curr->next;
 		delete curr;
 		curr = next;
-	}
+	}*/
 }
 
-bool LinkedList_Order::add(FoodItem foodItem)
+bool LinkedList_Order::addFoodItem(FoodItem& foodItem)
 {
 	Node* newNode = new Node;
 	newNode->foodItem = foodItem;
@@ -41,7 +41,7 @@ bool LinkedList_Order::add(FoodItem foodItem)
 	return true;
 }
 
-bool LinkedList_Order::add(int index, FoodItem foodItem)
+bool LinkedList_Order::addFoodItem(int index, FoodItem foodItem)
 {
 	if (index >= 0 && index <= size)
 	{
@@ -73,7 +73,7 @@ bool LinkedList_Order::add(int index, FoodItem foodItem)
 		return false;
 }
 
-void LinkedList_Order::remove(int index)
+void LinkedList_Order::removeFoodItem(int index)
 {
 	if (index >= 0 && index < size)
 	{
@@ -101,7 +101,7 @@ void LinkedList_Order::remove(int index)
 	}
 }
 
-FoodItem LinkedList_Order::get(int index)
+FoodItem LinkedList_Order::getFoodItem(int index)
 {
 	if (index >= 0 && index < size)
 	{
@@ -117,17 +117,17 @@ FoodItem LinkedList_Order::get(int index)
 	}
 }
 
-bool LinkedList_Order::isEmpty()
+bool LinkedList_Order::FoodItemListisEmpty()
 {
 	return size == 0;
 }
 
-int LinkedList_Order::getLength()
+int LinkedList_Order::FoodItemListgetLength()
 {
 	return size;
 }
 
-void LinkedList_Order::print()
+void LinkedList_Order::FoodItemListprint()
 {
 	Node* curr = firstNode;
 
@@ -144,6 +144,7 @@ void LinkedList_Order::print()
 		cout << "Food Name: " << foodName << endl;
 		cout << "Price: " << price << endl;
 		cout << "Is Available? " << isAvail << endl;
+		cout << endl;
 
 		curr = curr->next;
 	}

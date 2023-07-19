@@ -16,8 +16,8 @@ private:
 
 public:
 	Order();
-	Order(int, time_t, string, Customer, LinkedList_Order);
-	bool addFoodItem();
+	Order(int, time_t, string, Customer);
+	bool addFoodItem(int);
 	bool removeFoodItem();
 
 	void setOrderID(int);

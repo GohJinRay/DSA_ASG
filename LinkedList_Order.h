@@ -19,18 +19,18 @@ public:
 
 	~LinkedList_Order();
 
-	bool add(FoodItem foodItem);
+	bool addFoodItem(FoodItem& foodItem);
 
-	bool add(int index, FoodItem foodItem);
+	bool addFoodItem(int index, FoodItem foodItem);
 
-	void remove(int index);
+	void removeFoodItem(int index);
 
-	FoodItem get(int index);
+	FoodItem getFoodItem(int index);
 
-	bool isEmpty();
+	bool FoodItemListisEmpty();
 
-	int getLength();
+	int FoodItemListgetLength();
 
-	void print();
+	void FoodItemListprint();
 };
 

@@ -20,18 +20,18 @@ public:
 
 	~LinkedList_Customer();
 
-	bool add(Order* orderItem);
+	bool addOrder(Order* orderItem);
 
-	bool add(int index, Order* orderItem);
+	bool addOrder(int index, Order* orderItem);
 
-	void remove(int index);
+	void removeOrder(int index);
 
-	Order* get(int index);
+	Order* getOrder(int index);
 
-	bool isEmpty();
+	bool OrderListisEmpty();
 
-	int getLength();
+	int OrderListgetLength();
 
-	void print();
+	void OrderListprint();
 };
 

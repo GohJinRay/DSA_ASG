@@ -9,6 +9,7 @@ public:
 	Admin();
 	Admin(int, string, string, int, bool);
 	virtual bool login();
+	virtual void printDetails();
 	void viewOrders();
 	bool updateStatus(); 
 	void viewCustInfo(); 

@@ -16,7 +16,20 @@ bool User::registerUser()
 	return true;
 }
 
-string User::getName() 
+void User::printDetails()
 {
-	return name;
+	cout << "Customer Details:" << endl;
+	cout << "User ID: " << getUserID() << endl;
+	cout << "Name: " << getName() << endl;
+	cout << "Password: " << getPassword() << endl;
+	cout << "Phone Number: " << getPhoneNum() << endl;
 }
+
+void User::setUserID(int UserID) { userID = UserID; }
+void User::setName(string Name) { name = Name; }
+void User::setPassword(string Password) { password = Password; }
+void User::setPhoneNum(int PhoneNum) { phoneNum = PhoneNum; }
+int User::getUserID() { return userID; }
+string User::getName() { return name; }
+string User::getPassword() { return password; }
+int User::getPhoneNum() { return phoneNum; }

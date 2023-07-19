@@ -16,8 +16,9 @@ using namespace std;
 int main()
 {
 	QueuePtr newQueue;
-	Customer cust1(1, "a", "123", 123, false);
-	Customer cust2(2, "b", "124", 124, false);
+	LinkedList_Customer llC;
+	Customer cust1(llC, 1, "a", "123", 123, false);
+	Customer cust2(llC, 2, "b", "124", 124, false);
 	Order& orderList1 = cust1.createOrder();
 	Order& orderList2 = cust2.createOrder();
 	Order& orderList3 = cust1.createOrder();

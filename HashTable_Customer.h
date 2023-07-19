@@ -1,8 +1,8 @@
 #pragma once
 
-#include<string>
-#include<iostream>
-#include"Customer.h"
+#include <string>
+#include <iostream>
+#include "Customer.h"
 
 using namespace std;
 

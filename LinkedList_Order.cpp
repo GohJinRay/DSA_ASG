@@ -15,6 +15,7 @@ LinkedList_Order::~LinkedList_Order()
 	while (curr != NULL)
 	{
 		next = curr->next;
+		curr = NULL;
 		delete curr;
 		curr = next;
 	}

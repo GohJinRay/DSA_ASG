@@ -10,14 +10,15 @@ LinkedList_Order::LinkedList_Order()
 
 LinkedList_Order::~LinkedList_Order() 
 { 
-	/*Node* curr = firstNode;
+	Node* curr = firstNode;
 	Node* next;
 	while (curr != NULL)
 	{
 		next = curr->next;
 		delete curr;
 		curr = next;
-	}*/
+	}
+	firstNode = NULL;
 }
 
 bool LinkedList_Order::addFoodItem(FoodItem& foodItem)
@@ -78,8 +79,8 @@ void LinkedList_Order::removeFoodItem(int index)
 	if (index >= 0 && index < size)
 	{
 		int counter = 0;
-		Node* curr = firstNode->next;
 		Node* prev = firstNode;
+		Node* curr = firstNode->next;
 
 		if (index == 0)
 		{
@@ -108,7 +109,7 @@ FoodItem LinkedList_Order::getFoodItem(int index)
 		int counter = 0;
 		Node* curr = firstNode;
 
-		while (curr->next != NULL && counter < index)
+		while (curr->next != NULL && counter <= index)
 		{
 			curr = curr->next;
 			counter++;

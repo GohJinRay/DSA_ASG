@@ -11,11 +11,11 @@ private:
 
 public:
 	Customer();
-	Customer(LinkedList_Customer, int, string, string, int, bool);
+	Customer(int, string, string, int, bool);
 	virtual bool login();
 	virtual void printDetails();
 	void viewMenu();
-	Order& createOrder();
+	Order* createOrder(int);
 	bool cancelOrder();
 	LinkedList_Customer getOrderList();
 };

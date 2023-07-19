@@ -16,24 +16,32 @@ using namespace std;
 int main()
 {
 	QueuePtr newQueue;
-	LinkedList_Customer llC; // added this list
-	Customer cust1(llC, 1, "a", "123", 123, false); // added the list into here
-	Customer cust2(llC, 2, "b", "124", 124, false); // and here
-	Order& orderList1 = cust1.createOrder();
-	Order& orderList2 = cust2.createOrder();
-	Order& orderList3 = cust1.createOrder();
-	orderList1.addFoodItem(1);
-	orderList1.addFoodItem(2);
-	orderList2.addFoodItem(2);
-	orderList3.addFoodItem(1);
+	//LinkedList_Customer llC; // added this list
+	Customer cust1(1, "a", "123", 123, false); // added the list into here
+	Customer cust2(2, "b", "124", 124, false); // and here
+	Order* order;
+
+	order = cust1.createOrder(1);
+	order->addFoodItem(1);
+	order->addFoodItem(2);
+	newQueue.enqueue(*order);
+
+	order = cust2.createOrder(2);
+	order->addFoodItem(2);
+	newQueue.enqueue(*order);
+
+	order = cust1.createOrder(3);
+	order->addFoodItem(1);
+	newQueue.enqueue(*order);
+
 	cout << "Shows cust1's order" << endl;
 	cust1.getOrderList().OrderListprint();
 	cout << "Shows cust2's order" << endl;
 	cust2.getOrderList().OrderListprint();
-	newQueue.enqueue(&orderList1);
-	newQueue.enqueue(&orderList2);
+
 	cout << "Shows what's in the queue currently" << endl;
 	newQueue.displayItems();
+
 	return 0;
 }
 

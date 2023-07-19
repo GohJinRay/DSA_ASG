@@ -8,7 +8,7 @@ class QueuePtr
 private:
 	struct Node
 	{
-		Order* order;
+		Order order;
 		Node* next;
 	};
 
@@ -20,13 +20,13 @@ public:
 
 	~QueuePtr();
 
-	bool enqueue(Order* order);
+	bool enqueue(Order& order);
 
 	bool dequeue();
 
-	bool dequeue(Order* order);
+	bool dequeue(Order& order);
 
-	void getFront(Order* order);
+	void getFront(Order& order);
 
 	bool isEmpty();
 	

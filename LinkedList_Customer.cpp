@@ -11,14 +11,14 @@ LinkedList_Customer::LinkedList_Customer()
 
 LinkedList_Customer::~LinkedList_Customer() 
 {
-	/*Node* curr = firstNode;
-	Node* next;
+	Node* curr = firstNode;
 	while (curr != NULL)
 	{
-		next = curr->next;
+		Node* next = curr->next;
+		curr = NULL;
 		delete curr;
 		curr = next;
-	}*/
+	}
 }
 
 bool LinkedList_Customer::addOrder(Order* orderItem)
@@ -116,6 +116,7 @@ Order* LinkedList_Customer::getOrder(int index)
 		}
 		return curr->orderItem;
 	}
+	return NULL;
 }
 
 bool LinkedList_Customer::OrderListisEmpty()

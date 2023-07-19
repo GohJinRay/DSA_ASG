@@ -3,7 +3,7 @@
 
 Customer::Customer() { }
 
-Customer::Customer(LinkedList_Customer OrderList, int UserID, string Name, string Password, int PhoneNum, bool IsAdmin)
+Customer::Customer(int UserID, string Name, string Password, int PhoneNum, bool IsAdmin)
 	: User(UserID, Name, Password, PhoneNum, IsAdmin), orderList() {}
 
 bool Customer::login()
@@ -21,14 +21,13 @@ void Customer::viewMenu()
 
 }
 
-Order& Customer::createOrder() 
+Order* Customer::createOrder(int orderID) 
 {
-	time_t now = time(0);
-	Order* newOrder = new Order(1, now, "Not prepared", *this);
-
+	time_t orderDate = time(0);
+	Order* newOrder = new Order(orderID, orderDate, "Not preapred", *this);
 	orderList.addOrder(newOrder);
 
-	return *newOrder;
+	return newOrder;
 }
 
 bool Customer::cancelOrder() 

@@ -4,13 +4,13 @@ QueuePtr::QueuePtr() { };
 
 QueuePtr::~QueuePtr()
 {
-	/*while (!isEmpty())
+	while (!isEmpty())
 	{
 		dequeue();
-	}*/
+	}
 }
 
-bool QueuePtr::enqueue(Order* order)
+bool QueuePtr::enqueue(Order& order)
 {
 	Node* newNode = new Node;
 	newNode->order = order;
@@ -40,8 +40,8 @@ bool QueuePtr::dequeue()
 
 	else if (frontNode == backNode)
 	{
-		frontNode == NULL;
-		backNode == NULL;
+		frontNode = NULL;
+		backNode = NULL;
 
 		delete frontNode;
 	}
@@ -57,7 +57,7 @@ bool QueuePtr::dequeue()
 	return true;
 }
 
-bool QueuePtr::dequeue(Order* order)
+bool QueuePtr::dequeue(Order& order)
 {
 	if (frontNode == NULL)
 	{
@@ -86,16 +86,16 @@ bool QueuePtr::dequeue(Order* order)
 	return true;
 }
 
-void QueuePtr::getFront(Order* order)
+void QueuePtr::getFront(Order& order)
 {
 	if (!isEmpty())
 		order = frontNode->order;
 
 	else
 	{
-		order->setOrderID(-1);
-		order->setOrderDate(-1);
-		order->setStatus("Not prepared");
+		order.setOrderID(-1);
+		order.setOrderDate(-1);
+		order.setStatus("Not prepared");
 	}
 }
 
@@ -116,13 +116,13 @@ void QueuePtr::displayItems()
 		Node* curr = frontNode;
 		while (curr != NULL)
 		{
-			cout << "Order ID: " << curr->order->getOrderID() << endl;
-			cout << "Order Date: " << curr->order->getOrderDate() << endl;
-			cout << "Status: " << curr->order->getStatus() << endl << endl;
-			curr->order->getCustomer().printDetails();
+			cout << "Order ID: " << curr->order.getOrderID() << endl;
+			cout << "Order Date: " << curr->order.getOrderDate() << endl;
+			cout << "Status: " << curr->order.getStatus() << endl << endl;
+			curr->order.getCustomer().printDetails();
 			cout << endl;
 			cout << "Food Items: " << endl << endl;
-			curr->order->getFoodItemList().FoodItemListprint();
+			curr->order.getFoodItemList().FoodItemListprint(); //
 			cout << endl;
 			curr = curr->next;
 		}

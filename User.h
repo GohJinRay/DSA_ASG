@@ -17,7 +17,6 @@ public:
 	User(int, string, string, int, bool);
 	bool registerUser();
 	virtual bool login() = 0;
-	virtual void printDetails();
 	void setUserID(int);
 	void setName(string);
 	void setPassword(string);
@@ -26,4 +25,5 @@ public:
 	string getName();
 	string getPassword();
 	int getPhoneNum();
+	virtual void printDetails();
 };

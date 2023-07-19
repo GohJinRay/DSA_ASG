@@ -11,7 +11,7 @@ public:
 	virtual bool login();
 	virtual void printDetails();
 	void viewOrders();
-	bool updateStatus(); 
-	void viewCustInfo(); 
+	bool updateStatus(int, string); 
+	void viewCustInfo(int); 
 };
 

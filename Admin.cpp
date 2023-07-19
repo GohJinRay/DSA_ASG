@@ -19,12 +19,12 @@ void Admin::viewOrders()
 
 }
 
-bool Admin::updateStatus() 
+bool Admin::updateStatus(int id, string status) 
 {
 	return true;
 }
 
-void Admin::viewCustInfo() 
+void Admin::viewCustInfo(int id) 
 {
 
 }

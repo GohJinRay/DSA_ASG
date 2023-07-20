@@ -92,7 +92,7 @@ void Dictionary::remove(KeyType key) {
 Customer Dictionary::get(KeyType key) {
         int index = hash(key);
     if (isEmpty()) {
-        return ItemType();
+        return Customer();
     }
 
     Node* currNode = items[index];
@@ -103,7 +103,7 @@ Customer Dictionary::get(KeyType key) {
         }
         currNode = currNode->next;
     }
-    return ItemType();
+    return Customer();
 }
 
 bool Dictionary::isEmpty() {

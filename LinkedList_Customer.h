@@ -1,10 +1,11 @@
 #pragma once
+
+#include <iostream>
 using namespace std;
 
-class Order; //Forward declaration
+class Order;
 
-class LinkedList_Customer
-{
+class LinkedList_Customer {
 private:
 	struct Node
 	{
@@ -20,18 +21,18 @@ public:
 
 	~LinkedList_Customer();
 
-	bool addOrder(Order* orderItem);
+	bool addOrder(Order*);
 
-	bool addOrder(int index, Order* orderItem);
+	bool addOrder(int, Order*);
 
-	void removeOrder(int index);
+	void removeOrder(int);
 
-	Order* getOrder(int index);
+	Order* getOrder(int);
 
 	bool OrderListisEmpty();
 
 	int OrderListgetLength();
 
 	void OrderListprint();
-};
 
+};

@@ -11,6 +11,7 @@
 #include "Order.h"
 #include "FoodItem.h"
 #include "QueuePtr.h"
+#include "HashTable_Customer.h"
 using namespace std;
 
 int main()
@@ -41,7 +42,9 @@ int main()
 
 	cout << "Shows what's in the queue currently" << endl;
 	newQueue.displayItems();
-
+	newQueue.dequeue();
+	cout << "Hello" << endl;
+	newQueue.displayItems();
 	return 0;
 }
 

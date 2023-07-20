@@ -29,6 +29,7 @@ void User::setUserID(int UserID) { userID = UserID; }
 void User::setName(string Name) { name = Name; }
 void User::setPassword(string Password) { password = Password; }
 void User::setPhoneNum(int PhoneNum) { phoneNum = PhoneNum; }
+
 int User::getUserID() { return userID; }
 string User::getName() { return name; }
 string User::getPassword() { return password; }

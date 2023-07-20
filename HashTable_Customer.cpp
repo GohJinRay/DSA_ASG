@@ -113,3 +113,16 @@ bool Dictionary::isEmpty() {
 int Dictionary::getLength() {
     return size;
 }
+
+void Dictionary::print() {
+    for (int i = 0; i < MAX_SIZE; i++) {
+        if (items[i] != nullptr) {
+            cout << "Name of Customer: " << items[i]->key << endl; // print the name of customer (key)
+            Node* currNode = items[i]->next;
+            while (currNode != nullptr) {
+                cout << "Name of Customer: " << currNode->key << endl; // print the name of customer (key)
+                currNode = currNode->next;
+            }
+        }
+    }
+}

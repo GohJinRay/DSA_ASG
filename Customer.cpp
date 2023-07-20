@@ -24,7 +24,7 @@ void Customer::viewMenu()
 Order* Customer::createOrder(int orderID) 
 {
 	time_t orderDate = time(0);
-	Order* newOrder = new Order(orderID, orderDate, "Not preapred", *this);
+	Order* newOrder = new Order(orderID, orderDate, "Not prepared", *this);
 	orderList.addOrder(newOrder);
 
 	return newOrder;

@@ -3,28 +3,28 @@
 #include <string>
 
 Dictionary::Dictionary() {
-	size = 0;
-	for (int i = 0; i < MAX_SIZE; i++) {
-		items[i] = nullptr;
-	}
+    size = 0;
+    for (int i = 0; i < MAX_SIZE; i++) {
+        items[i] = nullptr;
+    }
 }
 
 Dictionary::~Dictionary() {
-	for (int i = 0; i < MAX_SIZE; i++) {
-		Node* currNode = items[i];
-		while (currNode != nullptr) {
-			Node* tempNode = currNode;
-			currNode = currNode->next;
-			delete tempNode;
-		}
-	}
+    for (int i = 0; i < MAX_SIZE; i++) {
+        Node* currNode = items[i];
+        while (currNode != nullptr) {
+            Node* tempNode = currNode;
+            currNode = currNode->next;
+            delete tempNode;
+        }
+    }
 }
 
 int Dictionary::hash(KeyType key) {
     int sum = 0;
 
     string name = key;
-    
+
     for (char c : name) {
         sum += static_cast<int>(c); // Convert char to ASCII and add to sum
     }
@@ -107,9 +107,9 @@ Customer Dictionary::get(KeyType key) {
 }
 
 bool Dictionary::isEmpty() {
-	return size == 0;
+    return size == 0;
 }
 
 int Dictionary::getLength() {
-	return size;
+    return size;
 }

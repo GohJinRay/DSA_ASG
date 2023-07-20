@@ -34,12 +34,12 @@ int Dictionary::hash(KeyType key) {
     return hashValue;
 }
 
-bool Dictionary::add(KeyType newKey, ItemType newItem) {
+bool Dictionary::add(KeyType newKey, Customer customer) {
 	int index = hash(newKey);
 
     Node* newNode = new Node;
     newNode->key = newKey;
-    newNode->item= newItem;
+    newNode->item= customer;
     newNode->next = nullptr;
 
     if (items[index] == nullptr) {

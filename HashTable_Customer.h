@@ -8,7 +8,7 @@ using namespace std;
 
 const int MAX_SIZE = 100;
 typedef string KeyType;
-typedef Customer ItemType;
+
 
 
 class Dictionary {
@@ -16,7 +16,7 @@ private:
 	struct Node
 	{
 		KeyType key;
-		ItemType item;
+		Customer item;
 		Node* next;
 	};
 
@@ -33,7 +33,7 @@ public:
 
 	int hash(KeyType key);
 
-	bool add(KeyType newKey, ItemType newItem);
+	bool add(KeyType newKey, Customer customer);
 
 	void remove(KeyType key);
 

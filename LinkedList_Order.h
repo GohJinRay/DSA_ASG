@@ -15,6 +15,7 @@ private:
 	int size;
 
 public:
+
 	LinkedList_Order();
 
 	~LinkedList_Order();

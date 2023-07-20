@@ -37,7 +37,7 @@ public:
 
 	void remove(KeyType key);
 
-	ItemType get(KeyType key);
+	Customer get(KeyType key);
 
 	bool isEmpty();
 

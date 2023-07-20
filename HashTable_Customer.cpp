@@ -89,7 +89,7 @@ void Dictionary::remove(KeyType key) {
     }
 }
 
-ItemType Dictionary::get(KeyType key) {
+Customer Dictionary::get(KeyType key) {
         int index = hash(key);
     if (isEmpty()) {
         return ItemType();

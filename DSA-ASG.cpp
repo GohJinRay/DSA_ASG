@@ -14,8 +14,52 @@
 #include "HashTable_Customer.h"
 using namespace std;
 
+
+void Menu() {
+	cout << "-----------------------------------" << endl;
+	cout << "Welcome to the Customer Menu" << endl;
+	cout << "-----------------------------------" << endl;
+	cout << "Please select an option:" << endl;
+	cout << "1. Register" << endl;
+	cout << "2. Login" << endl;
+	cout << "3. Exit" << endl;
+	cout << "-----------------------------------" << endl;
+	cout << "Enter your choice (1, 2, or 3): ";
+}
+
+
+
+
 int main()
 {
+	Customer cust1; // initialize
+	Admin admin1; // initalize
+
+	int choice;
+	do {
+		cin >> choice;
+
+		switch (choice) {
+		case 1:
+			// register customer
+			break;
+		case 2:
+			// login as customer or admin;
+			break;
+		case 3:
+			cout << "-----------------------------------" << endl;
+			cout << "Exiting the Customer Menu. Goodbye!" << endl;
+			cout << "-----------------------------------" << endl;
+			break;
+		default:
+			cout << "-----------------------------------" << endl;
+			cout << "Invalid choice. Please enter a valid option (1, 2, or 3)." << endl;
+			cout << "-----------------------------------" << endl;
+		}
+	} while (choice != 3);
+
+
+
 	QueuePtr newQueue;
 	//LinkedList_Customer llC; // added this list
 	Customer cust1(1, "John", "123", 123, false); // added the list into here
@@ -61,6 +105,8 @@ int main()
 	//admin1.updateStatus(orderL);
 	//admin1.viewOrders(orderL);
 	//admin1.viewCustInfo(orderL, 3);
+
+	Menu();
 
 
 	return 0;

@@ -9,6 +9,27 @@ Admin::Admin(int UserID, string Name, string Password, int PhoneNum, bool IsAdmi
 
 bool Admin::login()
 {
+    string username, password;
+    string expectedUsername = "Admin";
+    string expectedPassword = "hehehehaw";
+
+    cout << "Please enter your username: ";
+    cin >> username;
+
+    cout << "Please enter your password: ";
+    cin >> password;
+
+    if (username == expectedUsername && password == expectedPassword)
+    {
+        cout << "Login successful. Welcome, Admin!" << endl;
+        return true;
+    }
+    else
+    {
+        cout << "Invalid username or password. Login failed." << endl;
+        return false;
+    }
+
 	return true;
 }
 

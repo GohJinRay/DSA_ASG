@@ -1,6 +1,5 @@
 // DSA-ASG.cpp : This file contains the 'main' function. Program execution begins and ends there.
 
-
 #include <iostream>
 #include <string>
 #include "Admin.h"
@@ -14,12 +13,95 @@
 #include "HashTable_Customer.h"
 using namespace std;
 
+
+void Menu() 
+{
+	cout << "Please select an option:" << endl;
+	cout << "1. Register" << endl;
+	cout << "2. Login" << endl;
+	cout << "3. Exit" << endl;
+	cout << "-----------------------------------" << endl;
+	cout << "Enter your choice (1, 2, or 3): ";
+}
+
+int getMenuChoice() 
+{
+	cout << "-----------------------------------" << endl;
+	cout << "            Welcome!" << endl;
+	cout << "-----------------------------------" << endl;
+
+	int choice;
+	bool validChoice;
+
+	do 
+	{
+		validChoice = true; //Assume the choice is valid
+
+		Menu();
+
+		if (!(cin >> choice)) 
+		{
+			validChoice = false; //Not an integer
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n'); //Ignore invalid input
+		}
+
+		if (validChoice)
+		{
+			switch (choice)
+			{
+				case 1: // register customer
+					break;
+
+				case 2:
+					// login as customer or admin;
+					cout << "2" << endl;
+					break;
+
+				case 3:
+					cout << endl;
+					cout << "-----------------------------------" << endl;
+					cout << "Thank you so much. Goodbye!" << endl;
+					cout << "-----------------------------------" << endl;
+					cout << endl;
+					break;
+
+				default:
+					cout << endl;
+					cout << "-----------------------------------" << endl;
+					cout << "Invalid choice. Please enter a valid option (1, 2, or 3)." << endl;
+					cout << "-----------------------------------" << endl;
+					cout << endl;
+			}
+		}
+
+		else
+		{
+			cout << endl;
+			cout << "-----------------------------------" << endl;
+			cout << "Invalid input. Please enter a valid integer choice (1, 2, or 3)." << endl;
+			cout << "-----------------------------------" << endl;
+			cout << endl;
+		}
+	} while (!validChoice || choice != 3);
+
+	return choice;
+}
+
 int main()
 {
+	int choice;
+
+	do
+	{
+		choice = getMenuChoice();
+	} while (choice != 3);
+
+/////////////////////////////////////////////////////////////////////////////////////////////
 	QueuePtr newQueue;
 	//LinkedList_Customer llC; // added this list
-	Customer cust1(1, "John", "123", 123, false); // added the list into here
-	Customer cust2(2, "Mary", "124", 124, false); // and here
+	Customer cust1(1, "John", "123", 123, false); // initialization
+	Customer cust2(2, "Mary", "124", 124, false); // initialization
 	Order* order;
 
 	order = cust1.createOrder(1);
@@ -49,19 +131,20 @@ int main()
 
 	// testing dictionary
 	Dictionary CustomerDict;
-	CustomerDict.add(cust1.getName(),cust1);
-	CustomerDict.add(cust2.getName(), cust2);
+	CustomerDict.add(cust1.getFullName(),cust1);
+	CustomerDict.add(cust2.getFullName(), cust2);
 
 
 	// testing admin methods
 	Admin admin1(999, "admin", "password", 12345678, true);
-	//LinkedList_Customer orderL;
-	//orderL.addOrder(order);
-	//admin1.viewOrders(orderL);
-	//admin1.updateStatus(orderL);
-	//admin1.viewOrders(orderL);
-	//admin1.viewCustInfo(orderL, 3);
+	LinkedList_Customer orderL;
+	orderL.addOrder(order);
+	admin1.viewOrders(orderL);
+	admin1.updateStatus(orderL);
+	admin1.viewOrders(orderL);
+	admin1.viewCustInfo(orderL, 3);
 
+///////////////////////////////////////////////////////////////////////////////////////////////
 
 	return 0;
 }

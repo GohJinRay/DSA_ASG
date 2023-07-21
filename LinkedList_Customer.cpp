@@ -1,6 +1,5 @@
 #include "LinkedList_Customer.h"
 #include "Order.h"
-#include <iostream>
 using namespace std;
 
 LinkedList_Customer::LinkedList_Customer() 
@@ -137,7 +136,7 @@ void LinkedList_Customer::OrderListprint()
 	{
 		Order* order = curr->orderItem;
 		int orderID = order->getOrderID();
-		time_t orderDate = order->getOrderDate();
+		string orderDate = order->getOrderDate();
 		string status = order->getStatus();
 
 		cout << "Order ID: " << orderID << endl;

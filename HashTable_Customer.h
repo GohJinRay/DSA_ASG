@@ -1,26 +1,21 @@
 #pragma once
-
-#include <string>
-#include <iostream>
 #include "Customer.h"
-
 using namespace std;
 
 const int MAX_SIZE = 100;
 typedef string KeyType;
 
-
-
 class Dictionary {
+
 private:
 	struct Node
 	{
 		KeyType key;
-		Customer item;
+		Customer customer;
 		Node* next;
 	};
 
-	Node* items[MAX_SIZE];
+	Node* customers[MAX_SIZE];
 	int size;
 
 public:

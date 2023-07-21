@@ -1,7 +1,6 @@
 #pragma once
 #include "User.h"
 #include "LinkedList_Customer.h"
-#include <string>
 using namespace std;
 
 class Customer : public User

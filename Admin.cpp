@@ -1,11 +1,9 @@
-#include <algorithm>
 #include "Admin.h"
-#include "Order.h"
-#include "HashTable_Customer.h"
+#include "HashTable_Customer.h" //
 
 Admin::Admin() { };
 
-Admin::Admin(int UserID, string Name, string Password, int PhoneNum, bool IsAdmin) : User(UserID, Name, Password, PhoneNum, IsAdmin) { };
+Admin::Admin(int UserID, string FullName, string Password, int PhoneNum, bool IsAdmin) : User(UserID, FullName, Password, PhoneNum, IsAdmin) { };
 
 bool Admin::login()
 {
@@ -24,13 +22,12 @@ bool Admin::login()
         cout << "Login successful. Welcome, Admin!" << endl;
         return true;
     }
+
     else
     {
         cout << "Invalid username or password. Login failed." << endl;
         return false;
     }
-
-	return true;
 }
 
 void Admin::printDetails()
@@ -57,15 +54,12 @@ void Admin::viewOrders(LinkedList_Customer& orderList)
 		}
 
 		int orderID = order->getOrderID();
-		time_t orderDate = order->getOrderDate();
+		string orderDate = order->getOrderDate();
 		string status = order->getStatus();
 
 		cout << "Order List:" << endl;
 		cout << "Order ID: " << orderID << endl;
-		// Use ctime_s to print human-readable date
-		char buffer[26];
-		ctime_s(buffer, sizeof(buffer), &orderDate);
-		cout << "Order Date: " << buffer;
+		cout << "Order Date: " << orderDate;
 		cout << "Status: " << status << endl << endl;
 	}
 }
@@ -143,7 +137,7 @@ void Admin::viewCustInfo(LinkedList_Customer& orderList, int orderID) // not don
         Order* order = orderList.getOrder(i);
         if (orderID == order->getOrderID()) {
             int custID = order->getCustomer().getUserID();
-            string custName = order->getCustomer().getName();
+            string custName = order->getCustomer().getFullName();
             int phoneNum = order->getCustomer().getPhoneNum();
 
             cout << "----- Customer Information -----" << endl;

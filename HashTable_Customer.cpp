@@ -1,17 +1,19 @@
 #include "HashTable_Customer.h"
-#include <iostream>
-#include <string>
 
 Dictionary::Dictionary() {
+
     size = 0;
+
     for (int i = 0; i < MAX_SIZE; i++) {
-        items[i] = nullptr;
+        customers[i] = nullptr;
     }
 }
 
 Dictionary::~Dictionary() {
+
     for (int i = 0; i < MAX_SIZE; i++) {
-        Node* currNode = items[i];
+        Node* currNode = customers[i];
+
         while (currNode != nullptr) {
             Node* tempNode = currNode;
             currNode = currNode->next;
@@ -21,6 +23,7 @@ Dictionary::~Dictionary() {
 }
 
 int Dictionary::hash(KeyType key) {
+
     int sum = 0;
 
     string name = key;
@@ -35,18 +38,20 @@ int Dictionary::hash(KeyType key) {
 }
 
 bool Dictionary::add(KeyType newKey, Customer customer) {
+
 	int index = hash(newKey);
 
     Node* newNode = new Node;
     newNode->key = newKey;
-    newNode->item= customer;
+    newNode->customer= customer;
     newNode->next = nullptr;
 
-    if (items[index] == nullptr) {
-        items[index] = newNode;
+    if (customers[index] == nullptr) {
+        customers[index] = newNode;
     }
+
     else {
-        Node* currNode = items[index];
+        Node* currNode = customers[index];
 
         while (currNode->next != nullptr) {
 
@@ -62,17 +67,20 @@ bool Dictionary::add(KeyType newKey, Customer customer) {
         }
         currNode->next = newNode;
     }
+
     size++;
     return true;
 }
 
 void Dictionary::remove(KeyType key) {
+
     int index = hash(key);
 
     if (isEmpty()) { return; }
-    else if (items[index] != nullptr) {
 
-        Node* currNode = items[index];
+    else if (customers[index] != nullptr) {
+
+        Node* currNode = customers[index];
         Node* prevNode = nullptr;
         while (currNode->key != key) {
             prevNode = currNode;
@@ -82,7 +90,7 @@ void Dictionary::remove(KeyType key) {
             prevNode->next = currNode->next;
         }
         else {
-            items[index] = currNode->next;
+            customers[index] = currNode->next;
         }
         delete currNode;
         size--;
@@ -90,17 +98,21 @@ void Dictionary::remove(KeyType key) {
 }
 
 Customer Dictionary::get(KeyType key) {
-        int index = hash(key);
+
+    int index = hash(key);
+
     if (isEmpty()) {
         return Customer();
     }
 
-    Node* currNode = items[index];
+    Node* currNode = customers[index];
 
     while (currNode != nullptr) {
+
         if (currNode->key == key) {
-            return currNode->item;
+            return currNode->customer;
         }
+
         currNode = currNode->next;
     }
     return Customer();
@@ -116,9 +128,10 @@ int Dictionary::getLength() {
 
 void Dictionary::print() {
     for (int i = 0; i < MAX_SIZE; i++) {
-        if (items[i] != nullptr) {
-            cout << "Name of Customer: " << items[i]->key << endl; // print the name of customer (key)
-            Node* currNode = items[i]->next;
+        if (customers[i] != nullptr) {
+            cout << "Name of Customer: " << customers[i]->key << endl; // print the name of customer (key)
+            Node* currNode = customers[i]->next;
+
             while (currNode != nullptr) {
                 cout << "Name of Customer: " << currNode->key << endl; // print the name of customer (key)
                 currNode = currNode->next;

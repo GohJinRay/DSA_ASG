@@ -94,7 +94,7 @@ void QueuePtr::getFront(Order& order)
 	else
 	{
 		order.setOrderID(-1);
-		order.setOrderDate(-1);
+		order.setOrderDate("");
 		order.setStatus("Not prepared");
 	}
 }
@@ -122,7 +122,7 @@ void QueuePtr::displayItems()
 			curr->order.getCustomer().printDetails();
 			cout << endl;
 			cout << "Food Items: " << endl << endl;
-			curr->order.getFoodItemList().FoodItemListprint(); //
+			curr->order.getFoodItemList().FoodItemListprint(); 
 			cout << endl;
 			curr = curr->next;
 		}

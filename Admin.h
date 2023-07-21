@@ -1,5 +1,6 @@
 #pragma once
 #include "User.h"
+#include "LinkedList_Customer.h"
 #include <string>
 using namespace std;
 
@@ -10,8 +11,8 @@ public:
 	Admin(int, string, string, int, bool);
 	virtual bool login();
 	virtual void printDetails();
-	void viewOrders();
-	bool updateStatus(int, string); 
-	void viewCustInfo(int); 
+	void viewOrders(LinkedList_Customer&);
+	bool updateStatus(LinkedList_Customer&);
+	void viewCustInfo(LinkedList_Customer&, int);
 };
 

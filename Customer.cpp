@@ -6,7 +6,7 @@ Customer::Customer() { }
 Customer::Customer(int UserID, string Name, string Password, int PhoneNum, bool IsAdmin)
 	: User(UserID, Name, Password, PhoneNum, IsAdmin), orderList() {}
 
-bool Customer::login()
+bool Customer::login() // not done
 {
 	return true;
 }
@@ -16,7 +16,7 @@ void Customer::printDetails()
 	User::printDetails();
 }
 
-void Customer::viewMenu()
+void Customer::viewMenu() // not done
 {
 
 }
@@ -30,7 +30,7 @@ Order* Customer::createOrder(int orderID)
 	return newOrder;
 }
 
-bool Customer::cancelOrder() 
+bool Customer::cancelOrder() // not done
 {
 	return true;
 }

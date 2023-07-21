@@ -11,7 +11,7 @@ User::User(int UserID, string Name, string Password, int PhoneNum, bool IsAdmin)
 	isAdmin = IsAdmin;
 }
 
-bool User::registerUser()
+bool User::registerUser() // not done
 {
 	return true;
 }

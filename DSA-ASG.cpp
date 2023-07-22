@@ -91,31 +91,36 @@ int getMenuChoice()
 int main()
 {
 	int choice;
-
-	do
-	{
-		choice = getMenuChoice();
-	} while (choice != 3);
+	//do
+	//{
+	//	choice = getMenuChoice();
+	//} while (choice != 3);
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 	QueuePtr newQueue;
-	//LinkedList_Customer llC; // added this list
 	Customer cust1(1, "John", "123", 123, false); // initialization
 	Customer cust2(2, "Mary", "124", 124, false); // initialization
 	Order* order;
+
+
+	LinkedList_Customer orderL; //
 
 	order = cust1.createOrder(1);
 	order->addFoodItem(1);
 	order->addFoodItem(2);
 	newQueue.enqueue(*order);
 
+	orderL.addOrder(order); //
 	order = cust2.createOrder(2);
 	order->addFoodItem(2);
 	newQueue.enqueue(*order);
 
+	orderL.addOrder(order); //
 	order = cust1.createOrder(3);
 	order->addFoodItem(1);
 	newQueue.enqueue(*order);
+
+	orderL.addOrder(order); //
 
 	//cout << "Shows cust1's order" << endl;
 	//cust1.getOrderList().OrderListprint();
@@ -137,12 +142,10 @@ int main()
 
 	// testing admin methods
 	Admin admin1(999, "admin", "password", 12345678, true);
-	LinkedList_Customer orderL;
-	orderL.addOrder(order);
-	admin1.viewOrders(orderL);
-	admin1.updateStatus(orderL);
-	admin1.viewOrders(orderL);
-	admin1.viewCustInfo(orderL, 3);
+
+	admin1.viewOrders(newQueue);
+	admin1.updateStatus(orderL, newQueue);
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 

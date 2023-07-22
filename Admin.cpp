@@ -1,5 +1,5 @@
 #include "Admin.h"
-#include "HashTable_Customer.h" //
+#include "QueuePtr.h"
 
 Admin::Admin() { };
 
@@ -35,93 +35,34 @@ void Admin::printDetails()
 	User::printDetails();
 }
 
-void Admin::viewOrders(LinkedList_Customer& orderList)
+void Admin::viewOrders(QueuePtr& q)
 {
-	int numOrders = orderList.OrderListgetLength();
-
-	if (numOrders == 0) {
-		cout << "There are no orders currently." << endl;
-		return;
-	}
-
-
-	for (int i = 0; i < numOrders; i++)
-	{
-		Order* order = orderList.getOrder(i);
-
-		if (order->getStatus() == "Prepared") {
-			return;
-		}
-
-		int orderID = order->getOrderID();
-		string orderDate = order->getOrderDate();
-		string status = order->getStatus();
-
-		cout << "Order List:" << endl;
-		cout << "Order ID: " << orderID << endl;
-		cout << "Order Date: " << orderDate;
-		cout << "Status: " << status << endl << endl;
-	}
+    if (q.isEmpty()) { // check for incoming orders
+        cout << "No incoming orders.";
+        return;
+    }
+    q.displayItems();
 }
 
-bool Admin::updateStatus(LinkedList_Customer& orderList)
+bool Admin::updateStatus(LinkedList_Customer& orderList, QueuePtr& q)
 {
-    int numOrders = orderList.OrderListgetLength();
-
-    if (numOrders == 0) {
-        cout << "There is no order." << endl;
+    if (q.isEmpty()) { // check for incoming orders
+        cout << "No incoming orders.";
         return false;
     }
 
-    int id;
-    while (true) {
-        cout << "Which Order Status would you like to update? (Enter Order ID) ";
-        if (cin >> id) { // Check if the input is a valid integer
+    Order order;
+    q.getFront(order); // get the first order 
+    string prevStat = order.getStatus();
+    order.setStatus("Prepared"); // set it to prepared
+    Order* order1;
+    order1 = orderList.getOrder(order.getOrderID()); // change the status in linked list
+    order1->setStatus("Prepared");
+    q.dequeue(); // remove it from the queue
 
-            // Sequential Search starts here
-            Order* orderToUpdate = nullptr;
-            for (int i = 0; i < numOrders; i++) {
-                Order* order = orderList.getOrder(i);
-                if (id == order->getOrderID()) {
-                    orderToUpdate = order;
-                    break;
-                }
-            }
-            // Sequential Search ends here
+    cout << "Order ID " << order.getOrderID() << " status changed from " << prevStat << " -> " << order.getStatus() << " sucessfully!" << endl;
 
-
-            if (orderToUpdate == nullptr) { // checks if order with specified ID exists
-                cout << "Order with ID " << id << " not found. Please enter a valid Order ID" << endl;
-            }
-            else {
-                string status;
-                while (true) {
-                    cout << "Enter the updated status (Prepared/Not Prepared) (Enter -1 to go back): ";
-                    cin >> status;
-
-                    if (status == "-1") {
-                        cout << "Going back..." << endl << endl;
-                        break;
-                    }
-
-                    // Check if the input status is valid
-                    if (status == "Prepared" || status == "Not Prepared") {
-                        orderToUpdate->setStatus(status);
-                        cout << "Status updated successfully!" << endl << endl;
-                        return true;
-                    }
-                    else {
-                        cout << "Invalid status. Please enter either 'Prepared' or 'Not Prepared'." << endl;
-                    }
-                }
-            }
-        }
-        else {
-            cout << "Invalid input. Please enter a valid Order ID" << endl;
-            cin.clear(); // clear error flag, able to read I/O input again
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // ignore remaining characters up to '\n'
-        }
-    }
+    return true;
 }
 
 void Admin::viewCustInfo(LinkedList_Customer& orderList, int orderID) // not done

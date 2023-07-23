@@ -101,24 +101,20 @@ int main()
 	Customer cust2(2, "Mary", "124", 124, false, llc); // initialization
 	Order* order;
 
-	//LinkedList_Customer orderL; //
 
 	order = cust1.createOrder(1);
 	order->addFoodItem(1);
 	order->addFoodItem(2);
 	newQueue.enqueue(*order);
 
-	//orderL.addOrder(order); //
 	order = cust2.createOrder(2);
 	order->addFoodItem(2);
 	newQueue.enqueue(*order);
 
-	//orderL.addOrder(order); //
 	order = cust1.createOrder(3);
 	order->addFoodItem(1);
 	newQueue.enqueue(*order);
 
-	//orderL.addOrder(order); //
 
 	/*cout << "Shows cust1's order" << endl;
 	cust1.getOrderList().OrderListprint();

@@ -13,6 +13,13 @@
 #include "HashTable_Customer.h"
 using namespace std;
 
+void invalidOutput() {
+	cout << endl;
+	cout << "-----------------------------------" << endl;
+	cout << "Invalid input. Please enter a valid integer choice (1, 2, or 3)." << endl;
+	cout << "-----------------------------------" << endl;
+	cout << endl;
+}
 
 void Menu() 
 {
@@ -67,21 +74,13 @@ int getMenuChoice()
 					break;
 
 				default:
-					cout << endl;
-					cout << "-----------------------------------" << endl;
-					cout << "Invalid choice. Please enter a valid option (1, 2, or 3)." << endl;
-					cout << "-----------------------------------" << endl;
-					cout << endl;
+					invalidOutput();
 			}
 		}
 
 		else
 		{
-			cout << endl;
-			cout << "-----------------------------------" << endl;
-			cout << "Invalid input. Please enter a valid integer choice (1, 2, or 3)." << endl;
-			cout << "-----------------------------------" << endl;
-			cout << endl;
+			invalidOutput();
 		}
 	} while (!validChoice || choice != 3);
 

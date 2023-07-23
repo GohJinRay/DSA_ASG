@@ -3,8 +3,11 @@
 
 Customer::Customer() { }
 
-Customer::Customer(int UserID, string FullName, string Password, int PhoneNum, bool IsAdmin)
-	: User(UserID, FullName, Password, PhoneNum, IsAdmin), orderList() {}
+Customer::Customer(int UserID, string FullName, string Password, int PhoneNum, bool IsAdmin, LinkedList_Customer OrderList)
+	: User(UserID, FullName, Password, PhoneNum, IsAdmin)
+{
+	orderList = OrderList;
+}
 
 bool Customer::login() // not done
 {
@@ -35,7 +38,7 @@ Order* Customer::createOrder(int orderID)
 	char buffer[26]; // Use ctime_s to print human-readable date
 	ctime_s(buffer, sizeof(buffer), &now);
 	string currTime(buffer); //Convert to string format
-	Order* newOrder = new Order(orderID, currTime, "Not Prepared", *this);
+	Order* newOrder = new Order(orderID, currTime, "Not Prepared", this);
 	orderList.addOrder(newOrder);
 
 	return newOrder;

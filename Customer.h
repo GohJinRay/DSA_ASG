@@ -10,7 +10,7 @@ private:
 
 public:
 	Customer();
-	Customer(int, string, string, int, bool);
+	Customer(int, string, string, int, bool, LinkedList_Customer);
 	virtual bool login();
 	virtual void printDetails();
 	void viewMenu();

@@ -44,7 +44,28 @@ void Admin::viewOrders(QueuePtr& q)
     q.displayItems();
 }
 
-bool Admin::updateStatus(LinkedList_Customer& orderList, QueuePtr& q)
+//bool Admin::updateStatus(LinkedList_Customer& orderList, QueuePtr& q)
+//{
+//    if (q.isEmpty()) { // check for incoming orders
+//        cout << "No incoming orders.";
+//        return false;
+//    }
+//
+//    Order order;
+//    q.getFront(order); // get the first order 
+//    string prevStat = order.getStatus();
+//    order.setStatus("Prepared"); // set it to prepared
+//    Order* order1;
+//    order1 = orderList.getOrder(order.getOrderID()); // change the status in linked list
+//    order1->setStatus("Prepared");
+//    q.dequeue(); // remove it from the queue
+//
+//    cout << "Order ID " << order.getOrderID() << " status changed from " << prevStat << " -> " << order.getStatus() << " sucessfully!" << endl;
+//
+//    return true;
+//}
+
+bool Admin::updateStatus(QueuePtr& q)
 {
     if (q.isEmpty()) { // check for incoming orders
         cout << "No incoming orders.";
@@ -52,10 +73,13 @@ bool Admin::updateStatus(LinkedList_Customer& orderList, QueuePtr& q)
     }
 
     Order order;
+    Customer* customer;
     q.getFront(order); // get the first order 
+    customer = order.getCustomer();
     string prevStat = order.getStatus();
     order.setStatus("Prepared"); // set it to prepared
     Order* order1;
+    LinkedList_Customer orderList = customer->getOrderList();
     order1 = orderList.getOrder(order.getOrderID()); // change the status in linked list
     order1->setStatus("Prepared");
     q.dequeue(); // remove it from the queue
@@ -77,9 +101,9 @@ void Admin::viewCustInfo(LinkedList_Customer& orderList, int orderID) // not don
     for (int i = 0; i < numOrders;i++) {
         Order* order = orderList.getOrder(i);
         if (orderID == order->getOrderID()) {
-            int custID = order->getCustomer().getUserID();
-            string custName = order->getCustomer().getFullName();
-            int phoneNum = order->getCustomer().getPhoneNum();
+            int custID = order->getCustomer()->getUserID();
+            string custName = order->getCustomer()->getFullName();
+            int phoneNum = order->getCustomer()->getPhoneNum();
 
             cout << "----- Customer Information -----" << endl;
             cout << "Customer ID:           " << custID << endl;

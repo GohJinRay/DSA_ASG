@@ -2,7 +2,7 @@
 
 Order::Order() { }
 
-Order::Order(int OrderID, string OrderDate, string Status, Customer Customer)
+Order::Order(int OrderID, string OrderDate, string Status, Customer* Customer)
 	:orderID(OrderID), orderDate(OrderDate), status(Status), customer(Customer), foodItemList() { };
 
 bool Order::addFoodItem(int option) 
@@ -46,5 +46,5 @@ void Order::setStatus(string Status) { status = Status; }
 int Order::getOrderID() { return orderID; }
 string Order::getOrderDate() { return orderDate; }
 string Order::getStatus() { return status; }
-Customer Order::getCustomer() { return customer; }
+Customer* Order::getCustomer() { return customer; }
 LinkedList_Order Order::getFoodItemList() { return foodItemList; }

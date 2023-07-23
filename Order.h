@@ -10,12 +10,12 @@ private:
 	int orderID;
 	string orderDate;
 	string status;
-	Customer customer;
+	Customer* customer;
 	LinkedList_Order foodItemList;
 
 public:
 	Order();
-	Order(int, string, string, Customer);
+	Order(int, string, string, Customer*);
 	bool addFoodItem(int);
 	bool removeFoodItem();
 
@@ -26,6 +26,6 @@ public:
 	int getOrderID();
 	string getOrderDate();
 	string getStatus();
-	Customer getCustomer();
+	Customer* getCustomer();
 	LinkedList_Order getFoodItemList();
 };

@@ -12,7 +12,7 @@ public:
 	virtual bool login();
 	virtual void printDetails();
 	void viewOrders(QueuePtr&);
-	bool updateStatus(LinkedList_Customer&, QueuePtr&);
+	bool updateStatus(QueuePtr&);
 	void viewCustInfo(LinkedList_Customer&, int);
 };
 

@@ -13,10 +13,10 @@
 #include "HashTable_Customer.h"
 using namespace std;
 
-void invalidOutput() {
+void invalidInput() {
 	cout << endl;
 	cout << "-----------------------------------" << endl;
-	cout << "Invalid input. Please enter a valid integer choice (1, 2, or 3)." << endl;
+	cout << "Invalid input. Please enter a valid integer choice." << endl;
 	cout << "-----------------------------------" << endl;
 	cout << endl;
 }
@@ -62,7 +62,6 @@ int getMenuChoice()
 
 				case 2:
 					// login as customer or admin;
-					cout << "2" << endl;
 					break;
 
 				case 3:
@@ -74,13 +73,13 @@ int getMenuChoice()
 					break;
 
 				default:
-					invalidOutput();
+					invalidInput();
 			}
 		}
 
 		else
 		{
-			invalidOutput();
+			invalidInput();
 		}
 	} while (!validChoice || choice != 3);
 
@@ -90,41 +89,41 @@ int getMenuChoice()
 int main()
 {
 	int choice;
-	//do
-	//{
-	//	choice = getMenuChoice();
-	//} while (choice != 3);
+	do
+	{
+		choice = getMenuChoice();
+	} while (choice != 3);
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 	QueuePtr newQueue;
-	Customer cust1(1, "John", "123", 123, false); // initialization
-	Customer cust2(2, "Mary", "124", 124, false); // initialization
+	LinkedList_Customer llc;
+	Customer cust1(1, "John", "123", 123, false, llc); // initialization
+	Customer cust2(2, "Mary", "124", 124, false, llc); // initialization
 	Order* order;
 
-
-	LinkedList_Customer orderL; //
+	//LinkedList_Customer orderL; //
 
 	order = cust1.createOrder(1);
 	order->addFoodItem(1);
 	order->addFoodItem(2);
 	newQueue.enqueue(*order);
 
-	orderL.addOrder(order); //
+	//orderL.addOrder(order); //
 	order = cust2.createOrder(2);
 	order->addFoodItem(2);
 	newQueue.enqueue(*order);
 
-	orderL.addOrder(order); //
+	//orderL.addOrder(order); //
 	order = cust1.createOrder(3);
 	order->addFoodItem(1);
 	newQueue.enqueue(*order);
 
-	orderL.addOrder(order); //
+	//orderL.addOrder(order); //
 
-	//cout << "Shows cust1's order" << endl;
-	//cust1.getOrderList().OrderListprint();
-	//cout << "Shows cust2's order" << endl;
-	//cust2.getOrderList().OrderListprint();
+	/*cout << "Shows cust1's order" << endl;
+	cust1.getOrderList().OrderListprint();
+	cout << "Shows cust2's order" << endl;
+	cust2.getOrderList().OrderListprint();*/
 
 	//cout << "Shows what's in the queue currently" << endl;
 	//newQueue.displayItems();
@@ -143,7 +142,7 @@ int main()
 	Admin admin1(999, "admin", "password", 12345678, true);
 
 	admin1.viewOrders(newQueue);
-	admin1.updateStatus(orderL, newQueue);
+	admin1.updateStatus(newQueue);
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////

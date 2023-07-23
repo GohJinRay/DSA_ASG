@@ -13,7 +13,7 @@
 #include "HashTable_Customer.h"
 using namespace std;
 
-void invalidOutput() {
+void invalidInput() {
 	cout << endl;
 	cout << "-----------------------------------" << endl;
 	cout << "Invalid input. Please enter a valid integer choice (1, 2, or 3)." << endl;

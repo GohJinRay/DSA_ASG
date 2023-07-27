@@ -30,12 +30,18 @@ bool Order::addFoodItem(int option)
 
 	else if (option == 2)
 		foodItemList.addFoodItem(newFoodItem2);
+	
 
 	return true;
 }
 
-bool Order::removeFoodItem() //Not done
+bool Order::removeFoodItem(int option) //Not done
 {
+	if (foodItemList.FoodItemListgetLength() == 0) {
+		return false;
+	}
+
+	foodItemList.removeFoodItem(option);
 	return true;
 }
 

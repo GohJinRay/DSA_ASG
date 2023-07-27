@@ -3,23 +3,10 @@
 
 Customer::Customer() { }
 
-Customer::Customer(int UserID, string FullName, string Password, int PhoneNum, bool IsAdmin, LinkedList_Customer OrderList)
-	: User(UserID, FullName, Password, PhoneNum, IsAdmin)
+Customer::Customer(string userName, string Password, int PhoneNum, bool IsAdmin, LinkedList_Customer OrderList)
+	: User(userName, Password, PhoneNum, IsAdmin)
 {
 	orderList = OrderList;
-}
-
-bool Customer::login() // not done
-{
-	string fullname, password;
-
-	cout << "Please enter your full name: ";
-	cin >> fullname;
-
-	cout << "Please enter your password: ";
-	cin >> password;
-
-	return true;
 }
 
 void Customer::printDetails()

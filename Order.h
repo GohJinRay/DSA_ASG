@@ -17,7 +17,7 @@ public:
 	Order();
 	Order(int, string, string, Customer*);
 	bool addFoodItem(int);
-	bool removeFoodItem();
+	bool removeFoodItem(int);
 
 	void setOrderID(int);
 	void setOrderDate(string);

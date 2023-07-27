@@ -60,8 +60,7 @@ int getMenuChoice()
 				case 1: // register customer
 					break;
 
-				case 2:
-					// login as customer or admin;
+				case 2: // login as customer or admin;
 					break;
 
 				case 3:
@@ -81,24 +80,83 @@ int getMenuChoice()
 		{
 			invalidInput();
 		}
-	} while (!validChoice || choice != 3);
+	} while (!validChoice);
 
 	return choice;
 }
 
 int main()
 {
+	QueuePtr newQueue; //New Queue
+	LinkedList_Customer llc; //New Linked list to stored orders for each customer
+	Dictionary usersInfo; //HashTable to store Customer objects
+	Admin admin("Admin", "hehehehaw", 12345678, true); //By default, create new admin
+
 	int choice;
 	do
 	{
 		choice = getMenuChoice();
+
+		string username, password;
+		const string adminUsername = "Admin", adminPassword = "hehehehaw";
+		Customer newCustomer;
+
+		switch (choice)
+		{
+			case 1: //Register
+				int phoneNum;
+				bool isAdmin;
+				cout << "Please enter your username: "; 
+				cin >> username;
+
+				cout << "Please enter your password: ";
+				cin >> password;
+
+				cout << "Please enter your phone number: ";
+				cin >> phoneNum;
+
+				if (username == usersInfo.get(username).getUserName())
+				{
+					cout << "Already exists! Please enter a new username!" << endl;
+					break;
+				}
+
+				newCustomer = Customer(username, password, phoneNum, false, llc);
+				usersInfo.add(username, newCustomer);
+				cout << "Registeration complete!" << endl;
+
+				break;
+
+			case 2: //Login
+				cout << "Please enter your username: ";
+				cin >> username;
+
+				cout << "Please enter your password: ";
+				cin >> password;
+
+				if (username == adminUsername && password == adminPassword) //Admin login
+				{
+					cout << "Login successful. Welcome, Admin!" << endl;
+					break;
+				}
+
+				if (username == usersInfo.get(username).getUserName() && password == usersInfo.get(username).getPassword()) //Customer login
+				{
+					cout << "Login successful. Welcome " << username << "!" << endl;
+					break;
+				}
+
+				else
+				{
+					cout << "Invalid username or password. Login failed." << endl;
+				}
+				break;
+		}
 	} while (choice != 3);
 
 /////////////////////////////////////////////////////////////////////////////////////////////
-	QueuePtr newQueue;
-	LinkedList_Customer llc;
-	Customer cust1(1, "John", "123", 123, false, llc); // initialization
-	Customer cust2(2, "Mary", "124", 124, false, llc); // initialization
+	Customer cust1("John", "123", 123, false, llc); // initialization
+	Customer cust2("Mary", "124", 124, false, llc); // initialization
 	Order* order;
 
 
@@ -130,12 +188,12 @@ int main()
 
 	// testing dictionary
 	Dictionary CustomerDict;
-	CustomerDict.add(cust1.getFullName(),cust1);
-	CustomerDict.add(cust2.getFullName(), cust2);
+	CustomerDict.add(cust1.getUserName(),cust1);
+	CustomerDict.add(cust2.getUserName(), cust2);
 
 
 	// testing admin methods
-	Admin admin1(999, "admin", "password", 12345678, true);
+	Admin admin1("admin", "password", 12345678, true);
 
 	admin1.viewOrders(newQueue);
 	admin1.updateStatus(newQueue);

@@ -8,8 +8,7 @@ class Admin: public User
 {
 public:
 	Admin();
-	Admin(int, string, string, int, bool);
-	virtual bool login();
+	Admin(string, string, int, bool);
 	virtual void printDetails();
 	void viewOrders(QueuePtr&);
 	bool updateStatus(QueuePtr&);

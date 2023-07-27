@@ -3,32 +3,7 @@
 
 Admin::Admin() { };
 
-Admin::Admin(int UserID, string FullName, string Password, int PhoneNum, bool IsAdmin) : User(UserID, FullName, Password, PhoneNum, IsAdmin) { };
-
-bool Admin::login()
-{
-    string username, password;
-    string expectedUsername = "Admin";
-    string expectedPassword = "hehehehaw";
-
-    cout << "Please enter your username: ";
-    cin >> username;
-
-    cout << "Please enter your password: ";
-    cin >> password;
-
-    if (username == expectedUsername && password == expectedPassword)
-    {
-        cout << "Login successful. Welcome, Admin!" << endl;
-        return true;
-    }
-
-    else
-    {
-        cout << "Invalid username or password. Login failed." << endl;
-        return false;
-    }
-}
+Admin::Admin(string UserName, string Password, int PhoneNum, bool IsAdmin) : User(UserName, Password, PhoneNum, IsAdmin) { };
 
 void Admin::printDetails()
 {
@@ -101,12 +76,10 @@ void Admin::viewCustInfo(LinkedList_Customer& orderList, int orderID) // not don
     for (int i = 0; i < numOrders;i++) {
         Order* order = orderList.getOrder(i);
         if (orderID == order->getOrderID()) {
-            int custID = order->getCustomer()->getUserID();
-            string custName = order->getCustomer()->getFullName();
+            string custName = order->getCustomer()->getUserName();
             int phoneNum = order->getCustomer()->getPhoneNum();
 
             cout << "----- Customer Information -----" << endl;
-            cout << "Customer ID:           " << custID << endl;
             cout << "Customer Name:         " << custName << endl;
             cout << "Customer Phone Number: " << phoneNum << endl;
         }

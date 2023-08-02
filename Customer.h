@@ -11,9 +11,9 @@ private:
 public:
 	Customer();
 	Customer(string, string, int, bool, LinkedList_Customer);
-	virtual void printDetails();
-	void viewMenu();
+	LinkedList_Customer getOrderList();
 	Order* createOrder(int);
 	bool cancelOrder();
-	LinkedList_Customer getOrderList();
+	void viewMenu();
+	virtual void printDetails();
 };

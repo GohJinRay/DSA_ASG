@@ -1,14 +1,15 @@
 #pragma once
 
 #include <iostream>
+#include "Order.h"
 
 struct TreeNode {
-    int OrderID;
+    Order order;
     int height;
     TreeNode* left;
     TreeNode* right;
 
-    TreeNode(int id) : OrderID(id), height(1), left(nullptr), right(nullptr) {}
+    TreeNode(const Order& o) : order(o), height(1), left(nullptr), right(nullptr) {}
 };
 
 class AVLTree {
@@ -20,15 +21,15 @@ private:
     TreeNode* rotateRight(TreeNode* y);
     TreeNode* rotateLeft(TreeNode* x);
     TreeNode* balance(TreeNode* node);
-    TreeNode* insert(TreeNode* node, int orderID);
-    TreeNode* search(TreeNode* node, int orderID);
+    TreeNode* insert(TreeNode* node, Order);
+    Order search(TreeNode* node, int orderID);
     void printInorder(TreeNode* node);
     void destroyTree(TreeNode* node);
 
 public:
     AVLTree();
     ~AVLTree();
-    void insert(int orderID);
-    bool search(int orderID);
+    void insert(Order);
+    Order search(int orderID);
     void printInorder();
 };

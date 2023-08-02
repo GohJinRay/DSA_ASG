@@ -119,10 +119,10 @@ void Queue::displayItems()
 			cout << "Order ID: " << curr->order.getOrderID() << endl;
 			cout << "Order Date: " << curr->order.getOrderDate() << endl;
 			cout << "Status: " << curr->order.getStatus() << endl << endl;
-			curr->order.getCustomer()->printDetails();
+			//curr->order.getCustomer()->printDetails();
 			cout << endl;
 			cout << "Food Items: " << endl << endl;
-			curr->order.getFoodItemList().FoodItemListprint(); 
+			curr->order.getFoodItemList().print(); 
 			cout << endl;
 			curr = curr->next;
 		}

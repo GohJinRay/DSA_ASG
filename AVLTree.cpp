@@ -76,16 +76,16 @@ TreeNode* AVLTree::balance(TreeNode* node) {
     return node;
 }
 
-TreeNode* AVLTree::insert(TreeNode* node, int orderID) {
+TreeNode* AVLTree::insert(TreeNode* node, Order order) {
     if (node == nullptr) {
-        return new TreeNode(orderID); 
+        return new TreeNode(order); 
     }
 
-    if (orderID < node->OrderID) { 
-        node->left = insert(node->left, orderID); 
+    if (order.getOrderID() < node->order.getOrderID()) { 
+        node->left = insert(node->left, order); 
     }
-    else if (orderID > node->OrderID) { 
-        node->right = insert(node->right, orderID); 
+    else if (order.getOrderID() > node->order.getOrderID()) { 
+        node->right = insert(node->right, order); 
     }
     else {
         // Duplicate keys not allowed
@@ -96,16 +96,20 @@ TreeNode* AVLTree::insert(TreeNode* node, int orderID) {
     return balance(node);
 }
 
-void AVLTree::insert(int orderID) {
-    root = insert(root, orderID);
+void AVLTree::insert(Order order) {
+    root = insert(root, order);
 }
 
-TreeNode* AVLTree::search(TreeNode* node, int orderID) {
-    if (node == nullptr || node->OrderID == orderID) { 
-        return node;
+Order AVLTree::search(TreeNode* node, int orderID) {
+    if (node == nullptr) {
+        return Order();
     }
 
-    if (orderID < node->OrderID) { 
+    if (node->order.getOrderID() == orderID) {
+        return node->order;
+    }
+
+    if (orderID < node->order.getOrderID()) { 
         return search(node->left, orderID); 
     }
     else {
@@ -113,8 +117,8 @@ TreeNode* AVLTree::search(TreeNode* node, int orderID) {
     }
 }
 
-bool AVLTree::search(int key) {
-    return search(root, key) != nullptr;
+Order AVLTree::search(int orderID) {
+    return search(root, orderID);
 }
 
 void AVLTree::printInorder(TreeNode* node) {
@@ -123,7 +127,7 @@ void AVLTree::printInorder(TreeNode* node) {
     }
 
     printInorder(node->left);
-    std::cout << node->OrderID << " ";
+    std::cout << node->order.getOrderID() << " ";
     printInorder(node->right);
 }
 

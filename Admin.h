@@ -1,7 +1,8 @@
 #pragma once
 #include "User.h"
 #include "Queue.h"
-#include "Order.h"
+#include "AVLTree.h"
+#include "Customer.h"
 using namespace std;
 
 class Admin: public User
@@ -10,8 +11,8 @@ public:
 	Admin();
 	Admin(string, string, int, bool);
 	void viewOrders(Queue&);
-	bool updateStatus(Queue&);
-	void viewCustInfo(LinkedList_Customer&, int);
+	Order updateStatus(Queue&);
+	void viewCustInfo(AVLTree, int);
 	virtual void printDetails();
 };
 

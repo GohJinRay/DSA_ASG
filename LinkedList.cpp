@@ -1,122 +1,155 @@
 #include "LinkedList.h"
+#include <iostream>
+using namespace std;
 
-List::List() {
+
+LinkedList::LinkedList()
+{ 
 	firstNode = NULL;
 	size = 0;
 }
 
-List::~List() {
-	Node* current = firstNode;
-	while (current != NULL) {
-		Node* temp = current;
-		current = current->next;
-		delete temp;
+LinkedList::~LinkedList() 
+{ 
+	Node* curr = firstNode;
+	Node* next;
+	while (curr != NULL)
+	{
+		next = curr->next;
+		curr = NULL;
+		delete curr;
+		curr = next;
 	}
+	firstNode = NULL;
 }
 
-bool List::add(ItemType item) {
+bool LinkedList::addFoodItem(FoodItem& foodItem)
+{
 	Node* newNode = new Node;
-	newNode->item = item;
+	newNode->foodItem = foodItem;
 	newNode->next = NULL;
 
-	if (isEmpty()) {
+	if (size == 0)
 		firstNode = newNode;
-	}
-	else {
-		Node* currentNode = firstNode;
-		while (currentNode->next != NULL) {
-			currentNode = currentNode->next;
+	else
+	{
+		Node* curr = firstNode;
+		while (curr->next != NULL)
+		{
+			curr = curr->next;
 		}
-		currentNode->next = newNode;
+		curr->next = newNode;
 	}
 	size++;
 	return true;
 }
 
-bool List::add(int index, ItemType item) {
+bool LinkedList::addFoodItem(int index, FoodItem foodItem)
+{
+	if (index >= 0 && index <= size)
+	{
+		Node* newNode = new Node;
+		newNode->foodItem = foodItem;
+		newNode->next = NULL;
+		int counter = 0;
 
-	Node* newNode = new Node;
-	newNode->item = item;
-	newNode->next = NULL;
-
-	if (isEmpty()) {
-		firstNode = newNode;
-	}
-	else {
-		int x = 0;
-		Node* currentNode = firstNode;
-		while (currentNode->next != NULL && x < index) {
-			currentNode = currentNode->next;
-			x++;
+		if (index == 0)
+		{
+			newNode->next = firstNode;
+			firstNode = newNode;
 		}
-		currentNode->next = newNode;
+		else
+		{
+			Node* curr = firstNode;
+			while (curr->next != NULL && counter < index - 1)
+			{
+				curr = curr->next;
+				counter++;
+			}
+			newNode->next = curr->next;
+			curr->next = newNode;
+		}
 		size++;
-
+		return true;
 	}
-	return true;
+	else
+		return false;
 }
 
-void List::remove(int index) {
-	if (isEmpty()) {
-		return;
-	}
+void LinkedList::removeFoodItem(int index)
+{
+	if (index >= 0 && index < size)
+	{
+		int counter = 0;
+		Node* prev = firstNode;
+		Node* curr = firstNode->next;
 
-	// if index is 0, remove the first node
-	if (index == 0) {
-		Node* temp = firstNode;
-		firstNode = firstNode->next;
-		delete temp;
+		if (index == 0)
+		{
+			firstNode = prev->next;
+			delete prev;
+		}
+		else
+		{
+			while (curr->next != NULL && counter < index - 1)
+			{
+				prev = curr;
+				curr = curr->next;
+				counter++;
+			}
+			prev->next = curr->next;
+			delete curr;
+		}
 		size--;
 	}
+}
 
-	else {
-		Node* prevNode = firstNode;
-		Node* currNode = firstNode->next;
-		int x = 1;
-		while (currNode->next != NULL && x < index) {
-			prevNode = currNode;
-			currNode = currNode->next;
-			x++;
+FoodItem LinkedList::getFoodItem(int index)
+{
+	if (index >= 0 && index < size)
+	{
+		int counter = 0;
+		Node* curr = firstNode;
+
+		while (curr->next != NULL && counter <= index)
+		{
+			curr = curr->next;
+			counter++;
 		}
-
-
+		return curr->foodItem;
 	}
 }
 
-ItemType List::get(int index) {
-	if (isEmpty()) {
-		return ItemType();
-	}
-	else {
-		int x = 0;
-		Node* currNode = firstNode;
-		while (currNode->next != NULL && x < index) {
-			currNode = currNode->next;
-			x++;
-		}
-		return currNode->item;
-	}
+bool LinkedList::isEmpty()
+{
+	return size == 0;
 }
 
-bool List::isEmpty() {
-	return firstNode == NULL;
-}
-
-int List::getLength()
+int LinkedList::getLength()
 {
 	return size;
 }
 
-void List::print() {
-	if (isEmpty()) {
-		cout << "List is empty.\n";
-		return;
-	}
+void LinkedList::print()
+{
+	Node* curr = firstNode;
 
-	Node* current = firstNode;
-	while (current != NULL) {
-		cout << current->item << " ";
-		current = current->next;
+	while (curr != NULL)
+	{
+		FoodItem item = curr->foodItem;
+
+		int foodID = item.getFoodID();
+		string foodName = item.getFoodName();
+		double price = item.getPrice();
+		bool isAvail = item.getIsAvail();
+
+		cout << "Food ID: " << foodID << endl;
+		cout << "Food Name: " << foodName << endl;
+		cout << "Price: " << price << endl;
+		cout << "Is Available? " << isAvail << endl;
+		cout << endl;
+
+		curr = curr->next;
 	}
 	cout << endl;
 }

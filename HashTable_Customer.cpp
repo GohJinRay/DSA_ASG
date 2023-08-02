@@ -95,14 +95,6 @@ void Dictionary::remove(KeyType key) {
         else {
             customers[index] = currNode->next;
         }
-
-        LinkedList_Customer llC;
-        llC = currNode->customer.getOrderList(); // order list of customer
-        if (llC.OrderListgetLength() != 0) {
-            for (int i = 0; i < llC.OrderListgetLength(); i++) {
-                llC.removeOrder(i+1);
-            }
-        }
         delete currNode;
         size--;
     }

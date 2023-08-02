@@ -8,7 +8,7 @@ class Admin: public User
 {
 public:
 	Admin();
-	Admin(int, string, string, int, bool);
+	Admin(string, string, int, bool);
 	void viewOrders(Queue&);
 	bool updateStatus(Queue&);
 	void viewCustInfo(LinkedList_Customer&, int);

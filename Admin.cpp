@@ -1,5 +1,5 @@
 #include "Admin.h"
-#include "QueuePtr.h"
+#include "Queue.h"
 
 Admin::Admin() { };
 
@@ -10,7 +10,7 @@ void Admin::printDetails()
 	User::printDetails();
 }
 
-void Admin::viewOrders(QueuePtr& q)
+void Admin::viewOrders(Queue& q)
 {
     if (q.isEmpty()) { // check for incoming orders
         cout << "No incoming orders.";
@@ -40,7 +40,7 @@ void Admin::viewOrders(QueuePtr& q)
 //    return true;
 //}
 
-bool Admin::updateStatus(QueuePtr& q)
+bool Admin::updateStatus(Queue& q)
 {
     if (q.isEmpty()) { // check for incoming orders
         cout << "No incoming orders.";

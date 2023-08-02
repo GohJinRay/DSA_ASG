@@ -9,7 +9,7 @@
 #include "LinkedList_Order.h"
 #include "Order.h"
 #include "FoodItem.h"
-#include "QueuePtr.h"
+#include "Queue.h"
 #include "HashTable_Customer.h"
 using namespace std;
 
@@ -87,7 +87,7 @@ int getMenuChoice()
 
 int main()
 {
-	QueuePtr newQueue; //New Queue
+	Queue newQueue; //New Queue
 	LinkedList_Customer llc; //New Linked list to stored orders for each customer
 	Dictionary usersInfo; //HashTable to store Customer objects
 	Admin admin("Admin", "hehehehaw", 12345678, true); //By default, create new admin

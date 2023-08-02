@@ -24,10 +24,7 @@
     <ClCompile Include="FoodItem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LinkedList_Customer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LinkedList_Order.cpp">
+    <ClCompile Include="LinkedList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="User.cpp">
@@ -45,7 +42,7 @@
     <ClCompile Include="HashTable_Customer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LinkedList.cpp">
+    <ClCompile Include="AVLTree.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -56,7 +53,7 @@
     <ClInclude Include="FoodItem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LinkedList_Order.h">
+    <ClInclude Include="LinkedList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="User.h">
@@ -71,13 +68,10 @@
     <ClInclude Include="Queue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LinkedList_Customer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="HashTable_Customer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LinkedList.h">
+    <ClInclude Include="AVLTree.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

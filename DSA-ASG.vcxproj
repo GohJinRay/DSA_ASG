@@ -132,6 +132,7 @@
     <ClCompile Include="DSA-ASG.cpp" />
     <ClCompile Include="FoodItem.cpp" />
     <ClCompile Include="HashTable_Customer.cpp" />
+    <ClCompile Include="LinkedList.cpp" />
     <ClCompile Include="LinkedList_Customer.cpp" />
     <ClCompile Include="LinkedList_Order.cpp" />
     <ClCompile Include="Order.cpp" />
@@ -143,6 +144,7 @@
     <ClInclude Include="Customer.h" />
     <ClInclude Include="FoodItem.h" />
     <ClInclude Include="HashTable_Customer.h" />
+    <ClInclude Include="LinkedList.h" />
     <ClInclude Include="LinkedList_Customer.h" />
     <ClInclude Include="LinkedList_Order.h" />
     <ClInclude Include="Order.h" />

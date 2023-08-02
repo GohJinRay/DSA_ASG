@@ -1,19 +1,20 @@
 #pragma once
+
 #include "User.h"
-#include "LinkedList_Customer.h"
-using namespace std;
+#include "AVLTree.h"
+
 
 class Customer : public User
 {
 private:
-	LinkedList_Customer orderList;
+    AVLTree binTree;
 
 public:
-	Customer();
-	Customer(string, string, int, bool, LinkedList_Customer);
-	LinkedList_Customer getOrderList();
-	Order* createOrder(int);
-	bool cancelOrder();
-	void viewMenu();
-	virtual void printDetails();
+    Customer();
+    Customer(string, string, int, bool, AVLTree); // change to avl tree
+    Order getOrder();
+    Order* createOrder(int);
+    bool cancelOrder();
+    void viewMenu();
+    virtual void printDetails();
 };

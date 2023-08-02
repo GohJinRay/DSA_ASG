@@ -11,7 +11,7 @@ public:
 	Admin(string, string, int, bool);
 	void viewOrders(Queue&);
 	bool updateStatus(Queue&);
-	void viewCustInfo(LinkedList_Customer&, int);
+	void viewCustInfo(Order&);
 	virtual void printDetails();
 };
 

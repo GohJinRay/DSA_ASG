@@ -5,8 +5,7 @@
 #include "Admin.h"
 #include "Customer.h"
 #include "User.h"
-#include "LinkedList_Customer.h"
-#include "LinkedList_Order.h"
+#include "LinkedList.h"
 #include "Order.h"
 #include "FoodItem.h"
 #include "Queue.h"
@@ -88,7 +87,6 @@ int getMenuChoice()
 int main()
 {
 	Queue newQueue; //New Queue
-	LinkedList_Customer llc; //New Linked list to stored orders for each customer
 	Dictionary usersInfo; //HashTable to store Customer objects
 	Admin admin("Admin", "hehehehaw", 12345678, true); //By default, create new admin
 
@@ -120,8 +118,7 @@ int main()
 					cout << "Already exists! Please enter a new username!" << endl;
 					break;
 				}
-
-				newCustomer = Customer(username, password, phoneNum, false, llc);
+				//newCustomer = Customer(username, password, phoneNum, false, order);
 				usersInfo.add(username, newCustomer);
 				cout << "Registeration complete!" << endl;
 
@@ -155,23 +152,23 @@ int main()
 	} while (choice != 3);
 
 /////////////////////////////////////////////////////////////////////////////////////////////
-	Customer cust1("John", "123", 123, false, llc); // initialization
-	Customer cust2("Mary", "124", 124, false, llc); // initialization
-	Order* order;
+	//Customer cust1("John", "123", 123, false, llc); // initialization
+	//Customer cust2("Mary", "124", 124, false, llc); // initialization
+	//Order* order;
 
 
-	order = cust1.createOrder(1);
-	order->addFoodItem(1);
-	order->addFoodItem(2);
-	newQueue.enqueue(*order);
+	//order = cust1.createOrder(1);
+	//order->addFoodItem(1);
+	//order->addFoodItem(2);
+	//newQueue.enqueue(*order);
 
-	order = cust2.createOrder(2);
-	order->addFoodItem(2);
-	newQueue.enqueue(*order);
+	//order = cust2.createOrder(2);
+	//order->addFoodItem(2);
+	//newQueue.enqueue(*order);
 
-	order = cust1.createOrder(3);
-	order->addFoodItem(1);
-	newQueue.enqueue(*order);
+	//order = cust1.createOrder(3);
+	//order->addFoodItem(1);
+	//newQueue.enqueue(*order);
 
 
 	/*cout << "Shows cust1's order" << endl;
@@ -184,20 +181,6 @@ int main()
 	//newQueue.dequeue();
 	//cout << "Hello" << endl;
 	//newQueue.displayItems();
-
-
-	// testing dictionary
-	Dictionary CustomerDict;
-	CustomerDict.add(cust1.getUserName(),cust1);
-	CustomerDict.add(cust2.getUserName(), cust2);
-
-
-	// testing admin methods
-	Admin admin1("admin", "password", 12345678, true);
-
-	admin1.viewOrders(newQueue);
-	admin1.updateStatus(newQueue);
-
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 

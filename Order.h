@@ -1,7 +1,6 @@
 #pragma once
-#include <ctime>
 #include "Customer.h"
-#include "LinkedList_Order.h"
+#include "LinkedList.h"
 using namespace std;
 
 class Order
@@ -11,7 +10,7 @@ private:
 	string orderDate;
 	string status;
 	Customer* customer;
-	LinkedList_Order foodItemList;
+	LinkedList foodItemList;
 
 public:
 	Order();
@@ -27,5 +26,5 @@ public:
 	string getOrderDate();
 	string getStatus();
 	Customer* getCustomer();
-	LinkedList_Order getFoodItemList();
+	LinkedList getFoodItemList();
 };

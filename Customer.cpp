@@ -3,10 +3,10 @@
 
 Customer::Customer() { }
 
-Customer::Customer(string userName, string Password, int PhoneNum, bool IsAdmin, LinkedList_Customer OrderList)
+Customer::Customer(string userName, string Password, int PhoneNum, bool IsAdmin, AVLTree BinTree)
 	: User(userName, Password, PhoneNum, IsAdmin)
 {
-	orderList = OrderList;
+	binTree = BinTree;
 }
 
 void Customer::printDetails()
@@ -26,8 +26,6 @@ Order* Customer::createOrder(int orderID)
 	ctime_s(buffer, sizeof(buffer), &now);
 	string currTime(buffer); //Convert to string format
 	Order* newOrder = new Order(orderID, currTime, "Not Prepared", this);
-	orderList.addOrder(newOrder);
-
 	return newOrder;
 }
 
@@ -36,8 +34,6 @@ bool Customer::cancelOrder() // not done
 	return true;
 }
 
-LinkedList_Customer Customer::getOrderList()
-{
-	return orderList;
+Order Customer::getOrder() {
+	return;
 }
-

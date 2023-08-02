@@ -122,7 +122,7 @@ void Queue::displayItems()
 			curr->order.getCustomer()->printDetails();
 			cout << endl;
 			cout << "Food Items: " << endl << endl;
-			curr->order.getFoodItemList().FoodItemListprint(); 
+			curr->order.getFoodItemList().print(); 
 			cout << endl;
 			curr = curr->next;
 		}

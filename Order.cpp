@@ -5,7 +5,7 @@ Order::Order() { }
 Order::Order(int OrderID, string OrderDate, string Status, Customer* Customer)
 	:orderID(OrderID), orderDate(OrderDate), status(Status), customer(Customer), foodItemList() { };
 
-bool Order::addFoodItem(int option) 
+bool Order::addFoodItem(int option) // not done
 {
 	//Main course
 	FoodItem newFoodItem1(1, "Hainanese Chicken Rice", 4.50, true);
@@ -37,7 +37,7 @@ bool Order::addFoodItem(int option)
 
 bool Order::removeFoodItem(int option) //Not done
 {
-	if (foodItemList.FoodItemListgetLength() == 0) {
+	if (foodItemList.getLength() == 0) {
 		return false;
 	}
 
@@ -53,4 +53,4 @@ int Order::getOrderID() { return orderID; }
 string Order::getOrderDate() { return orderDate; }
 string Order::getStatus() { return status; }
 Customer* Order::getCustomer() { return customer; }
-LinkedList_Order Order::getFoodItemList() { return foodItemList; }
+LinkedList Order::getFoodItemList() { return foodItemList; }

@@ -1,8 +1,8 @@
-#include "QueuePtr.h"
+#include "Queue.h"
 
-QueuePtr::QueuePtr() { };
+Queue::Queue() { };
 
-QueuePtr::~QueuePtr()
+Queue::~Queue()
 {
 	while (!isEmpty())
 	{
@@ -10,7 +10,7 @@ QueuePtr::~QueuePtr()
 	}
 }
 
-bool QueuePtr::enqueue(Order& order)
+bool Queue::enqueue(Order& order)
 {
 	Node* newNode = new Node;
 	newNode->order = order;
@@ -30,7 +30,7 @@ bool QueuePtr::enqueue(Order& order)
 	return true;
 }
 
-bool QueuePtr::dequeue()
+bool Queue::dequeue()
 {
 	if (frontNode == NULL)
 	{
@@ -57,7 +57,7 @@ bool QueuePtr::dequeue()
 	return true;
 }
 
-bool QueuePtr::dequeue(Order& order)
+bool Queue::dequeue(Order& order)
 {
 	if (frontNode == NULL)
 	{
@@ -86,7 +86,7 @@ bool QueuePtr::dequeue(Order& order)
 	return true;
 }
 
-void QueuePtr::getFront(Order& order)
+void Queue::getFront(Order& order)
 {
 	if (!isEmpty())
 		order = frontNode->order;
@@ -99,12 +99,12 @@ void QueuePtr::getFront(Order& order)
 	}
 }
 
-bool QueuePtr::isEmpty()
+bool Queue::isEmpty()
 {
 	return (frontNode == NULL);
 }
 
-void QueuePtr::displayItems()
+void Queue::displayItems()
 {
 	if (isEmpty())
 	{

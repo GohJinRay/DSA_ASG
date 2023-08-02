@@ -1,7 +1,7 @@
 #pragma once
 #include "Order.h"
 using namespace std;
-class QueuePtr
+class Queue
 {
 private:
 	struct Node
@@ -14,9 +14,9 @@ private:
 	Node* backNode;
 
 public:
-	QueuePtr();
+	Queue();
 
-	~QueuePtr();
+	~Queue();
 
 	bool enqueue(Order& order);
 

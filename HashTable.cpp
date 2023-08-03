@@ -1,4 +1,4 @@
-#include "HashTable_Customer.h"
+#include "HashTable.h"
 
 Dictionary::Dictionary() {
 

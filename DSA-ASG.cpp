@@ -9,7 +9,7 @@
 #include "Order.h"
 #include "FoodItem.h"
 #include "Queue.h"
-#include "HashTable_Customer.h"
+#include "HashTable.h"
 #include "AVLTree.h"
 using namespace std;
 

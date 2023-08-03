@@ -8,8 +8,6 @@
 
 class Customer : public User
 {
-private:
-
 public:
     Customer();
     Customer(string, string, int, bool); 

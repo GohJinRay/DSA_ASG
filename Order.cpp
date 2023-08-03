@@ -11,43 +11,45 @@ Order::Order(int OrderID, string OrderDate, string Status, Customer* Customer, L
 	foodItemList = FoodItemList;
 }
 
-bool Order::addFoodItem(int option) // not done
+bool Order::addFoodItem(FoodItem foodItem, int option) 
 {
-	//Main course
-	FoodItem newFoodItem1(1, "Hainanese Chicken Rice", 4.50, true);
-	FoodItem newFoodItem2(2, "Steak", 15.99, true);
-	FoodItem newFoodItem3(3, "Nasi Lemak", 5.80, true);
-	FoodItem newFoodItem4(4, "Mee Goreng", 6.99, true);
-	FoodItem newFoodItem5(5, "Tom Yum Soup", 7.50, true);
+	if (option >= 1 && option <= maxFoodItems)
+	{
+		foodItemList.addItem(foodItem);
+		cout << "Food item has been added to the order." << endl << endl;
+		return true;
+	}
 
-	//Drinks
-	FoodItem newFoodItem6(6, "Coca-Cola", 2.00, true);
-	FoodItem newFoodItem7(7, "Ice Lemon Tea", 2.30, true);
-	FoodItem newFoodItem8(8, "Bandung", 1.80, true);
-	FoodItem newFoodItem9(9, "Thai Iced Tea", 2.20, true);
-
-	//Deserts
-	FoodItem newFoodItem10(10, "Chocolate Cake", 5.99, true);
-	FoodItem newFoodItem11(11, "Ice Cream", 3.50, true);
-	FoodItem newFoodItem12(12, "Mango Sticky Rice", 5.00, true);
-
-	if (option == 1)
-		foodItemList.addFoodItem(newFoodItem1);
-
-	else if (option == 2)
-		foodItemList.addFoodItem(newFoodItem2);
-
-	return true;
+	cout << "Invalid Food Item!" << endl << endl;
+	return false;
 }
 
-bool Order::removeFoodItem(int option) //Not done
+bool Order::removeFoodItem(int option) 
 {
 	if (foodItemList.getLength() == 0) {
+		cout << "Food Item List is empty." << endl << endl;
 		return false;
 	}
 
-	foodItemList.removeFoodItem(option);
+	if (option < 1 || option > foodItemList.getLength())
+	{
+		cout << "Invalid option!" << endl << endl;
+		return false;
+	}
+
+	foodItemList.removeItem(option);
+	cout << "Food item has been removed!" << endl << endl;
 	return true;
+}
+
+void Order::printOrder()
+{
+	cout << "|Order ID: " << getOrderID() << endl;
+	cout << "|Order Date: " << getOrderDate();
+	cout << "|Status: " << getStatus() << endl << endl;
+	cout << "Food Items:" << endl;
+	cout << "-----------" << endl << endl;
+	getFoodItemList().print();
 }
 
 void Order::setOrderID(int OrderID) { orderID = OrderID; }

@@ -1,6 +1,7 @@
 #include "AVLTree.h"
+using namespace std;
 
-AVLTree::AVLTree() : root(nullptr) {}
+AVLTree::AVLTree() : root(nullptr) { }
 
 AVLTree::~AVLTree() {
     destroyTree(root);
@@ -27,8 +28,8 @@ TreeNode* AVLTree::rotateRight(TreeNode* y) {
     x->right = y;
     y->left = T2;
 
-    y->height = std::max(getHeight(y->left), getHeight(y->right)) + 1;
-    x->height = std::max(getHeight(x->left), getHeight(x->right)) + 1;
+    y->height = max(getHeight(y->left), getHeight(y->right)) + 1;
+    x->height = max(getHeight(x->left), getHeight(x->right)) + 1;
 
     return x;
 }
@@ -40,8 +41,8 @@ TreeNode* AVLTree::rotateLeft(TreeNode* x) {
     y->left = x;
     x->right = T2;
 
-    x->height = std::max(getHeight(x->left), getHeight(x->right)) + 1;
-    y->height = std::max(getHeight(y->left), getHeight(y->right)) + 1;
+    x->height = max(getHeight(x->left), getHeight(x->right)) + 1;
+    y->height = max(getHeight(y->left), getHeight(y->right)) + 1;
 
     return y;
 }
@@ -92,7 +93,7 @@ TreeNode* AVLTree::insert(TreeNode* node, Order order) {
         return node;
     }
 
-    node->height = 1 + std::max(getHeight(node->left), getHeight(node->right));
+    node->height = 1 + max(getHeight(node->left), getHeight(node->right));
     return balance(node);
 }
 
@@ -127,14 +128,14 @@ void AVLTree::printInorder(TreeNode* node) {
     }
 
     printInorder(node->left);
-    std::cout << node->order.getOrderID() << " ";
+    cout << node->order.getOrderID() << " ";
     printInorder(node->right);
 }
 
 
 void AVLTree::printInorder() {
     printInorder(root);
-    std::cout << std::endl;
+    cout << endl;
 }
 
 void AVLTree::destroyTree(TreeNode* node) {

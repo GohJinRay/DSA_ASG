@@ -20,13 +20,13 @@ public:
 
 	~LinkedList();
 
-	bool addFoodItem(FoodItem& foodItem);
+	bool addItem(FoodItem& foodItem);
 
-	bool addFoodItem(int index, FoodItem foodItem);
+	bool addItem(int index, FoodItem foodItem);
 
-	void removeFoodItem(int index);
+	void removeItem(int index);
 
-	FoodItem getFoodItem(int index);
+	FoodItem getItem(int index);
 
 	bool isEmpty();
 

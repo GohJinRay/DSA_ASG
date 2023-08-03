@@ -19,7 +19,7 @@ void User::printDetails()
 {
 	cout << "Customer Details:" << endl;
 	cout << "User Name: " << getUserName() << endl;
-	cout << "Phone Number: " << getPhoneNum() << endl;
+	cout << "Phone Number: " << getPhoneNum() << endl << endl;
 }
 
 void User::setUserName(string UserName) { userName = UserName; }

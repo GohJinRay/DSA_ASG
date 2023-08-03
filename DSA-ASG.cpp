@@ -87,6 +87,27 @@ int getMenuChoice()
 
 int main()
 {
+	
+	FoodItem foodItems[maxFoodItems] = {
+		//Main course
+		{1, "Hainanese Chicken Rice", 4.50},
+		{2, "Steak", 15.99},
+		{3, "Nasi Lemak", 5.80},
+		{4, "Mee Goreng", 6.99},
+		{5, "Tom Yum Soup", 7.50},
+
+		//Drinks
+		{6, "Coca-Cola", 2.00},
+		{7, "Ice Lemon Tea", 2.30},
+		{8, "Bandung", 1.80},
+		{9, "Thai Iced Tea", 2.20},
+
+		//Deserts 
+		{10, "Chocolate Cake", 5.99},
+		{11, "Ice Cream", 3.50},
+		{12, "Mango Sticky Rice", 5.00}
+	};
+
 	Queue newQueue; //New Queue
 	Dictionary usersInfo; //HashTable to store Customer objects
 	Admin admin("Admin", "hehehehaw", 12345678, true); //By default, create new admin
@@ -160,20 +181,23 @@ int main()
 	Customer cust2("Mary", "124", 124, false); // initialization
 
 	order = cust1.createOrder(orderID);
-	order.addFoodItem(1);
-	order.addFoodItem(2);
+	int option = 1;
+	order.addFoodItem(foodItems[option - 1], option);
+	option = 2;
+	order.addFoodItem(foodItems[option - 1], option);
 	newQueue.enqueue(order);
 	orderID++;
 
 	order = cust2.createOrder(orderID);
-	order.addFoodItem(2);
+	option = 2;
+	order.addFoodItem(foodItems[option - 1], option);
 	newQueue.enqueue(order);
 	orderID++;
 
 	cout << "Shows what's in the queue currently" << endl;
+	cout << "-----------------------------------" << endl;
 	newQueue.displayItems();
 	order = admin.updateStatus(newQueue); //Dequeue upon update
-	cout << endl;
 	avlTree.insert(order);
 	newQueue.displayItems();
 	avlTree.printInorder();

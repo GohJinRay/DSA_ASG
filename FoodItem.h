@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <iostream>
 using namespace std;
 
 class FoodItem
@@ -8,21 +9,20 @@ private:
 	int foodID;
 	string foodName;
 	double price;
-	bool isAvail;
 
 public:
 	FoodItem();
-	FoodItem(int, string, double, bool);
+	FoodItem(int, string, double);
+	
+	void printFoodItem();
 	
 	void setFoodID(int);
 	void setFoodName(string);
 	void setPrice(double);
-	void setIsAvail(bool);
 
 	int getFoodID();
 	string getFoodName();
 	double getPrice();
-	bool getIsAvail();
 };
 
 

@@ -108,7 +108,7 @@ void Queue::displayItems()
 {
 	if (isEmpty())
 	{
-		cout << "Queue is empty!" << endl;
+		cout << "Queue is empty!" << endl << endl;
 	}
 
 	else
@@ -116,16 +116,8 @@ void Queue::displayItems()
 		Node* curr = frontNode;
 		while (curr != NULL)
 		{
-			cout << "Order ID: " << curr->order.getOrderID() << endl;
-			cout << "Order Date: " << curr->order.getOrderDate() << endl;
-			cout << "Status: " << curr->order.getStatus() << endl << endl;
-			//curr->order.getCustomer()->printDetails();
-			cout << endl;
-			cout << "Food Items: " << endl << endl;
-			curr->order.getFoodItemList().print(); 
-			cout << endl;
+			curr->order.printOrder();
 			curr = curr->next;
 		}
-		cout << endl;
 	}
 }

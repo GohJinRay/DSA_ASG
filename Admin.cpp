@@ -12,7 +12,7 @@ void Admin::printDetails()
 void Admin::viewOrders(Queue& q)
 {
     if (q.isEmpty()) { // check for incoming orders
-        cout << "No incoming orders.";
+        cout << "No incoming orders." << endl << endl;
         return;
     }
     q.displayItems();
@@ -21,7 +21,7 @@ void Admin::viewOrders(Queue& q)
 Order Admin::updateStatus(Queue& q)
 {
     if (q.isEmpty()) { // check for incoming orders
-        cout << "No incoming orders.";
+        cout << "No incoming orders." << endl << endl;
         return Order(); //Return empty order object
     }
 
@@ -31,12 +31,12 @@ Order Admin::updateStatus(Queue& q)
     order.setStatus("Prepared"); // set it to prepared
     q.dequeue(); // remove it from the queue
 
-    cout << "Order ID " << order.getOrderID() << "'s status changed from " << prevStat << " -> " << order.getStatus() << " sucessfully!" << endl;
+    cout << "Order ID " << order.getOrderID() << "'s status changed from " << prevStat << " -> " << order.getStatus() << " sucessfully!" << endl << endl;
 
     return order;
 }
 
-void Admin::viewCustInfo(AVLTree avlTree, int orderID)
+void Admin::viewCustInfo(AVLTree avlTree, int orderID) // not done
 {
     Order order;
     order = avlTree.search(orderID);

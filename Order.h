@@ -1,6 +1,9 @@
 #pragma once
+#include <iostream>
 #include "LinkedList.h"
 using namespace std;
+
+const int maxFoodItems = 12;
 
 class Customer;
 
@@ -16,8 +19,9 @@ private:
 public:
 	Order();
 	Order(int, string, string, Customer*, LinkedList);
-	bool addFoodItem(int);
+	bool addFoodItem(FoodItem, int option);
 	bool removeFoodItem(int);
+	void printOrder();
 
 	void setOrderID(int);
 	void setOrderDate(string);

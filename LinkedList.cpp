@@ -23,7 +23,7 @@ LinkedList::~LinkedList()
 	firstNode = NULL;
 }
 
-bool LinkedList::addFoodItem(FoodItem& foodItem)
+bool LinkedList::addItem(FoodItem& foodItem)
 {
 	Node* newNode = new Node;
 	newNode->foodItem = foodItem;
@@ -44,7 +44,7 @@ bool LinkedList::addFoodItem(FoodItem& foodItem)
 	return true;
 }
 
-bool LinkedList::addFoodItem(int index, FoodItem foodItem)
+bool LinkedList::addItem(int index, FoodItem foodItem)
 {
 	if (index >= 0 && index <= size)
 	{
@@ -76,7 +76,7 @@ bool LinkedList::addFoodItem(int index, FoodItem foodItem)
 		return false;
 }
 
-void LinkedList::removeFoodItem(int index)
+void LinkedList::removeItem(int index)
 {
 	if (index >= 0 && index < size)
 	{
@@ -104,7 +104,7 @@ void LinkedList::removeFoodItem(int index)
 	}
 }
 
-FoodItem LinkedList::getFoodItem(int index)
+FoodItem LinkedList::getItem(int index)
 {
 	if (index >= 0 && index < size)
 	{
@@ -136,20 +136,7 @@ void LinkedList::print()
 
 	while (curr != NULL)
 	{
-		FoodItem item = curr->foodItem;
-
-		int foodID = item.getFoodID();
-		string foodName = item.getFoodName();
-		double price = item.getPrice();
-		bool isAvail = item.getIsAvail();
-
-		cout << "Food ID: " << foodID << endl;
-		cout << "Food Name: " << foodName << endl;
-		cout << "Price: " << price << endl;
-		cout << "Is Available? " << isAvail << endl;
-		cout << endl;
-
+		curr->foodItem.printFoodItem();
 		curr = curr->next;
 	}
-	cout << endl;
 }

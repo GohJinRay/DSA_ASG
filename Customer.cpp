@@ -12,7 +12,7 @@ void Customer::printDetails()
 
 void Customer::viewMenu() // not done
 {
-
+	cout << "----- Menu -----" << endl;
 }
 
 Order Customer::createOrder(int orderID) 

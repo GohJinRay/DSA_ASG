@@ -21,7 +21,7 @@ Order Customer::createOrder(int orderID)
 	return newOrder;
 }
 
-bool Customer::cancelOrder(Queue queue, int orderID) // not done
+bool Customer::cancelOrder(Queue queue, int orderID) 
 {
 	Queue auxiliaryQueue;
 	bool foundOrder = false;

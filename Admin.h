@@ -11,7 +11,7 @@ public:
 	Admin();
 	Admin(string, string, int, bool);
 	void viewOrders(Queue&);
-	Order updateStatus(Queue&);
+	void updateStatus(AVLTree, Queue&);
 	void viewCustInfo(AVLTree, int);
 	virtual void printDetails();
 };

@@ -221,8 +221,7 @@ int main()
 	cout << "Shows what's in the queue currently" << endl;
 	cout << "-----------------------------------" << endl;
 	newQueue.displayItems();
-	order = admin.updateStatus(newQueue); //Dequeue upon update
-	avlTree.insert(order);
+	admin.updateStatus(avlTree, newQueue); //Dequeue upon update and add order to tree
 	newQueue.displayItems();
 	avlTree.printInorder();
 

@@ -18,11 +18,11 @@ void Admin::viewOrders(Queue& q)
     q.displayItems();
 }
 
-Order Admin::updateStatus(Queue& q)
+void Admin::updateStatus(AVLTree avlTree, Queue& q)
 {
     if (q.isEmpty()) { // check for incoming orders
         cout << "No incoming orders." << endl << endl;
-        return Order(); //Return empty order object
+        return;
     }
 
     Order order;
@@ -33,7 +33,7 @@ Order Admin::updateStatus(Queue& q)
 
     cout << "Order ID " << order.getOrderID() << "'s status changed from " << prevStat << " -> " << order.getStatus() << " sucessfully!" << endl << endl;
 
-    return order;
+    avlTree.insert(order);
 }
 
 void Admin::viewCustInfo(AVLTree avlTree, int orderID) // not done

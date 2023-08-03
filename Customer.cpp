@@ -21,7 +21,38 @@ Order Customer::createOrder(int orderID)
 	return newOrder;
 }
 
-bool Customer::cancelOrder() // not done
+bool Customer::cancelOrder(Queue queue, int orderID) // not done
 {
-	return true;
+	Queue auxiliaryQueue;
+	bool foundOrder = false;
+
+	while (!queue.isEmpty())
+	{
+		Order currOrder;
+		queue.getFront(currOrder);
+		queue.dequeue();
+
+		if (currOrder.getOrderID() == orderID)
+		{
+			foundOrder = true;
+			cout << "Order with ID " << orderID << " has been canceled." << endl;
+		}
+		else
+		{
+			auxiliaryQueue.enqueue(currOrder);
+		}
+	}
+
+	while (!auxiliaryQueue.isEmpty())
+	{
+		Order currOrder;
+		auxiliaryQueue.getFront(currOrder);
+		auxiliaryQueue.dequeue();
+		queue.enqueue(currOrder);
+	}
+
+	if (!foundOrder)
+		cout << "Order with ID " << orderID << " is not in the queue. Cancellation failed." << endl;
+
+	return foundOrder;
 }

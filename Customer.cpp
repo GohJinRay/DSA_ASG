@@ -10,11 +10,6 @@ void Customer::printDetails()
 	User::printDetails();
 }
 
-void Customer::viewMenu() // not done
-{
-	cout << "----- Menu -----" << endl;
-}
-
 Order Customer::createOrder(int orderID) 
 {
 	LinkedList foodItemList;

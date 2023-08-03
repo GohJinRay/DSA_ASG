@@ -13,7 +13,6 @@ private:
 public:
 	User();
 	User(string, string, int, bool);
-	bool registerUser();
 
 	void setUserName(string);
 	void setPassword(string);

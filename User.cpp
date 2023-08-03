@@ -10,11 +10,6 @@ User::User(string UserName, string Password, int PhoneNum, bool IsAdmin)
 	isAdmin = IsAdmin;
 }
 
-bool User::registerUser() // not done
-{
-	return true;
-}
-
 void User::printDetails()
 {
 	cout << "Customer Details:" << endl;

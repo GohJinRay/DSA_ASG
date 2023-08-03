@@ -48,7 +48,7 @@ void Order::printOrder()
 	cout << "|Order Date: " << getOrderDate();
 	cout << "|Status: " << getStatus() << endl << endl;
 	cout << "Food Items:" << endl;
-	cout << "-----------" << endl << endl;
+	cout << "-----------" << endl;
 	getFoodItemList().print();
 }
 

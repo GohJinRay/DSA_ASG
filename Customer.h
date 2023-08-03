@@ -14,6 +14,5 @@ public:
     Customer(string, string, int, bool); 
     Order createOrder(int);
     bool cancelOrder();
-    void viewMenu();
     virtual void printDetails();
 };

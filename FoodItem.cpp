@@ -13,7 +13,9 @@ void FoodItem::printFoodItem()
 {
 	cout << "Food ID: " << getFoodID() << endl;
 	cout << "Food Name: " << getFoodName() << endl;
-	cout << "Price: " << getPrice() << endl << endl;
+	cout.precision(2);
+	cout << fixed;
+	cout << "Price: $" << getPrice() << endl << endl;
 }
 
 void FoodItem::setFoodID(int FoodID) { foodID = FoodID; }

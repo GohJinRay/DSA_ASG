@@ -85,6 +85,26 @@ int getMenuChoice()
 	return choice;
 }
 
+void viewMenu(FoodItem foodItems[])
+{
+	cout << " Food ID |                 Food Name | Price ($)" << endl;
+	cout << "------------------------------------------------" << endl;
+	for (int i = 0; i < maxFoodItems; i++)
+	{
+		cout.width(8);
+		cout << foodItems[i].getFoodID();
+		cout << " | ";
+		cout.width(25);
+		cout << foodItems[i].getFoodName();
+		cout << " | $";
+		cout.precision(2);
+		cout << fixed;
+		cout << foodItems[i].getPrice();
+		cout << endl;
+	}
+	cout << endl;
+}
+
 int main()
 {
 	
@@ -121,16 +141,22 @@ int main()
 		choice = getMenuChoice();
 
 		string username, password;
-		const string adminUsername = "Admin", adminPassword = "hehehehaw";
+		int phoneNum;
 		Customer newCustomer;
+		const string adminUsername = "Admin", adminPassword = "hehehehaw";
+
 
 		switch (choice)
 		{
 			case 1: //Register
-				int phoneNum;
-				bool isAdmin;
 				cout << "Please enter your username: "; 
 				cin >> username;
+
+				if (username == usersInfo.get(username).getUserName())
+				{
+					cout << "Already exists! Please enter a new username!" << endl;
+					break;
+				}
 
 				cout << "Please enter your password: ";
 				cin >> password;
@@ -138,12 +164,7 @@ int main()
 				cout << "Please enter your phone number: ";
 				cin >> phoneNum;
 
-				if (username == usersInfo.get(username).getUserName())
-				{
-					cout << "Already exists! Please enter a new username!" << endl;
-					break;
-				}
-				//newCustomer = Customer(username, password, phoneNum, false, order);
+				newCustomer = Customer(username, password, phoneNum, false);
 				usersInfo.add(username, newCustomer);
 				cout << "Registeration complete!" << endl;
 
@@ -179,6 +200,9 @@ int main()
 /////////////////////////////////////////////////////////////////////////////////////////////
 	Customer cust1("John", "123", 123, false); // initialization
 	Customer cust2("Mary", "124", 124, false); // initialization
+
+	//View Menu
+	viewMenu(foodItems);
 
 	order = cust1.createOrder(orderID);
 	int option = 1;

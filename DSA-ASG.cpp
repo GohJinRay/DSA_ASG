@@ -130,7 +130,7 @@ int main()
 
 	Queue newQueue; //New Queue
 	Dictionary usersInfo; //HashTable to store Customer objects
-	Admin admin("Admin", "hehehehaw", 12345678, true); //By default, create new admin
+	Admin admin("Admin", "hehehehaw", 12345678); //By default, create new admin
 	Order order;
 	int orderID = 0; //Start at 0 by default
 	AVLTree avlTree;
@@ -166,7 +166,7 @@ int main()
 
 				newCustomer = Customer(username, password, phoneNum, false);
 				usersInfo.add(username, newCustomer);
-				cout << "Registeration complete!" << endl;
+				cout << "Registration complete!" << endl;
 
 				break;
 

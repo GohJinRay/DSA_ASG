@@ -10,7 +10,7 @@ class Customer : public User
 {
 public:
     Customer();
-    Customer(string, string, int, bool); 
+    Customer(string, string, int); 
     Order createOrder(int);
     bool cancelOrder(Queue, int);
     virtual void printDetails();

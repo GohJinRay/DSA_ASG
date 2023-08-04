@@ -2,12 +2,15 @@
 #include <iostream>
 #include "Order.h"
 using namespace std;
+
+typedef Order ItemType;
+
 class Queue
 {
 private:
 	struct Node
 	{
-		Order order;
+		ItemType item;
 		Node* next;
 	};
 
@@ -19,13 +22,13 @@ public:
 
 	~Queue();
 
-	bool enqueue(Order& order);
+	bool enqueue(ItemType order);
 
 	bool dequeue();
 
-	bool dequeue(Order& order);
+	bool dequeue(ItemType order);
 
-	void getFront(Order& order);
+	void getFront(ItemType order);
 
 	bool isEmpty();
 	

@@ -23,7 +23,7 @@ LinkedList::~LinkedList()
 	firstNode = NULL;
 }
 
-bool LinkedList::addItem(FoodItem& foodItem)
+bool LinkedList::addItem(ItemType& foodItem)
 {
 	Node* newNode = new Node;
 	newNode->item = foodItem;
@@ -44,7 +44,7 @@ bool LinkedList::addItem(FoodItem& foodItem)
 	return true;
 }
 
-bool LinkedList::addItem(int index, FoodItem foodItem)
+bool LinkedList::addItem(int index, ItemType foodItem)
 {
 	if (index >= 0 && index <= size)
 	{
@@ -104,7 +104,7 @@ void LinkedList::removeItem(int index)
 	}
 }
 
-FoodItem LinkedList::getItem(int index)
+ItemType LinkedList::getItem(int index)
 {
 	if (index >= 0 && index < size)
 	{

@@ -1,5 +1,7 @@
 #include "Queue.h"
 
+typedef Order ItemType;
+
 Queue::Queue() { };
 
 Queue::~Queue()
@@ -10,10 +12,10 @@ Queue::~Queue()
 	}
 }
 
-bool Queue::enqueue(Order& order)
+bool Queue::enqueue(ItemType order)
 {
 	Node* newNode = new Node;
-	newNode->order = order;
+	newNode->item = order;
 	newNode->next = NULL;
 
 	if (isEmpty())
@@ -57,7 +59,7 @@ bool Queue::dequeue()
 	return true;
 }
 
-bool Queue::dequeue(Order& order)
+bool Queue::dequeue(ItemType order)
 {
 	if (frontNode == NULL)
 	{
@@ -67,7 +69,7 @@ bool Queue::dequeue(Order& order)
 
 	else if (frontNode == backNode)
 	{
-		order = frontNode->order;
+		order = frontNode->item;
 		frontNode = NULL;
 		backNode = NULL;
 
@@ -77,7 +79,7 @@ bool Queue::dequeue(Order& order)
 	else
 	{
 		Node* temp = frontNode;
-		order = temp->order;
+		order = temp->item;
 		frontNode = frontNode->next;
 
 		temp->next = NULL;
@@ -86,10 +88,10 @@ bool Queue::dequeue(Order& order)
 	return true;
 }
 
-void Queue::getFront(Order& order)
+void Queue::getFront(ItemType order)
 {
 	if (!isEmpty())
-		order = frontNode->order;
+		order = frontNode->item;
 
 	else
 	{
@@ -116,7 +118,7 @@ void Queue::displayItems()
 		Node* curr = frontNode;
 		while (curr != NULL)
 		{
-			curr->order.printOrder();
+			curr->item.printOrder();
 			curr = curr->next;
 		}
 	}

@@ -22,13 +22,13 @@ public:
 
 	~LinkedList();
 
-	bool addItem(FoodItem& foodItem);
+	bool addItem(ItemType& foodItem);
 
-	bool addItem(int index, FoodItem foodItem);
+	bool addItem(int index, ItemType foodItem);
 
 	void removeItem(int index);
 
-	FoodItem getItem(int index);
+	ItemType getItem(int index);
 
 	bool isEmpty();
 

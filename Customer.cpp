@@ -2,8 +2,8 @@
 
 Customer::Customer() { }
 
-Customer::Customer(string UserName, string Password, int PhoneNum, bool IsAdmin)
-	: User(UserName, Password, PhoneNum, IsAdmin) { }
+Customer::Customer(string UserName, string Password, int PhoneNum)
+	: User(UserName, Password, PhoneNum) { }
 
 void Customer::printDetails()
 {

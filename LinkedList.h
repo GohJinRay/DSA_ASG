@@ -2,12 +2,14 @@
 #include "FoodItem.h"
 using namespace std;
 
+typedef FoodItem ItemType;
+
 class LinkedList
 {
 private:
 	struct Node
 	{
-		FoodItem foodItem;
+		ItemType item;
 		Node* next;
 	};
 

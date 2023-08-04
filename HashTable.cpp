@@ -132,13 +132,19 @@ int Dictionary::getLength() {
 void Dictionary::print() {
     for (int i = 0; i < MAX_SIZE; i++) {
         if (customers[i] != nullptr) {
-            cout << "Name of Customer: " << customers[i]->key << endl; // print the name of customer (key)
+            Customer cust;
+            cust = customers[i]->item;
+            cust.printDetails();
             Node* currNode = customers[i]->next;
 
             while (currNode != nullptr) {
-                cout << "Name of Customer: " << currNode->key << endl; // print the name of customer (key)
+                Customer cust;
+                cust = customers[i]->item;
+                cust.printDetails();
                 currNode = currNode->next;
             }
         }
     }
+
+
 }

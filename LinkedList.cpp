@@ -26,7 +26,7 @@ LinkedList::~LinkedList()
 bool LinkedList::addItem(FoodItem& foodItem)
 {
 	Node* newNode = new Node;
-	newNode->foodItem = foodItem;
+	newNode->item = foodItem;
 	newNode->next = NULL;
 
 	if (size == 0)
@@ -49,7 +49,7 @@ bool LinkedList::addItem(int index, FoodItem foodItem)
 	if (index >= 0 && index <= size)
 	{
 		Node* newNode = new Node;
-		newNode->foodItem = foodItem;
+		newNode->item = foodItem;
 		newNode->next = NULL;
 		int counter = 0;
 
@@ -116,7 +116,7 @@ FoodItem LinkedList::getItem(int index)
 			curr = curr->next;
 			counter++;
 		}
-		return curr->foodItem;
+		return curr->item;
 	}
 }
 
@@ -136,7 +136,7 @@ void LinkedList::print()
 
 	while (curr != NULL)
 	{
-		curr->foodItem.printFoodItem();
+		curr->item.printFoodItem();
 		curr = curr->next;
 	}
 }

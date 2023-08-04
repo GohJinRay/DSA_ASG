@@ -4,7 +4,6 @@ using namespace std;
 
 const int MAX_SIZE = 100;
 typedef string KeyType;
-typedef Customer ItemType;
 
 class Dictionary {
 
@@ -12,7 +11,7 @@ private:
 	struct Node
 	{
 		KeyType key;
-		ItemType item;
+		Customer item;
 		Node* next;
 	};
 

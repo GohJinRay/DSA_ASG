@@ -9,7 +9,7 @@
 #include "Order.h"
 #include "FoodItem.h"
 #include "Queue.h"
-#include "HashTable_Customer.h"
+#include "HashTable.h"
 #include "AVLTree.h"
 using namespace std;
 
@@ -164,7 +164,7 @@ int main()
 				cout << "Please enter your phone number: ";
 				cin >> phoneNum;
 
-				newCustomer = Customer(username, password, phoneNum, false);
+				newCustomer = Customer(username, password, phoneNum);
 				usersInfo.add(username, newCustomer);
 				cout << "Registration complete!" << endl;
 
@@ -198,8 +198,8 @@ int main()
 	} while (choice != 3);
 
 /////////////////////////////////////////////////////////////////////////////////////////////
-	Customer cust1("John", "123", 123, false); // initialization
-	Customer cust2("Mary", "124", 124, false); // initialization
+	Customer cust1("John", "123", 123); // initialization
+	Customer cust2("Mary", "124", 124); // initialization
 
 	//View Menu
 	viewMenu(foodItems);

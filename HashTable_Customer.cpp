@@ -43,7 +43,7 @@ bool Dictionary::add(KeyType newKey, Customer customer) {
 
     Node* newNode = new Node;
     newNode->key = newKey;
-    newNode->customer= customer;
+    newNode->item = customer;
     newNode->next = nullptr;
 
     if (customers[index] == nullptr) {
@@ -113,7 +113,7 @@ Customer Dictionary::get(KeyType key) {
     while (currNode != nullptr) {
 
         if (currNode->key == key) {
-            return currNode->customer;
+            return currNode->item;
         }
 
         currNode = currNode->next;

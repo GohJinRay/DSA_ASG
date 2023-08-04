@@ -2,7 +2,7 @@
 
 Admin::Admin() { };
 
-Admin::Admin(string UserName, string Password, int PhoneNum, bool IsAdmin) : User(UserName, Password, PhoneNum, IsAdmin) { };
+Admin::Admin(string UserName, string Password, int PhoneNum) : User(UserName, Password, PhoneNum) { };
 
 void Admin::printDetails()
 {

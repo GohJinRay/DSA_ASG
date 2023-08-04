@@ -2,12 +2,11 @@
 
 User::User() { };
 
-User::User(string UserName, string Password, int PhoneNum, bool IsAdmin)
+User::User(string UserName, string Password, int PhoneNum)
 {
 	userName = UserName;
 	password = Password;
 	phoneNum = PhoneNum;
-	isAdmin = IsAdmin;
 }
 
 void User::printDetails()

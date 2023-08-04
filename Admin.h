@@ -9,7 +9,7 @@ class Admin: public User
 {
 public:
 	Admin();
-	Admin(string, string, int, bool);
+	Admin(string, string, int);
 	void viewOrders(Queue&);
 	void updateStatus(AVLTree, Queue&);
 	void viewCustInfo(AVLTree, int);

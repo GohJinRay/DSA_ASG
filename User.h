@@ -8,11 +8,10 @@ private:
 	string userName;
 	string password;
 	int phoneNum;
-	bool isAdmin;
 
 public:
 	User();
-	User(string, string, int, bool);
+	User(string, string, int);
 
 	void setUserName(string);
 	void setPassword(string);

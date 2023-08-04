@@ -5,7 +5,8 @@
 #include "Admin.h"
 #include "Customer.h"
 #include "User.h"
-#include "LinkedList.h"
+#include "LinkedList_Order.h"
+#include "LinkedList_Customer.h"
 #include "Order.h"
 #include "FoodItem.h"
 #include "Queue.h"
@@ -129,11 +130,11 @@ int main()
 	};
 
 	Queue newQueue; //New Queue
+	LinkedList_Customer orderList;
 	Dictionary usersInfo; //HashTable to store Customer objects
 	Admin admin("Admin", "hehehehaw", 12345678); //By default, create new admin
-	Order order;
+	Order* order;
 	int orderID = 0; //Start at 0 by default
-	AVLTree avlTree;
 
 	int choice;
 	do
@@ -164,7 +165,7 @@ int main()
 				cout << "Please enter your phone number: ";
 				cin >> phoneNum;
 
-				newCustomer = Customer(username, password, phoneNum);
+				newCustomer = Customer(username, password, phoneNum, orderList);
 				usersInfo.add(username, newCustomer);
 				cout << "Registration complete!" << endl;
 
@@ -198,32 +199,49 @@ int main()
 	} while (choice != 3);
 
 /////////////////////////////////////////////////////////////////////////////////////////////
-	Customer cust1("John", "123", 123); // initialization
-	Customer cust2("Mary", "124", 124); // initialization
+	Customer cust1("John", "123", 123, orderList); // initialization
+	Customer cust2("Mary", "124", 124, orderList); // initialization
 
 	//View Menu
 	viewMenu(foodItems);
 
 	order = cust1.createOrder(orderID);
 	int option = 1;
-	order.addFoodItem(foodItems[option - 1], option);
+	order->addFoodItem(foodItems[option - 1], option);
 	option = 2;
-	order.addFoodItem(foodItems[option - 1], option);
-	newQueue.enqueue(order);
+	order->addFoodItem(foodItems[option - 1], option);
+	newQueue.enqueue(*order); // enqueue the object by dereference the pointer
 	orderID++;
+	cust1.getOrderList().OrderListprint();
+
+	order = cust1.createOrder(orderID);
+	option = 1;
+	order->addFoodItem(foodItems[option - 1], option);
+	option = 2;
+	order->addFoodItem(foodItems[option - 1], option);
+	newQueue.enqueue(*order);
+	orderID++;
+	cust1.getOrderList().OrderListprint();
 
 	order = cust2.createOrder(orderID);
 	option = 2;
-	order.addFoodItem(foodItems[option - 1], option);
-	newQueue.enqueue(order);
+	order->addFoodItem(foodItems[option - 1], option);
+	newQueue.enqueue(*order);
 	orderID++;
+	cust2.getOrderList().OrderListprint();
 
 	cout << "Shows what's in the queue currently" << endl;
 	cout << "-----------------------------------" << endl;
 	newQueue.displayItems();
-	admin.updateStatus(avlTree, newQueue); //Dequeue upon update and add order to tree
+	//admin.updateStatus(newQueue); //Dequeue upon update
+	//newQueue.displayItems();
+	cust1.getOrderList().OrderListprint();
+
+	cout << "Cancel Order" << endl;
+	cust1.cancelOrder(newQueue, 0);
+
 	newQueue.displayItems();
-	avlTree.printInorder();
+	cust1.getOrderList().OrderListprint();
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 

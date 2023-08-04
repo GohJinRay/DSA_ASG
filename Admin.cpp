@@ -18,7 +18,7 @@ void Admin::viewOrders(Queue& q)
     q.displayItems();
 }
 
-void Admin::updateStatus(AVLTree avlTree, Queue& q)
+void Admin::updateStatus(Queue& q) // not done
 {
     if (q.isEmpty()) { // check for incoming orders
         cout << "No incoming orders." << endl << endl;
@@ -30,16 +30,18 @@ void Admin::updateStatus(AVLTree avlTree, Queue& q)
     string prevStat = order.getStatus(); // saves the prev status
     order.setStatus("Prepared"); // set it to prepared
     q.dequeue(); // remove it from the queue
+    
+    Order* order1;
+    LinkedList_Customer orderList = order.getCustomer()->getOrderList();
+    order1 = orderList.getOrder(0); // gets the order in linked list
+    order1->setStatus("Prepared");
 
     cout << "Order ID " << order.getOrderID() << "'s status changed from " << prevStat << " -> " << order.getStatus() << " sucessfully!" << endl << endl;
-
-    avlTree.insert(order);
 }
 
-void Admin::viewCustInfo(AVLTree avlTree, int orderID) // not done
+void Admin::viewCustInfo(int orderID) // not done
 {
     Order order;
-    order = avlTree.search(orderID);
     Customer* customer = order.getCustomer();
     customer->printDetails();
 }

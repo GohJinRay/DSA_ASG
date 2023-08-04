@@ -2,26 +2,30 @@
 
 Customer::Customer() { }
 
-Customer::Customer(string UserName, string Password, int PhoneNum)
-	: User(UserName, Password, PhoneNum) { }
+Customer::Customer(string UserName, string Password, int PhoneNum, LinkedList_Customer OrderList)
+	: User(UserName, Password, PhoneNum) 
+{ 
+	orderList = OrderList;
+}
 
 void Customer::printDetails()
 {
 	User::printDetails();
 }
 
-Order Customer::createOrder(int orderID) 
+Order* Customer::createOrder(int orderID) 
 {
-	LinkedList foodItemList;
+	LinkedList_Order foodItemList;
 	time_t now = time(0);
 	char buffer[26]; // Use ctime_s to print human-readable date
 	ctime_s(buffer, sizeof(buffer), &now);
 	string currTime(buffer); //Convert to string format
-	Order newOrder(orderID, currTime, "Not Prepared", this, foodItemList);
+	Order* newOrder = new Order(orderID, currTime, "Not Prepared", this, foodItemList);
+	orderList.addOrder(newOrder);
 	return newOrder;
 }
 
-bool Customer::cancelOrder(Queue queue, int orderID) 
+bool Customer::cancelOrder(Queue& queue, int orderID) 
 {
 	Queue auxiliaryQueue;
 	bool foundOrder = false;
@@ -34,6 +38,7 @@ bool Customer::cancelOrder(Queue queue, int orderID)
 
 		if (currOrder.getOrderID() == orderID)
 		{
+			orderList.removeOrder(currOrder); //Remove order from linked list 
 			foundOrder = true;
 			cout << "Order with ID " << orderID << " has been canceled." << endl;
 		}
@@ -55,4 +60,9 @@ bool Customer::cancelOrder(Queue queue, int orderID)
 		cout << "Order with ID " << orderID << " is not in the queue. Cancellation failed." << endl;
 
 	return foundOrder;
+}
+
+LinkedList_Customer Customer::getOrderList()
+{
+	return orderList;
 }

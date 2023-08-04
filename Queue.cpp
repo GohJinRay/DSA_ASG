@@ -1,7 +1,5 @@
 #include "Queue.h"
 
-typedef Order ItemType;
-
 Queue::Queue() { };
 
 Queue::~Queue()
@@ -12,10 +10,10 @@ Queue::~Queue()
 	}
 }
 
-bool Queue::enqueue(ItemType order)
+bool Queue::enqueue(Order& orderItem)
 {
 	Node* newNode = new Node;
-	newNode->item = order;
+	newNode->orderItem = orderItem;
 	newNode->next = NULL;
 
 	if (isEmpty())
@@ -34,7 +32,7 @@ bool Queue::enqueue(ItemType order)
 
 bool Queue::dequeue()
 {
-	if (frontNode == NULL)
+	if (isEmpty())
 	{
 		cout << "No nodes to dequeue!" << endl;
 		return false;
@@ -59,9 +57,9 @@ bool Queue::dequeue()
 	return true;
 }
 
-bool Queue::dequeue(ItemType order)
+bool Queue::dequeue(Order& orderItem)
 {
-	if (frontNode == NULL)
+	if (isEmpty())
 	{
 		cout << "No nodes to dequeue!" << endl;
 		return false;
@@ -69,7 +67,7 @@ bool Queue::dequeue(ItemType order)
 
 	else if (frontNode == backNode)
 	{
-		order = frontNode->item;
+		orderItem = frontNode->orderItem;
 		frontNode = NULL;
 		backNode = NULL;
 
@@ -79,7 +77,7 @@ bool Queue::dequeue(ItemType order)
 	else
 	{
 		Node* temp = frontNode;
-		order = temp->item;
+		orderItem = temp->orderItem;
 		frontNode = frontNode->next;
 
 		temp->next = NULL;
@@ -88,16 +86,16 @@ bool Queue::dequeue(ItemType order)
 	return true;
 }
 
-void Queue::getFront(ItemType order)
+void Queue::getFront(Order& orderItem) 
 {
 	if (!isEmpty())
-		order = frontNode->item;
+		orderItem = frontNode->orderItem;
 
 	else
 	{
-		order.setOrderID(-1);
-		order.setOrderDate("");
-		order.setStatus("Not prepared");
+		orderItem.setOrderID(-1);
+		orderItem.setOrderDate("");
+		orderItem.setStatus("Not prepared");
 	}
 }
 
@@ -106,7 +104,7 @@ bool Queue::isEmpty()
 	return (frontNode == NULL);
 }
 
-void Queue::displayItems()
+void Queue::displayItems() 
 {
 	if (isEmpty())
 	{
@@ -118,7 +116,7 @@ void Queue::displayItems()
 		Node* curr = frontNode;
 		while (curr != NULL)
 		{
-			curr->item.printOrder();
+			curr->orderItem.printOrder();
 			curr = curr->next;
 		}
 	}

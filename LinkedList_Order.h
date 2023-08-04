@@ -1,15 +1,14 @@
 #pragma once
+#include <string>
 #include "FoodItem.h"
 using namespace std;
 
-typedef FoodItem ItemType;
-
-class LinkedList
+class LinkedList_Order
 {
 private:
 	struct Node
 	{
-		ItemType item;
+		FoodItem foodItem;
 		Node* next;
 	};
 
@@ -18,17 +17,17 @@ private:
 
 public:
 
-	LinkedList();
+	LinkedList_Order();
 
-	~LinkedList();
+	~LinkedList_Order();
 
-	bool addItem(ItemType& foodItem);
+	bool addItem(FoodItem& item);
 
-	bool addItem(int index, ItemType foodItem);
+	bool addItem(int index, FoodItem& item);
 
 	void removeItem(int index);
 
-	ItemType getItem(int index);
+	FoodItem getItem(int index);
 
 	bool isEmpty();
 

@@ -1,32 +1,28 @@
-#include "LinkedList.h"
-#include <iostream>
+#include "LinkedList_Customer.h"
 using namespace std;
 
-
-LinkedList::LinkedList()
-{ 
+LinkedList_Customer::LinkedList_Customer()
+{
 	firstNode = NULL;
 	size = 0;
 }
 
-LinkedList::~LinkedList() 
-{ 
+LinkedList_Customer::~LinkedList_Customer()
+{
 	Node* curr = firstNode;
-	Node* next;
 	while (curr != NULL)
 	{
-		next = curr->next;
+		Node* next = curr->next;
 		curr = NULL;
 		delete curr;
 		curr = next;
 	}
-	firstNode = NULL;
 }
 
-bool LinkedList::addItem(ItemType& foodItem)
+bool LinkedList_Customer::addOrder(Order* orderItem)
 {
 	Node* newNode = new Node;
-	newNode->item = foodItem;
+	newNode->orderItem = orderItem;
 	newNode->next = NULL;
 
 	if (size == 0)
@@ -44,12 +40,12 @@ bool LinkedList::addItem(ItemType& foodItem)
 	return true;
 }
 
-bool LinkedList::addItem(int index, ItemType foodItem)
+bool LinkedList_Customer::addOrder(int index, Order* orderItem)
 {
 	if (index >= 0 && index <= size)
 	{
 		Node* newNode = new Node;
-		newNode->item = foodItem;
+		newNode->orderItem = orderItem;
 		newNode->next = NULL;
 		int counter = 0;
 
@@ -76,67 +72,70 @@ bool LinkedList::addItem(int index, ItemType foodItem)
 		return false;
 }
 
-void LinkedList::removeItem(int index)
+void LinkedList_Customer::removeOrder(Order& orderItem)
 {
-	if (index >= 0 && index < size)
-	{
-		int counter = 0;
-		Node* prev = firstNode;
-		Node* curr = firstNode->next;
+	Node* curr = firstNode;
+	Node* prev = NULL;
 
-		if (index == 0)
+	while (curr != NULL)
+	{
+		if (curr->orderItem->getOrderID() == orderItem.getOrderID())
 		{
-			firstNode = prev->next;
-			delete prev;
-		}
-		else
-		{
-			while (curr->next != NULL && counter < index - 1)
-			{
-				prev = curr;
-				curr = curr->next;
-				counter++;
-			}
-			prev->next = curr->next;
+			if (prev == NULL)
+				firstNode = curr->next;
+			else
+				prev->next = curr->next;
+
 			delete curr;
+			size--;
+			return;
 		}
-		size--;
+		
+		prev = curr;
+		curr = curr->next;
 	}
+	
+	cout << "Order not found in the linked list." << endl;
 }
 
-ItemType LinkedList::getItem(int index)
+Order* LinkedList_Customer::getOrder(int index)
 {
 	if (index >= 0 && index < size)
 	{
 		int counter = 0;
 		Node* curr = firstNode;
 
-		while (curr->next != NULL && counter <= index)
+		while (curr->next != NULL && counter < index)
 		{
 			curr = curr->next;
 			counter++;
 		}
-		return curr->item;
+		return curr->orderItem;
 	}
+	return NULL;
 }
 
-bool LinkedList::isEmpty()
+bool LinkedList_Customer::OrderListisEmpty()
 {
 	return size == 0;
 }
 
-int LinkedList::getLength()
+int LinkedList_Customer::OrderListgetLength()
 {
 	return size;
 }
 
-void LinkedList::print()
+void LinkedList_Customer::OrderListprint()
 {
 	Node* curr = firstNode;
 
 	while (curr != NULL)
 	{
-		curr->item.printFoodItem();
+		Order* order = curr->orderItem;
+
+		order->printOrder();
+
 		curr = curr->next;
 	}
+	cout << endl;
 }

@@ -24,7 +24,7 @@
     <ClCompile Include="FoodItem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LinkedList.cpp">
+    <ClCompile Include="LinkedList_Order.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="User.cpp">
@@ -45,6 +45,9 @@
     <ClCompile Include="AVLTree.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="LinkedList_Customer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Admin.h">
@@ -53,7 +56,7 @@
     <ClInclude Include="FoodItem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LinkedList.h">
+    <ClInclude Include="LinkedList_Order.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="User.h">
@@ -72,6 +75,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AVLTree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkedList_Customer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

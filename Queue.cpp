@@ -1,7 +1,5 @@
 #include "Queue.h"
 
-typedef Order ItemType;
-
 Queue::Queue() { };
 
 Queue::~Queue()

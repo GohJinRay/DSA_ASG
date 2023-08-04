@@ -2,14 +2,13 @@
 #include "FoodItem.h"
 using namespace std;
 
-typedef FoodItem ItemType;
 
 class LinkedList
 {
 private:
 	struct Node
 	{
-		ItemType item;
+		FoodItem item;
 		Node* next;
 	};
 
@@ -22,13 +21,13 @@ public:
 
 	~LinkedList();
 
-	bool addItem(ItemType& foodItem);
+	bool addItem(FoodItem& foodItem);
 
-	bool addItem(int index, ItemType foodItem);
+	bool addItem(int index, FoodItem& foodItem);
 
 	void removeItem(int index);
 
-	ItemType getItem(int index);
+	FoodItem  getItem(int index);
 
 	bool isEmpty();
 

@@ -138,9 +138,7 @@ void LinkedList_Order::print()
 	while (curr != NULL)
 	{
 		FoodItem item = curr->foodItem;
-
 		item.printFoodItem();
-		cout << endl;
 
 		curr = curr->next;
 	}

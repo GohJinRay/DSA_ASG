@@ -18,10 +18,10 @@ public:
 
 	bool addFoodItem(FoodItem);
 	bool removeFoodItem(int);
-	FoodItem getFoodItem();
-	int getCatID(int);
-	string getCatName(string);
-	SortedArray getCatArray(SortedArray);
+	FoodItem getFoodItem(int);
+	int getCatID();
+	string getCatName();
+	SortedArray getCatArray();
 
 	void printDetails();
 	

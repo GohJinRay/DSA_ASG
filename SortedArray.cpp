@@ -1,84 +1,85 @@
 #include "SortedArray.h"
-#include "FoodItem.h"
 #include <iostream>
 using namespace std;
 
 SortedArray::SortedArray() {
-    array = nullptr;
     size = 0;
 }
+ 
+SortedArray::~SortedArray() { }
 
-SortedArray::~SortedArray() {
-    delete[] array;
-}
-
-void SortedArray::insert(FoodItem* value) {
-    FoodItem** newArray = new FoodItem * [size + 1];
-    int i = 0;
-
-    while (i < size && *array[i] < *value) {
-        newArray[i] = array[i];
-        i++;
+bool SortedArray::insert(FoodItem newItem)  
+{
+    if (size >= MAX_ITEMS)
+    {
+        cout << "Array is full. Cannot insert more items." << endl;
+        return false;
     }
 
-    newArray[i] = value;
-
-    while (i < size) {
-        newArray[i + 1] = array[i];
-        i++;
+    int insertIndex = size;
+    while (insertIndex > 0 && newItem.getFoodID() < foodItems[insertIndex - 1].getFoodID())
+    {
+        foodItems[insertIndex] = foodItems[insertIndex - 1];
+        insertIndex--;
     }
 
-    delete[] array;
-    array = newArray;
+    foodItems[insertIndex] = newItem;
     size++;
+    return true;
 }
 
-bool SortedArray::search(FoodItem* value) {
+FoodItem SortedArray::search(int foodID) 
+{
     int left = 0;
     int right = size - 1;
 
-    while (left <= right) {
+    while (left <= right)
+    {
         int mid = left + (right - left) / 2;
-        if (*array[mid] == *value) {
+        if (foodItems[mid].getFoodID() == foodID)
+            return foodItems[mid];
+        if (foodItems[mid].getFoodID() < foodID)
+            left = mid + 1;
+        else
+            right = mid - 1;
+    }
+    return FoodItem();
+}
+
+bool SortedArray::remove(int foodID) {
+    int left = 0;
+    int right = size - 1;
+
+    while (left <= right)
+    {
+        int mid = left + (right - left) / 2;
+        if (foodItems[mid].getFoodID() == foodID)
+        {
+            for (int i = mid; i < size - 1; i++)
+            {
+                foodItems[i] = foodItems[i + 1];
+            }
+            size--;
             return true;
         }
-        else if (*array[mid] < *value) {
+        if (foodItems[mid].getFoodID() < foodID)
             left = mid + 1;
-        }
-        else {
+        else
             right = mid - 1;
-        }
     }
 
+    cout << "Food item with ID " << foodID << " not found." << endl;
     return false;
 }
 
-void SortedArray::remove(FoodItem* value) {
-    FoodItem** newArray = new FoodItem * [size - 1];
-    int i = 0;
-
-    while (i < size && *array[i] != *value) {
-        newArray[i] = array[i];
-        i++;
-    }
-
-    if (i < size) {
-        i++;
-    }
-
-    while (i < size) {
-        newArray[i - 1] = array[i];
-        i++;
-    }
-
-    delete[] array;
-    array = newArray;
-    size--;
+int SortedArray::getSize()
+{
+    return size;
 }
 
 void SortedArray::print() {
     for (int i = 0; i < size; i++) {
-        (*array[i]).printFoodItem();
+        foodItems[i].printFoodItem();
     }
     cout << endl;
 }

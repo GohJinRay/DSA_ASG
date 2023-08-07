@@ -15,7 +15,6 @@ void Customer::printDetails()
 
 Order* Customer::createOrder(int orderID) 
 {
-	LinkedList_Order foodItemList;
 	time_t now = time(0);
 	char buffer[26]; // Use ctime_s to print human-readable date
 	ctime_s(buffer, sizeof(buffer), &now);
@@ -23,7 +22,7 @@ Order* Customer::createOrder(int orderID)
 
 	// Create a new Order objects and initialize its foodItemList with an empty list
 	// and add it to the orderList
-	Order* newOrder = new Order(orderID, currTime, NotPrepared, this, foodItemList);
+	Order* newOrder = new Order(orderID, currTime, NotPrepared, this, LinkedList_Order());
 	orderList.addOrder(newOrder);
 
 	return newOrder;

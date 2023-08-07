@@ -12,6 +12,7 @@
 #include "Queue.h"
 #include "HashTable.h"
 #include "SortedArray.h"
+#include "Category.h"
 using namespace std;
 
 void invalidInput() {
@@ -128,45 +129,40 @@ void viewMenu(FoodItem foodItems[])
 	cout << endl;
 }
 
-///////
-void testing() {
-	SortedArray foodItems;
-
-	FoodItem item1(1, "Burger", 5.99);
-	FoodItem item2(2, "Pizza", 8.50);
-	FoodItem item3(3, "Salad", 6.25);
-
-	foodItems.insert(&item2);
-	foodItems.insert(&item1);
-	foodItems.insert(&item3);
-
-	cout << "Food Items: " << endl;
-	foodItems.print();
-}
-///////
-
 int main()
 {
-	
-	FoodItem foodItems[maxFoodItems] = {
-		//Main course
-		{1, "Hainanese Chicken Rice", 4.50},
-		{2, "Steak", 15.99},
-		{3, "Nasi Lemak", 5.80},
-		{4, "Mee Goreng", 6.99},
-		{5, "Tom Yum Soup", 7.50},
+	SortedArray mainCourseArray;
+	FoodItem food1(1, "Hainanese Chicken Rice", 4.50);
+	FoodItem food2(2, "Steak", 15.99);
+	FoodItem food3(3, "Nasi Lemak", 5.80);
+	FoodItem food4(4, "Mee Goreng", 6.99);
+	FoodItem food5(5, "Tom Yum Soup", 7.50);
 
-		//Drinks
-		{6, "Coca-Cola", 2.00},
-		{7, "Ice Lemon Tea", 2.30},
-		{8, "Bandung", 1.80},
-		{9, "Thai Iced Tea", 2.20},
+	mainCourseArray.insert(food1);
+	mainCourseArray.insert(food2);
+	mainCourseArray.insert(food3);
+	mainCourseArray.insert(food4);
+	mainCourseArray.insert(food5);
 
-		//Deserts 
-		{10, "Chocolate Cake", 5.99},
-		{11, "Ice Cream", 3.50},
-		{12, "Mango Sticky Rice", 5.00}
-	};
+	SortedArray drinksArray;
+	FoodItem food6(100, "Coca-Cola", 2.00);
+	FoodItem food7(101, "Ice Lemon Tea", 2.3);
+	FoodItem food8(102, "Bandung", 1.80);
+	FoodItem food9(103, "Thai Iced Tea", 2.20);
+
+	drinksArray.insert(food6);
+	drinksArray.insert(food7);
+	drinksArray.insert(food8);
+	drinksArray.insert(food9);
+
+	SortedArray desertsArray;
+	FoodItem food10(200, "Chocolate Cake", 5.99);
+	FoodItem food11(201, "Ice Cream", 3.50);
+	FoodItem food12(202, "Mango Sticky Rice", 5.00);
+
+	desertsArray.insert(food10);
+	desertsArray.insert(food11);
+	desertsArray.insert(food12);
 
 	Queue newQueue; //New Queue
 	LinkedList_Customer orderList;
@@ -174,9 +170,6 @@ int main()
 	Admin admin("Admin", "hehehehaw", 12345678); //By default, create new admin
 	Order* order;
 	int orderID = 0; //Start at 0 by default
-	////
-	testing(); // testing of sorted array
-	////
 	int choice;
 	do
 	{
@@ -242,29 +235,72 @@ int main()
 	Customer cust1("John", "123", 123, orderList); // initialization
 	Customer cust2("Mary", "124", 124, orderList); // initialization
 
-	viewMenu(foodItems);
+	//viewMenu(foodItems);
+	Category category1(1, "Main Course", mainCourseArray);
+	category1.printDetails();
+
+	Category category2(2, "Drinks", drinksArray);
+	category2.printDetails();
+
+	Category category3(3, "Deserts", desertsArray);
+	category3.printDetails();
 
 	order = cust1.createOrder(orderID);
 	int option = 1;
-	order->addFoodItem(foodItems[option - 1]);
-	option = 2;
-	order->addFoodItem(foodItems[option - 1]);
+	if (option > 0 && option <= category1.getCatArray().getSize())
+		order->addFoodItem(category1.getFoodItem(option));
+	else if (option >= 100 && option < category2.getCatArray().getSize() + 100)
+		order->addFoodItem(category2.getFoodItem(option));
+	else if (option >= 200 && option < category3.getCatArray().getSize() + 200)
+		order->addFoodItem(category3.getFoodItem(option));
+	else
+		cout << "Invalid option. Please a valid one." << endl;
+	option = 200;
+	if (option > 0 && option <= category1.getCatArray().getSize())
+		order->addFoodItem(category1.getFoodItem(option));
+	else if (option >= 100 && option < category2.getCatArray().getSize() + 100)
+		order->addFoodItem(category2.getFoodItem(option));
+	else if (option >= 200 && option < category3.getCatArray().getSize() + 200)
+		order->addFoodItem(category3.getFoodItem(option));
+	else
+		cout << "Invalid option. Please a valid one." << endl;
 	newQueue.enqueue(*order); // enqueue the object by dereference the pointer
 	orderID++;
 	cust1.getOrderList().orderListPrint();
 
 	order = cust1.createOrder(orderID);
-	option = 1;
-	order->addFoodItem(foodItems[option - 1]);
-	option = 2;
-	order->addFoodItem(foodItems[option - 1]);
+	option = 100;
+	if (option > 0 && option <= category1.getCatArray().getSize())
+		order->addFoodItem(category1.getFoodItem(option));
+	else if (option >= 100 && option < category2.getCatArray().getSize() + 100)
+		order->addFoodItem(category2.getFoodItem(option));
+	else if (option >= 200 && option < category3.getCatArray().getSize() + 200)
+		order->addFoodItem(category3.getFoodItem(option));
+	else
+		cout << "Invalid option. Please a valid one." << endl;
+	option = 201;
+	if (option > 0 && option <= category1.getCatArray().getSize())
+		order->addFoodItem(category1.getFoodItem(option));
+	else if (option >= 100 && option < category2.getCatArray().getSize() + 100)
+		order->addFoodItem(category2.getFoodItem(option));
+	else if (option >= 200 && option < category3.getCatArray().getSize() + 200)
+		order->addFoodItem(category3.getFoodItem(option));
+	else
+		cout << "Invalid option. Please a valid one." << endl;
 	newQueue.enqueue(*order);
 	orderID++;
 	cust1.getOrderList().orderListPrint();
 
 	order = cust2.createOrder(orderID);
-	option = 2;
-	order->addFoodItem(foodItems[option - 1]);
+	option = 202;
+	if (option > 0 && option <= category1.getCatArray().getSize())
+		order->addFoodItem(category1.getFoodItem(option));
+	else if (option >= 100 && option < category2.getCatArray().getSize() + 100)
+		order->addFoodItem(category2.getFoodItem(option));
+	else if (option >= 200 && option < category3.getCatArray().getSize() + 200)
+		order->addFoodItem(category3.getFoodItem(option));
+	else
+		cout << "Invalid option. Please a valid one." << endl;
 	newQueue.enqueue(*order);
 	orderID++;
 	cust2.getOrderList().orderListPrint();

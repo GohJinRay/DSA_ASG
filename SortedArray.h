@@ -1,9 +1,11 @@
 #pragma once
 #include "FoodItem.h"
 
+const int MAX_ITEMS = 25;
+
 class SortedArray {
 private:
-    FoodItem** array;
+    FoodItem foodItems[MAX_ITEMS];
     int size;
 
 public:
@@ -14,9 +16,10 @@ public:
     ~SortedArray();
 
     // Methods
-    void insert(FoodItem* value);
-    bool search(FoodItem* value);
-    void remove(FoodItem* value);
+    bool insert(FoodItem);
+    FoodItem search(int);
+    bool remove(int);
+    int getSize();
     void print();
 };
 

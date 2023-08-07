@@ -12,6 +12,7 @@
 #include "Queue.h"
 #include "HashTable.h"
 #include "AVLTree.h"
+#include "SortedArray.h"
 using namespace std;
 
 void invalidInput() {
@@ -106,6 +107,23 @@ void viewMenu(FoodItem foodItems[])
 	cout << endl;
 }
 
+///////
+void testing() {
+	SortedArray foodItems;
+
+	FoodItem item1(1, "Burger", 5.99);
+	FoodItem item2(2, "Pizza", 8.50);
+	FoodItem item3(3, "Salad", 6.25);
+
+	foodItems.insert(&item2);
+	foodItems.insert(&item1);
+	foodItems.insert(&item3);
+
+	cout << "Food Items: " << endl;
+	foodItems.print();
+}
+///////
+
 int main()
 {
 	
@@ -135,12 +153,13 @@ int main()
 	Admin admin("Admin", "hehehehaw", 12345678); //By default, create new admin
 	Order* order;
 	int orderID = 0; //Start at 0 by default
-
+	////
+	testing(); // testing of sorted array
+	////
 	int choice;
 	do
 	{
 		choice = getMenuChoice();
-
 		string username, password;
 		int phoneNum;
 		Customer newCustomer;

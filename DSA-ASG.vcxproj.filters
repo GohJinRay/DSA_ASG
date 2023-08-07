@@ -48,6 +48,12 @@
     <ClCompile Include="LinkedList_Customer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SortedArray.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Category.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Admin.h">
@@ -78,6 +84,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="LinkedList_Customer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SortedArray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Category.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

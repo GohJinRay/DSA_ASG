@@ -20,8 +20,12 @@ Order* Customer::createOrder(int orderID)
 	char buffer[26]; // Use ctime_s to print human-readable date
 	ctime_s(buffer, sizeof(buffer), &now);
 	string currTime(buffer); //Convert to string format
+
+	// Create a new Order objects and initialize its foodItemList with an empty list
+	// and add it to the orderList
 	Order* newOrder = new Order(orderID, currTime, NotPrepared, this, foodItemList);
 	orderList.addOrder(newOrder);
+
 	return newOrder;
 }
 
@@ -38,7 +42,8 @@ bool Customer::cancelOrder(Queue& queue, int orderID)
 
 		if (currOrder.getOrderID() == orderID)
 		{
-			orderList.removeOrder(currOrder); //Remove order from linked list 
+			// Remove order from linked list 
+			orderList.removeOrder(currOrder); 
 			foundOrder = true;
 			cout << "Order with ID " << orderID << " has been canceled." << endl;
 		}
@@ -48,6 +53,7 @@ bool Customer::cancelOrder(Queue& queue, int orderID)
 		}
 	}
 
+	// Re-enqueue the remaining orders back to the original queue
 	while (!auxiliaryQueue.isEmpty())
 	{
 		Order currOrder;

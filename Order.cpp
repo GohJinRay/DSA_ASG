@@ -11,17 +11,11 @@ Order::Order(int OrderID, string OrderDate, OrderStatus Status, Customer* Custom
 	foodItemList = FoodItemList;
 }
 
-bool Order::addFoodItem(FoodItem foodItem, int option) 
+bool Order::addFoodItem(FoodItem foodItem) 
 {
-	if (option >= 1 && option <= maxFoodItems)
-	{
-		foodItemList.addItem(foodItem);
-		cout << "Food item has been added to the order." << endl << endl;
-		return true;
-	}
-
-	cout << "Invalid Food Item!" << endl << endl;
-	return false;
+	foodItemList.addItem(foodItem);
+	cout << "Food item has been added to the order." << endl << endl;
+	return true;
 }
 
 bool Order::removeFoodItem(int option) 

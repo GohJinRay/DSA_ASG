@@ -115,17 +115,17 @@ Order* LinkedList_Customer::getOrder(int index)
 	return NULL;
 }
 
-bool LinkedList_Customer::OrderListisEmpty()
+bool LinkedList_Customer::orderListIsEmpty()
 {
 	return size == 0;
 }
 
-int LinkedList_Customer::OrderListgetLength()
+int LinkedList_Customer::orderListGetLength()
 {
 	return size;
 }
 
-void LinkedList_Customer::OrderListprint()
+void LinkedList_Customer::orderListPrint()
 {
 	Node* curr = firstNode;
 

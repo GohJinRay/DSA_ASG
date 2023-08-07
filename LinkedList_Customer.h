@@ -26,10 +26,10 @@ public:
 
 	Order* getOrder(int);
 
-	bool OrderListisEmpty();
+	bool orderListIsEmpty();
 
-	int OrderListgetLength();
+	int orderListGetLength();
 
-	void OrderListprint();
+	void orderListPrint();
 
 };

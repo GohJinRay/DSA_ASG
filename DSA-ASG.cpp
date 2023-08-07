@@ -207,41 +207,41 @@ int main()
 
 	order = cust1.createOrder(orderID);
 	int option = 1;
-	order->addFoodItem(foodItems[option - 1], option);
+	order->addFoodItem(foodItems[option - 1]);
 	option = 2;
-	order->addFoodItem(foodItems[option - 1], option);
+	order->addFoodItem(foodItems[option - 1]);
 	newQueue.enqueue(*order); // enqueue the object by dereference the pointer
 	orderID++;
-	cust1.getOrderList().OrderListprint();
+	cust1.getOrderList().orderListPrint();
 
 	order = cust1.createOrder(orderID);
 	option = 1;
-	order->addFoodItem(foodItems[option - 1], option);
+	order->addFoodItem(foodItems[option - 1]);
 	option = 2;
-	order->addFoodItem(foodItems[option - 1], option);
+	order->addFoodItem(foodItems[option - 1]);
 	newQueue.enqueue(*order);
 	orderID++;
-	cust1.getOrderList().OrderListprint();
+	cust1.getOrderList().orderListPrint();
 
 	order = cust2.createOrder(orderID);
 	option = 2;
-	order->addFoodItem(foodItems[option - 1], option);
+	order->addFoodItem(foodItems[option - 1]);
 	newQueue.enqueue(*order);
 	orderID++;
-	cust2.getOrderList().OrderListprint();
+	cust2.getOrderList().orderListPrint();
 
 	cout << "Shows what's in the queue currently" << endl;
 	cout << "-----------------------------------" << endl;
 	newQueue.displayItems();
 	admin.updateStatus(newQueue); //Dequeue upon update
 	newQueue.displayItems();
-	cust1.getOrderList().OrderListprint();
+	cust1.getOrderList().orderListPrint();
 
 	/*cout << "Cancel Order" << endl;
 	cust1.cancelOrder(newQueue, 0);
 
 	newQueue.displayItems();
-	cust1.getOrderList().OrderListprint();*/
+	cust1.getOrderList().orderListPrint();*/
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 

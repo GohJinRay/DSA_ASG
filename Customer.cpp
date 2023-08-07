@@ -20,7 +20,7 @@ Order* Customer::createOrder(int orderID)
 	char buffer[26]; // Use ctime_s to print human-readable date
 	ctime_s(buffer, sizeof(buffer), &now);
 	string currTime(buffer); //Convert to string format
-	Order* newOrder = new Order(orderID, currTime, "Not Prepared", this, foodItemList);
+	Order* newOrder = new Order(orderID, currTime, NotPrepared, this, foodItemList);
 	orderList.addOrder(newOrder);
 	return newOrder;
 }

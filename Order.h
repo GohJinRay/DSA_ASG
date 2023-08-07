@@ -7,6 +7,12 @@ using namespace std;
 
 const int maxFoodItems = 12;
 
+enum OrderStatus 
+{ 
+	Prepared,
+	NotPrepared
+};
+
 class Customer;
 
 class Order
@@ -14,24 +20,24 @@ class Order
 private:
 	int orderID;
 	string orderDate;
-	string status;
+	OrderStatus status;
 	Customer* customer;
 	LinkedList_Order foodItemList;
 
 public:
 	Order();
-	Order(int, string, string, Customer*, LinkedList_Order);
+	Order(int, string, OrderStatus, Customer*, LinkedList_Order);
 	bool addFoodItem(FoodItem, int option);
 	bool removeFoodItem(int);
 	void printOrder();
 
 	void setOrderID(int);
 	void setOrderDate(string);
-	void setStatus(string);
+	void setStatus(OrderStatus);
 
 	int getOrderID();
 	string getOrderDate();
-	string getStatus();
+	OrderStatus getStatus();
 	Customer* getCustomer();
 	LinkedList_Order getFoodItemList();
 };

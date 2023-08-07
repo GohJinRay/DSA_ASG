@@ -252,15 +252,15 @@ int main()
 	cout << "Shows what's in the queue currently" << endl;
 	cout << "-----------------------------------" << endl;
 	newQueue.displayItems();
-	//admin.updateStatus(newQueue); //Dequeue upon update
-	//newQueue.displayItems();
+	admin.updateStatus(newQueue); //Dequeue upon update
+	newQueue.displayItems();
 	cust1.getOrderList().OrderListprint();
 
-	cout << "Cancel Order" << endl;
+	/*cout << "Cancel Order" << endl;
 	cust1.cancelOrder(newQueue, 0);
 
 	newQueue.displayItems();
-	cust1.getOrderList().OrderListprint();
+	cust1.getOrderList().OrderListprint();*/
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 

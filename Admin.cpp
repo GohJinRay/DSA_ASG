@@ -11,30 +11,35 @@ void Admin::printDetails()
 
 void Admin::viewOrders(Queue& q)
 {
-    if (q.isEmpty()) { // check for incoming orders
+    // check for incoming orders
+    if (q.isEmpty()) { 
         cout << "No incoming orders." << endl << endl;
         return;
     }
     q.displayItems();
 }
 
-void Admin::updateStatus(Queue& q) // not done
+void Admin::updateStatus(Queue& q) 
 {
-    if (q.isEmpty()) { // check for incoming orders
+    // check for incoming orders
+    if (q.isEmpty()) { 
         cout << "No incoming orders." << endl << endl;
         return;
     }
 
+    // Get the front order from the queue
     Order order;
-    q.getFront(order); // get the first order 
-    string prevStat = order.getStatus(); // saves the prev status
-    order.setStatus("Prepared"); // set it to prepared
-    q.dequeue(); // remove it from the queue
+    q.getFront(order); 
+    OrderStatus prevStat = order.getStatus(); 
+
+    // Update the status of the front order in the queue and dequeue it
+    order.setStatus(Prepared);
+    q.dequeue(); 
     
-    Order* order1;
+    // update the status of the corresponding order in the linked list
     LinkedList_Customer orderList = order.getCustomer()->getOrderList();
-    order1 = orderList.getOrder(0); // gets the order in linked list
-    order1->setStatus("Prepared");
+    Order* linkedOrder = orderList.getOrder(0); 
+    linkedOrder->setStatus(Prepared);
 
     cout << "Order ID " << order.getOrderID() << "'s status changed from " << prevStat << " -> " << order.getStatus() << " sucessfully!" << endl << endl;
 }

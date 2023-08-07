@@ -128,7 +128,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Admin.cpp" />
-    <ClCompile Include="AVLTree.cpp" />
     <ClCompile Include="Category.cpp" />
     <ClCompile Include="Customer.cpp" />
     <ClCompile Include="DSA-ASG.cpp" />
@@ -143,7 +142,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Admin.h" />
-    <ClInclude Include="AVLTree.h" />
     <ClInclude Include="Category.h" />
     <ClInclude Include="Customer.h" />
     <ClInclude Include="FoodItem.h" />

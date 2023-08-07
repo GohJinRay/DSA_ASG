@@ -11,7 +11,6 @@
 #include "FoodItem.h"
 #include "Queue.h"
 #include "HashTable.h"
-#include "AVLTree.h"
 #include "SortedArray.h"
 using namespace std;
 

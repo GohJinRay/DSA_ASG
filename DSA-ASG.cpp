@@ -90,8 +90,19 @@ void adminMenu() // not done
 {
 	cout << "Please select an option:" << endl;
 	cout << "1. View the incoming orders" << endl;
-	cout << "2. Update status of the next incoming order" << endl;
-	cout << "3. View custome information" << endl;
+	cout << "2. Update status of the chosen order" << endl;
+	cout << "3. View customer information" << endl;
+	cout << "4. Exit" << endl;
+	cout << "-----------------------------------" << endl;
+	cout << "Enter your choice (1, 2, 3 or 4): ";
+}
+
+void userMenu() // not done
+{
+	cout << "Please select an option:" << endl;
+	cout << "1. Browse menu" << endl;
+	cout << "2. Create a new order" << endl;
+	cout << "3. Cancel order" << endl;
 	cout << "4. Exit" << endl;
 	cout << "-----------------------------------" << endl;
 	cout << "Enter your choice (1, 2, 3 or 4): ";
@@ -231,7 +242,6 @@ int main()
 	Customer cust1("John", "123", 123, orderList); // initialization
 	Customer cust2("Mary", "124", 124, orderList); // initialization
 
-	//View Menu
 	viewMenu(foodItems);
 
 	order = cust1.createOrder(orderID);
@@ -266,11 +276,11 @@ int main()
 	newQueue.displayItems();
 	cust1.getOrderList().orderListPrint();
 
-	/*cout << "Cancel Order" << endl;
-	cust1.cancelOrder(newQueue, 0);
+	cout << "Cancel Order" << endl;
+	cust1.cancelOrder(newQueue, 1); // Cancel orderID 1
 
 	newQueue.displayItems();
-	cust1.getOrderList().orderListPrint();*/
+	cust1.getOrderList().orderListPrint();
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 

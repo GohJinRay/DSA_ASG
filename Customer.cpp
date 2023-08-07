@@ -48,9 +48,7 @@ bool Customer::cancelOrder(Queue& queue, int orderID)
 			cout << "Order with ID " << orderID << " has been canceled." << endl;
 		}
 		else
-		{
 			auxiliaryQueue.enqueue(currOrder);
-		}
 	}
 
 	// Re-enqueue the remaining orders back to the original queue

@@ -98,19 +98,17 @@ void LinkedList_Customer::removeOrder(Order& orderItem)
 	cout << "Order not found in the linked list." << endl;
 }
 
-Order* LinkedList_Customer::getOrder(int index)
+Order* LinkedList_Customer::getOrder(int orderID)
 {
-	if (index >= 0 && index < size)
-	{
-		int counter = 0;
-		Node* curr = firstNode;
+	Node* curr = firstNode;
 
-		while (curr->next != NULL && counter < index)
+	while (curr != NULL)
+	{
+		if (curr->orderItem->getOrderID() == orderID)
 		{
-			curr = curr->next;
-			counter++;
+			return curr->orderItem;
 		}
-		return curr->orderItem;
+		curr = curr->next;
 	}
 	return NULL;
 }

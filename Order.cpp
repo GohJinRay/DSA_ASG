@@ -40,16 +40,7 @@ void Order::printOrder()
 {
 	cout << "|Order ID: " << getOrderID() << endl;
 	cout << "|Order Date: " << getOrderDate();
-	cout << "|Status: ";
-	switch (getStatus())
-	{
-		case OrderStatus::NotPrepared:
-			cout << "Not Prepared" << endl;
-
-		case OrderStatus::Prepared:
-			cout << "Preapred" << endl;
-	}
-	cout << endl;
+	cout << "|Status: " << getStatus() << endl << endl;
 	cout << "Food Items:" << endl;
 	cout << "-----------" << endl;
 	getFoodItemList().print();
@@ -61,6 +52,19 @@ void Order::setStatus(OrderStatus Status) { status = Status; }
 
 int Order::getOrderID() { return orderID; }
 string Order::getOrderDate() { return orderDate; }
-OrderStatus Order::getStatus() { return status; }
+string Order::getStatus() 
+{ 
+	switch (status)
+	{
+		case Prepared:
+			return "Prepared";
+
+		case NotPrepared:
+			return "Not Prepared";
+
+		default:
+			return "Unknown";
+	}
+}
 Customer* Order::getCustomer() { return customer; }
 LinkedList_Order Order::getFoodItemList() { return foodItemList; }

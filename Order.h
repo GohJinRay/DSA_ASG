@@ -37,7 +37,7 @@ public:
 
 	int getOrderID();
 	string getOrderDate();
-	OrderStatus getStatus();
+	string getStatus();
 	Customer* getCustomer();
 	LinkedList_Order getFoodItemList();
 };

@@ -23,6 +23,20 @@ public:
 	int getFoodID();
 	string getFoodName();
 	double getPrice();
+
+	bool operator<(FoodItem& other)
+	{
+		return foodID < other.foodID;
+	}
+
+	bool operator==(FoodItem& other)
+	{
+		return foodID == other.foodID;
+	}
+
+	bool operator !=(FoodItem& other) {
+		return foodID != other.foodID;
+	}
 };
 
 

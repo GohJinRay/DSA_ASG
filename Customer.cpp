@@ -65,7 +65,7 @@ bool Customer::cancelOrder(Queue& queue, int orderID)
 	return foundOrder;
 }
 
-LinkedList_Customer Customer::getOrderList()
+LinkedList_Customer& Customer::getOrderList()
 {
 	return orderList;
 }

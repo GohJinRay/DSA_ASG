@@ -129,6 +129,34 @@ void viewMenu(FoodItem foodItems[])
 	cout << endl;
 }
 
+///////
+void testing() {
+
+	LinkedList_Customer orderList1; // Create order list instance for customer1
+	LinkedList_Customer orderList2; // Create order list instance for customer2
+
+	Customer customer1("John Doe", "password", 123456, orderList1);
+	Customer customer2("Jane Smith", "secret", 789012, orderList2);
+
+	Dictionary customerDictionary;
+
+	customerDictionary.add(customer1.getUserName(), &customer1);
+
+	customerDictionary.add(customer2.getUserName(), &customer2);
+
+	customerDictionary.print();
+
+	Order* order1 = customer1.createOrder(0);
+
+	Order* order2 = customer2.createOrder(1);
+
+	Admin admin("Admin Name", "adminpass", 999);
+
+	admin.viewCustInfo(customerDictionary, 0);
+
+}
+///////
+
 int main()
 {
 	SortedArray mainCourseArray;
@@ -170,6 +198,9 @@ int main()
 	Admin admin("Admin", "hehehehaw", 12345678); //By default, create new admin
 	Order* order;
 	int orderID = 0; //Start at 0 by default
+	////
+	testing(); // testing of xxxx
+	////
 	int choice;
 	do
 	{
@@ -186,7 +217,7 @@ int main()
 				cout << "Please enter your username: "; 
 				cin >> username;
 
-				if (username == usersInfo.get(username).getUserName())
+				if (username == usersInfo.get(username)->getUserName())
 				{
 					cout << "Already exists! Please enter a new username!" << endl;
 					break;
@@ -199,7 +230,7 @@ int main()
 				cin >> phoneNum;
 
 				newCustomer = Customer(username, password, phoneNum, orderList);
-				usersInfo.add(username, newCustomer);
+				usersInfo.add(username, &newCustomer);
 				cout << "Registration complete!" << endl;
 
 				break;
@@ -217,7 +248,7 @@ int main()
 					break;
 				}
 
-				if (username == usersInfo.get(username).getUserName() && password == usersInfo.get(username).getPassword()) //Customer login
+				if (username == usersInfo.get(username)->getUserName() && password == usersInfo.get(username)->getPassword()) //Customer login
 				{
 					cout << "Login successful. Welcome " << username << "!" << endl;
 					break;

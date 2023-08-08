@@ -11,7 +11,7 @@ private:
 	struct Node
 	{
 		KeyType key;
-		Customer item;
+		Customer* item;
 		Node* next;
 	};
 
@@ -28,11 +28,13 @@ public:
 
 	int hash(KeyType key);
 
-	bool add(KeyType newKey, Customer customer);
+	bool add(KeyType newKey, Customer* customer);
 
 	void remove(KeyType key);
 
-	Customer get(KeyType key);
+	Customer* get(KeyType key);
+
+	Customer* getCustomerByOrderID(int orderID);
 
 	bool isEmpty();
 

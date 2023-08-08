@@ -23,6 +23,14 @@ void invalidInput() {
 	cout << endl;
 }
 
+bool isANumber(string input)
+{
+	for (char c : input)
+		if (!isdigit(c))
+			return false;
+	return true;
+}
+
 void Menu() 
 {
 	cout << "Please select an option:" << endl;
@@ -109,26 +117,6 @@ void userMenu() // not done
 	cout << "Enter your choice (1, 2, 3 or 4): ";
 }
 
-void viewMenu(FoodItem foodItems[])
-{
-	cout << " Food ID |                 Food Name | Price ($)" << endl;
-	cout << "------------------------------------------------" << endl;
-	for (int i = 0; i < maxFoodItems; i++)
-	{
-		cout.width(8);
-		cout << foodItems[i].getFoodID();
-		cout << " | ";
-		cout.width(25);
-		cout << foodItems[i].getFoodName();
-		cout << " | $";
-		cout.precision(2);
-		cout << fixed;
-		cout << foodItems[i].getPrice();
-		cout << endl;
-	}
-	cout << endl;
-}
-
 ///////
 void testing() {
 
@@ -143,8 +131,6 @@ void testing() {
 	customerDictionary.add(customer1.getUserName(), &customer1);
 
 	customerDictionary.add(customer2.getUserName(), &customer2);
-
-	customerDictionary.print();
 
 	Order* order1 = customer1.createOrder(0);
 
@@ -217,7 +203,7 @@ int main()
 				cout << "Please enter your username: "; 
 				cin >> username;
 
-				if (username == usersInfo.get(username)->getUserName())
+				if (usersInfo.get(username) != NULL)
 				{
 					cout << "Already exists! Please enter a new username!" << endl;
 					break;
@@ -248,10 +234,16 @@ int main()
 					break;
 				}
 
-				if (username == usersInfo.get(username)->getUserName() && password == usersInfo.get(username)->getPassword()) //Customer login
+				else if (usersInfo.get(username) != NULL)
 				{
-					cout << "Login successful. Welcome " << username << "!" << endl;
-					break;
+					Customer* customer = usersInfo.get(username);
+
+					if (customer->getPassword() == password)
+					{
+						cout << "Login successful. Welcome " << username << "!" << endl;
+						userMenu();
+						break;
+					}
 				}
 
 				else

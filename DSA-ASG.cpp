@@ -129,6 +129,34 @@ void viewMenu(FoodItem foodItems[])
 	cout << endl;
 }
 
+///////
+void testing() {
+
+	LinkedList_Customer orderList1; // Create order list instance for customer1
+	LinkedList_Customer orderList2; // Create order list instance for customer2
+
+	Customer customer1("John Doe", "password", 123456, orderList1);
+	Customer customer2("Jane Smith", "secret", 789012, orderList2);
+
+	Dictionary customerDictionary;
+
+	customerDictionary.add(customer1.getUserName(), customer1);
+
+	customerDictionary.add(customer2.getUserName(), customer2);
+
+	Order* order1 = customer1.createOrder(0);
+
+	Order* order2 = customer2.createOrder(1);
+
+	cout << customer2.getOrderList().orderListGetLength();
+
+	Admin admin("Admin Name", "adminpass", 999);
+
+	admin.viewCustInfo(customerDictionary, 0);
+
+}
+///////
+
 int main()
 {
 	SortedArray mainCourseArray;
@@ -170,6 +198,9 @@ int main()
 	Admin admin("Admin", "hehehehaw", 12345678); //By default, create new admin
 	Order* order;
 	int orderID = 0; //Start at 0 by default
+	////
+	testing(); // testing of xxxx
+	////
 	int choice;
 	do
 	{

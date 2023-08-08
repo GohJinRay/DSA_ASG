@@ -78,9 +78,15 @@ void Admin::updateStatus(Queue& q)
     cout << "Order ID " << targetOrder.getOrderID() << "'s status changed from " << prevStat << " -> " << targetOrder.getStatus() << " sucessfully!" << endl << endl;
 }
 
-void Admin::viewCustInfo(int orderID) // not done
+void Admin::viewCustInfo(Dictionary& customerDictionary, int orderID) // not done
 {
-    Order order;
-    Customer* customer = order.getCustomer();
-    customer->printDetails();
+    Customer* customer = customerDictionary.getCustomerByOrderID(orderID);
+
+    if (customer != nullptr) {
+        cout << "Customer Information:" << endl;
+        customer->printDetails();
+    }
+    else {
+        cout << "Order not found." << endl;
+    }
 }

@@ -130,18 +130,29 @@ void viewMenu(FoodItem foodItems[])
 
 ///////
 void testing() {
-	SortedArray foodItems;
 
-	FoodItem item1(1, "Burger", 5.99);
-	FoodItem item2(2, "Pizza", 8.50);
-	FoodItem item3(3, "Salad", 6.25);
+	LinkedList_Customer orderList1; // Create order list instance for customer1
+	LinkedList_Customer orderList2; // Create order list instance for customer2
 
-	foodItems.insert(&item2);
-	foodItems.insert(&item1);
-	foodItems.insert(&item3);
+	Customer customer1("John Doe", "password", 123456, orderList1);
+	Customer customer2("Jane Smith", "secret", 789012, orderList2);
 
-	cout << "Food Items: " << endl;
-	foodItems.print();
+	Dictionary customerDictionary;
+
+	customerDictionary.add(customer1.getUserName(), customer1);
+
+	customerDictionary.add(customer2.getUserName(), customer2);
+
+	Order* order1 = customer1.createOrder(0);
+
+	Order* order2 = customer2.createOrder(1);
+
+	cout << customer2.getOrderList().orderListGetLength();
+
+	Admin admin("Admin Name", "adminpass", 999);
+
+	admin.viewCustInfo(customerDictionary, 0);
+
 }
 ///////
 
@@ -175,7 +186,7 @@ int main()
 	Order* order;
 	int orderID = 0; //Start at 0 by default
 	////
-	testing(); // testing of sorted array
+	testing(); // testing of xxxx
 	////
 	int choice;
 	do

@@ -34,6 +34,8 @@ public:
 
 	Customer get(KeyType key);
 
+	Customer* getCustomerByOrderID(int orderID);
+
 	bool isEmpty();
 
 	int getLength();

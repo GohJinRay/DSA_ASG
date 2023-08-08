@@ -121,6 +121,32 @@ Customer Dictionary::get(KeyType key) {
     return Customer();
 }
 
+Customer* Dictionary::getCustomerByOrderID(int orderID) {
+
+    for (int i = 0; i < MAX_SIZE; i++) {
+        Node* currNode = customers[i];
+        while (currNode != nullptr) {
+
+            LinkedList_Customer orderList = currNode->item.getOrderList();
+            int orderCount = orderList.orderListGetLength();
+
+            for (int j = 0; j < orderCount; j++) {
+                Order* order = orderList.getOrder(j);
+
+                if (order->getOrderID() == orderID) {
+
+                    return &(currNode->item);
+                }
+            }
+
+            currNode = currNode->next;
+        }
+    }
+
+    return nullptr;
+}
+
+
 bool Dictionary::isEmpty() {
     return size == 0;
 }

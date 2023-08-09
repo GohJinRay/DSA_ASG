@@ -15,20 +15,9 @@
 #include "Category.h"
 using namespace std;
 
-void invalidInput() {
+void invalidIntegerInput() {
 	cout << endl;
-	cout << "-----------------------------------" << endl;
-	cout << "Invalid input. Please enter a valid integer choice." << endl;
-	cout << "-----------------------------------" << endl;
-	cout << endl;
-}
-
-bool isANumber(string input)
-{
-	for (char c : input)
-		if (!isdigit(c))
-			return false;
-	return true;
+	cout << "Invalid input. Please enter a valid integer." << endl << endl;
 }
 
 void Menu() 
@@ -82,13 +71,13 @@ int getMenuChoice()
 					break;
 
 				default:
-					invalidInput();
+					invalidIntegerInput();
 			}
 		}
 
 		else
 		{
-			invalidInput();
+			invalidIntegerInput();
 		}
 	} while (!validChoice);
 
@@ -101,7 +90,7 @@ void adminMenu() // not done
 	cout << "1. View the incoming orders" << endl;
 	cout << "2. Update status of the chosen order" << endl;
 	cout << "3. View customer information" << endl;
-	cout << "4. Exit" << endl;
+	cout << "4. Back" << endl;
 	cout << "-----------------------------------" << endl;
 	cout << "Enter your choice (1, 2, 3 or 4): ";
 }
@@ -112,7 +101,7 @@ void userMenu() // not done
 	cout << "1. Browse menu" << endl;
 	cout << "2. Create a new order" << endl;
 	cout << "3. Cancel order" << endl;
-	cout << "4. Exit" << endl;
+	cout << "4. Back" << endl;
 	cout << "-----------------------------------" << endl;
 	cout << "Enter your choice (1, 2, 3 or 4): ";
 }
@@ -132,17 +121,13 @@ void testing() {
 
 	customerDictionary.add(customer2.getUserName(), &customer2);
 
-
-
 	Order* order1 = customer1.createOrder(0);
 
 	Order* order2 = customer2.createOrder(1);
 
 	Admin admin("Admin Name", "adminpass", 999);
 
-
 	admin.viewCustInfo(customerDictionary);
-
 }
 ///////
 
@@ -196,21 +181,21 @@ int main()
 		choice = getMenuChoice();
 		string username, password;
 		int phoneNum;
-		Customer newCustomer;
+		Customer* newCustomer;
 		const string adminUsername = "Admin", adminPassword = "hehehehaw";
 
 
 		switch (choice)
 		{
 			case 1: //Register
-				while (true) // Error handling for Username Input
+				while (true) // Error handling for username Input
 				{
 					cout << "Please enter your username: ";
 					cin >> username;
 
 					if (usersInfo.get(username) != NULL)
 					{
-						cout << "Already exists! Please enter a new username!" << endl;
+						cout << "Already exists! Please enter a new username!" << endl << endl;
 					}
 					else
 					{
@@ -221,28 +206,25 @@ int main()
 				cout << "Please enter your password: ";
 				cin >> password;
 
-				int phoneNumInput;
-				while (true) // Error handling for Password Input
+				while (true) // Error handling for phoneNum Input
 				{
 					cout << "Please enter your phone number: ";
-					cin >> phoneNumInput;
 
-					if (cin.fail())
+					if (!(cin >> phoneNum))
 					{
-						cout << "Invalid input. Please enter a valid integer." << endl;
+						invalidIntegerInput();
 						cin.clear(); // Clear error state
-						cin.ignore(100, '\n'); // Clear input buffer
+						cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear input buffer
 					}
 					else
 					{
-						phoneNum = phoneNumInput;
 						break;
 					}
 				}
 
-				newCustomer = Customer(username, password, phoneNum, orderList);
-				usersInfo.add(username, &newCustomer);
-				cout << "Registration complete! Please log in to your account to contiune using the services!" << endl;
+				newCustomer = new Customer(username, password, phoneNum, orderList);
+				usersInfo.add(username, newCustomer);
+				cout << "Registration complete! Please log in to your account to contiune using the services!" << endl << endl;
 
 				break;
 
@@ -255,7 +237,7 @@ int main()
 
 				if (username == adminUsername && password == adminPassword) //Admin login
 				{
-					cout << "Login successful. Welcome, Admin!" << endl;
+					cout << "Login successful. Welcome, Admin!" << endl << endl;
 					break;
 				}
 
@@ -265,15 +247,26 @@ int main()
 
 					if (customer->getPassword() == password)
 					{
-						cout << "Login successful. Welcome " << username << "!" << endl;
-						userMenu();
-						break;
+						cout << "Login successful. Welcome " << username << "!" << endl << endl;
+						do {
+							userMenu();
+							if (!(cin >> choice))
+							{
+								invalidIntegerInput();
+								cin.clear(); // Clear error state
+								cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear input buffer
+							}
+						} while (choice != 4);
+					}
+					else
+					{
+						cout << "Invalid password. Login failed." << endl << endl;
 					}
 				}
 
 				else
 				{
-					cout << "Invalid username or password. Login failed." << endl;
+					cout << "Invalid username or password. Login failed." << endl << endl;
 				}
 				break;
 		}

@@ -84,8 +84,19 @@ void Admin::viewCustInfo(Dictionary& customerDictionary)
 
     // Ask the admin to choose an order ID
     int chosenOrderID;
-    cout << "Enter the Order ID you want to view customer info for: ";
-    cin >> chosenOrderID;
+    while (true) // error handling
+    {
+        cout << "Enter the Order ID you want to view customer info for: ";
+
+        if (!(cin >> chosenOrderID))
+        {
+            cout << "Invalid input. Please enter a valid Order ID." << endl << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard invalid input
+        }
+        else
+            break;
+    }
 
     Customer* customer = customerDictionary.getCustomerByOrderID(chosenOrderID);
    

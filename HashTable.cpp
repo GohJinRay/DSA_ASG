@@ -1,6 +1,6 @@
 #include "HashTable.h"
 
-Dictionary::Dictionary() {
+Dictionary::Dictionary() { // constructor
 
     size = 0;
 
@@ -9,7 +9,7 @@ Dictionary::Dictionary() {
     }
 }
 
-Dictionary::~Dictionary() {
+Dictionary::~Dictionary() { // deconstructor
 
     for (int i = 0; i < MAX_SIZE; i++) {
         Node* currNode = customers[i];
@@ -22,7 +22,7 @@ Dictionary::~Dictionary() {
     }
 }
 
-int Dictionary::hash(KeyType key) {
+int Dictionary::hash(KeyType key) { // hashing the key
 
     int sum = 0;
 
@@ -37,7 +37,7 @@ int Dictionary::hash(KeyType key) {
     return hashValue;
 }
 
-bool Dictionary::add(KeyType newKey, Customer* customer) {
+bool Dictionary::add(KeyType newKey, Customer* customer) { // add the customer into the dictionary
 
 	int index = hash(newKey);
 
@@ -72,7 +72,7 @@ bool Dictionary::add(KeyType newKey, Customer* customer) {
     return true;
 }
 
-void Dictionary::remove(KeyType key) {
+void Dictionary::remove(KeyType key) { // remove customer based of key
 
     int index = hash(key);
 
@@ -100,7 +100,7 @@ void Dictionary::remove(KeyType key) {
     }
 }
 
-Customer* Dictionary::get(KeyType key) {
+Customer* Dictionary::get(KeyType key) { // get customer based of key
 
     int index = hash(key);
 
@@ -121,7 +121,7 @@ Customer* Dictionary::get(KeyType key) {
     return NULL;
 }
 
-Customer* Dictionary::getCustomerByOrderID(int orderID) {
+Customer* Dictionary::getCustomerByOrderID(int orderID) { // get the customer based off OrderID
     for (int i = 0; i < MAX_SIZE; i++) {
         Node* currNode = customers[i];
         while (currNode != nullptr) {
@@ -141,16 +141,16 @@ Customer* Dictionary::getCustomerByOrderID(int orderID) {
 
 
 
-bool Dictionary::isEmpty() {
+bool Dictionary::isEmpty() { // check if Dictionary is empty
     return size == 0;
 }
 
-int Dictionary::getLength() {
+int Dictionary::getLength() { // get Dictionary length
     return size;
 }
 
 
-void Dictionary::printAllOrders() {
+void Dictionary::printAllOrders() { // print all orders via customer in the Dictionary
     for (int i = 0; i < MAX_SIZE; i++) {
         Node* curr = customers[i];
         while (curr != nullptr) {
@@ -164,7 +164,6 @@ void Dictionary::printAllOrders() {
         }
     }
 }
-
 
 
 void Dictionary::print() {  // print all the customer belonging in the Dictionary

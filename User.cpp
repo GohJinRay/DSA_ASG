@@ -9,7 +9,7 @@ User::User(string UserName, string Password, int PhoneNum)
 	phoneNum = PhoneNum;
 }
 
-void User::printDetails()
+void User::printDetails() // print user details
 {
 	cout << "User Name: " << getUserName() << endl;
 	cout << "Phone Number: " << getPhoneNum() << endl << endl;

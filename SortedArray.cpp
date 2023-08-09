@@ -81,5 +81,4 @@ void SortedArray::print() { // print all the fooditems details in the array
     for (int i = 0; i < size; i++) {
         foodItems[i].printFoodItem();
     }
-    cout << endl;
 }

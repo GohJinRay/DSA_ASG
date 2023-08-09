@@ -18,104 +18,8 @@ using namespace std;
 void invalidIntegerInput() {
 	cout << endl;
 	cout << "Invalid input. Please enter a valid integer." << endl;
-}
-
-void Menu() 
-{
-	cout << endl;
-	cout << "Please select an option:" << endl;
-	cout << "1. Register" << endl;
-	cout << "2. Login" << endl;
-	cout << "3. Exit" << endl;
-	cout << "-----------------------------------" << endl;
-	cout << "Enter your choice (1, 2, or 3): ";
-}
-
-int getMenuChoice() 
-{
-	cout << "-----------------------------------" << endl;
-	cout << "            Welcome!" << endl;
-	cout << "-----------------------------------" << endl;
-
-	int choice;
-
-	do 
-	{
-		while (true)
-		{
-			Menu();
-
-			if (!(cin >> choice))
-			{
-				cin.clear();
-				cin.ignore(numeric_limits<streamsize>::max(), '\n'); //Ignore invalid input
-
-				invalidIntegerInput();
-			}
-			else
-				break;
-		}
-		
-		switch (choice)
-		{
-		case 1: // register customer
-			break;
-
-		case 2: // login as customer or admin;
-			break;
-
-		case 3:
-			cout << endl;
-			cout << "-----------------------------------" << endl;
-			cout << "Thank you so much. Goodbye!" << endl;
-			cout << "-----------------------------------" << endl;
-			cout << endl;
-			break;
-
-		default:
-			invalidIntegerInput();
-		}
-	} while (choice != 3);
-
-	return choice;
-}
-
-void adminMenu() 
-{
-	cout << endl;
-	cout << "Please select an option:" << endl;
-	cout << "1. View the incoming orders" << endl;
-	cout << "2. Update status of the chosen order" << endl;
-	cout << "3. View customer information" << endl;
-	cout << "4. Create new food item and add to menu" << endl; // Need to check whether a food item with the same order id exists first
-	cout << "5. Back" << endl;
-	cout << "-----------------------------------" << endl;
-	cout << "Enter your choice (1, 2, 3, 4 or 5): ";
-}
-
-void userMenu() 
-{
-	cout << endl;
-	cout << "Please select an option:" << endl;
-	cout << "1. Browse menu" << endl;
-	cout << "2. Create a new order" << endl;
-	cout << "3. Cancel order" << endl;
-	cout << "4. View all orders" << endl;
-	cout << "5. Back" << endl;
-	cout << "-----------------------------------" << endl;
-	cout << "Enter your choice (1, 2, 3, 4 or 5): ";
-}
-
-int adminInterface()
-{
-	int choice;
-	return 0;
-}
-
-int userInteface()
-{
-	int choice;
-	return 0;
+	cin.clear(); // Clear error state
+	cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear input buffer
 }
 
 ///////
@@ -178,6 +82,10 @@ int main()
 	desertsArray.insert(food11);
 	desertsArray.insert(food12);
 
+	Category category1(1, "Main Course", mainCourseArray);
+	Category category2(2, "Drinks", drinksArray);
+	Category category3(3, "Deserts", desertsArray);
+
 	Queue newQueue; //New Queue
 	LinkedList_Customer orderList;
 	Dictionary usersInfo; //HashTable to store Customer objects
@@ -201,57 +109,49 @@ int main()
 		Customer* newCustomer;
 		const string adminUsername = "Admin", adminPassword = "hehehehaw";
 
-		while (true)
-		{
-			Menu();
+		do {
+			cout << endl;
+			cout << "Please select an option:" << endl;
+			cout << "1. Register" << endl;
+			cout << "2. Login" << endl;
+			cout << "3. Exit" << endl;
+			cout << "-----------------------------------" << endl;
+			cout << "Enter your choice (1, 2, or 3): ";
 
 			if (!(cin >> choice))
 			{
-				cin.clear();
-				cin.ignore(numeric_limits<streamsize>::max(), '\n'); //Ignore invalid input
-
 				invalidIntegerInput();
 			}
 			else
 				break;
-		}
+		} while (true);
 
 		switch (choice)
 		{
 		case 1: // register customer
-			while (true) // Error handling for username Input
-			{
+			do { // Error handling for username Input
 				cout << "Please enter your username: ";
 				cin >> username;
 
 				if (usersInfo.get(username) != NULL)
-				{
 					cout << "Already exists! Please enter a new username!" << endl;
-				}
 				else
-				{
 					break;
-				}
-			}
+			} while (true);
 
 			cout << "Please enter your password: ";
 			cin >> password;
 
-			while (true) // Error handling for phoneNum Input
-			{
+			do { // Error handling for phoneNum Input
 				cout << "Please enter your phone number: ";
 
 				if (!(cin >> phoneNum))
 				{
 					invalidIntegerInput();
-					cin.clear(); // Clear error state
-					cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear input buffer
 				}
 				else
-				{
 					break;
-				}
-			}
+			} while (true);
 
 			newCustomer = new Customer(username, password, phoneNum, orderList);
 			usersInfo.add(username, newCustomer);
@@ -269,7 +169,41 @@ int main()
 			if (username == adminUsername && password == adminPassword) // Admin login
 			{
 				cout << endl << "Login successful. Welcome, Admin!" << endl;
-				break;
+				do
+				{
+					cout << endl;
+					cout << "Please select an option:" << endl;
+					cout << "1. View the incoming orders" << endl;
+					cout << "2. Update status of the chosen order" << endl;
+					cout << "3. View customer information" << endl;
+					cout << "4. Create new food item and add to menu" << endl; // Need to check whether a food item with the same order id exists first
+					cout << "5. Logout" << endl;
+					cout << "-----------------------------------" << endl;
+					cout << "Enter your choice (1, 2, 3, 4 or 5): ";
+
+					cin >> choice;
+
+					switch (choice)
+					{
+					case 1: // View the incoming orders
+						break;
+
+					case 2: // Update status of the chosen order
+						break;
+
+					case 3: // View customer information
+						break;
+
+					case 4: // Create new food item and add to menu
+						break;
+
+					case 5:
+						break;
+
+					default:
+						invalidIntegerInput();
+					}
+				} while (choice != 5);
 			}
 
 			else if (usersInfo.get(username) != NULL)
@@ -279,26 +213,102 @@ int main()
 				if (customer->getPassword() == password) // User login
 				{
 					cout << endl << "Login successful. Welcome " << username << "!" << endl;
-					do {
-						userMenu();
-						if (!(cin >> choice))
+					do
+					{
+						cout << endl << "Please select an option:" << endl;
+						cout << "1. Browse menu and create new order" << endl;
+						cout << "2. Cancel order" << endl;
+						cout << "3. View all orders" << endl;
+						cout << "4. Logout" << endl;
+						cout << "-----------------------------------" << endl;
+						cout << "Enter your choice (1, 2, 3, or 4): ";
+
+						cin >> choice;
+
+						switch (choice)
 						{
+						case 1: // Browse menu and create new order
+							cout << endl;
+							cout << "------------------- Menu -----------------------" << endl << endl;
+							cout << " Food ID |                 Food Name | Price ($)" << endl;
+							cout << "------------------------------------------------" << endl;
+							category1.getCatArray().print();
+							category2.getCatArray().print();
+							category3.getCatArray().print();
+							do {
+								string response;
+								cout << "Do you want to make an order? (yes/no): ";
+								cin >> response;
+
+								if (response == "yes")
+								{
+									order = customer->createOrder(orderID);
+									orderID++;
+									
+									do {
+										cout << endl << "Please select an option:" << endl;
+										cout << "1. Add Food Item" << endl;
+										cout << "2. Remove Food Item" << endl;
+										cout << "3. View your current cart" << endl;
+										cout << "4. Submit Order" << endl;
+										cout << "------------------------" << endl;
+										cout << "Enter your choice (1, 2, 3 or 4): ";
+
+										cin >> choice;
+
+										switch (choice)
+										{
+										case 1: // Add Food Item
+											cout << "yes" << endl;
+											break;
+
+										case 2: // Remove Food Item
+											cout << "yes" << endl;
+											break;
+
+										case 3: // View your current cart
+											cout << "yes" << endl;
+											break;
+
+										case 4: // Submit Order
+											cout << "yes" << endl;
+											break;
+
+										default:
+											invalidIntegerInput();
+										}
+									} while (choice != 4);
+									
+									break;
+								}
+								else if (response == "no")
+									break;
+								else
+									cout << "Invalid response. Please enter \"yes\" or \"no\"." << endl << endl;
+									
+							} while (true);
+
+						case 2: // Cancel order
+							break;
+
+						case 3: // View all orders
+							break;
+
+						case 4:
+							break;
+
+						default:
 							invalidIntegerInput();
-							cin.clear(); // Clear error state
-							cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear input buffer
 						}
-					} while (choice != 5);
+					} while (choice != 4);
 				}
 				else
-				{
 					cout << "Invalid password. Login failed." << endl;
-				}
 			}
 
 			else
-			{
 				cout << "Invalid username or password. Login failed." << endl;
-			}
+
 			break;
 
 		case 3:
@@ -317,16 +327,6 @@ int main()
 /////////////////////////////////////////////////////////////////////////////////////////////
 	Customer cust1("John", "123", 123, orderList); // initialization
 	Customer cust2("Mary", "124", 124, orderList); // initialization
-
-	//viewMenu(foodItems);
-	Category category1(1, "Main Course", mainCourseArray);
-	category1.printDetails();
-
-	Category category2(2, "Drinks", drinksArray);
-	category2.printDetails();
-
-	Category category3(3, "Deserts", desertsArray);
-	category3.printDetails();
 
 	order = cust1.createOrder(orderID);
 	int option = 1;

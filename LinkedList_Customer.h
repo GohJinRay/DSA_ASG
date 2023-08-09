@@ -20,7 +20,7 @@ public:
 	bool addOrder(Order*);
 	bool addOrder(int, Order*);
 
-	void removeOrder(Order&);
+	bool removeOrder(Order&);
 
 	Order* getOrder(int);
 

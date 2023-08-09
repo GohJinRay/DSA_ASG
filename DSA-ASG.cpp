@@ -100,8 +100,7 @@ int main()
 	cout << "            Welcome!" << endl;
 	cout << "-----------------------------------" << endl;
 
-	int choice; // Used for all input fields relating to choices 
-
+	int choice;
 	do
 	{
 		string username, password;
@@ -168,6 +167,7 @@ int main()
 
 			if (username == adminUsername && password == adminPassword) // Admin login
 			{
+				int adminChoice1;
 				cout << endl << "Login successful. Welcome, Admin!" << endl;
 				do
 				{
@@ -181,9 +181,9 @@ int main()
 					cout << "-----------------------------------" << endl;
 					cout << "Enter your choice (1, 2, 3, 4 or 5): ";
 
-					cin >> choice;
+					cin >> adminChoice1;
 
-					switch (choice)
+					switch (adminChoice1)
 					{
 					case 1: // View the incoming orders
 						break;
@@ -203,7 +203,7 @@ int main()
 					default:
 						invalidIntegerInput();
 					}
-				} while (choice != 5);
+				} while (adminChoice1 != 5);
 			}
 
 			else if (usersInfo.get(username) != NULL)
@@ -212,6 +212,7 @@ int main()
 
 				if (customer->getPassword() == password) // User login
 				{
+					int userChoice1;
 					cout << endl << "Login successful. Welcome " << username << "!" << endl;
 					do
 					{
@@ -223,9 +224,9 @@ int main()
 						cout << "-----------------------------------" << endl;
 						cout << "Enter your choice (1, 2, 3, or 4): ";
 
-						cin >> choice;
+						cin >> userChoice1;
 
-						switch (choice)
+						switch (userChoice1)
 						{
 						case 1: // Browse menu and create new order
 							cout << endl;
@@ -245,7 +246,11 @@ int main()
 									order = customer->createOrder(orderID);
 									orderID++;
 									
+									int userChoice2;
+
 									do {
+										int foodIDOption;
+
 										cout << endl << "Please select an option:" << endl;
 										cout << "1. Add Food Item" << endl;
 										cout << "2. Remove Food Item" << endl;
@@ -254,20 +259,44 @@ int main()
 										cout << "------------------------" << endl;
 										cout << "Enter your choice (1, 2, 3 or 4): ";
 
-										cin >> choice;
+										cin >> userChoice2;
 
-										switch (choice)
+										switch (userChoice2)
 										{
 										case 1: // Add Food Item
-											cout << "yes" << endl;
+											cout << endl << "Enter the foodID to add to cart: ";
+											if (!(cin >> foodIDOption))
+												invalidIntegerInput();
+
+											if (foodIDOption > 0 && foodIDOption <= category1.getCatArray().getSize())
+												order->addFoodItem(category1.getFoodItem(foodIDOption));
+											else if (foodIDOption >= 100 && foodIDOption < category2.getCatArray().getSize() + 100)
+												order->addFoodItem(category2.getFoodItem(foodIDOption));
+											else if (foodIDOption >= 200 && foodIDOption < category3.getCatArray().getSize() + 200)
+												order->addFoodItem(category3.getFoodItem(foodIDOption));
+											else
+												cout << "Invalid food ID option! Please choose from the menu!" << endl;
+
 											break;
 
 										case 2: // Remove Food Item
-											cout << "yes" << endl;
+											cout << endl << "Enter the foodID to remove from cart: ";
+											if (!(cin >> foodIDOption))
+											{
+												invalidIntegerInput();
+												break;
+											}
+
+											if (order->removeFoodItem(foodIDOption) == true) {}
+
+											else
+												cout << "Removal of food item from cart is unsuccessful." << endl;
+											
 											break;
 
 										case 3: // View your current cart
-											cout << "yes" << endl;
+											order->printOrder();
+
 											break;
 
 										case 4: // Submit Order
@@ -277,7 +306,7 @@ int main()
 										default:
 											invalidIntegerInput();
 										}
-									} while (choice != 4);
+									} while (userChoice2 != 4);
 									
 									break;
 								}
@@ -300,7 +329,7 @@ int main()
 						default:
 							invalidIntegerInput();
 						}
-					} while (choice != 4);
+					} while (userChoice1 != 4);
 				}
 				else
 					cout << "Invalid password. Login failed." << endl;

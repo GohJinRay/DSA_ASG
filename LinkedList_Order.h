@@ -22,7 +22,7 @@ public:
 	bool addItem(FoodItem& item);
 	bool addItem(int index, FoodItem& item);
 
-	void removeItem(int index);
+	bool removeItem(int index);
 
 	FoodItem getItem(int index);
 

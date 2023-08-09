@@ -17,26 +17,26 @@ Order::Order(int OrderID, string OrderDate, OrderStatus Status, Customer* Custom
 bool Order::addFoodItem(FoodItem foodItem)  // add fooditem to order
 {
 	foodItemList.addItem(foodItem);
-	cout << "Food item has been added to the order." << endl << endl;
+	cout << "Food item has been added to the order." << endl;
 	return true;
 }
 
-bool Order::removeFoodItem(int option)  // remove fooditem via index
+bool Order::removeFoodItem(int foodID)  // remove fooditem via id
 {
 	if (foodItemList.getLength() == 0) {
-		cout << "Food Item List is empty." << endl << endl;
+		cout << "Food Item List is empty." << endl;
 		return false;
 	}
 
-	if (option < 1 || option > foodItemList.getLength())
+	if (foodItemList.removeItem(foodID) == true)
 	{
-		cout << "Invalid option!" << endl << endl;
+		cout << "Food item has been removed!" << endl;
+		return true;
+	}
+	else
+	{
 		return false;
 	}
-
-	foodItemList.removeItem(option);
-	cout << "Food item has been removed!" << endl << endl;
-	return true;
 }
 
 void Order::printOrder() // printing the orders

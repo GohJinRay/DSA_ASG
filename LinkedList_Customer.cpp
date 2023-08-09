@@ -72,7 +72,7 @@ bool LinkedList_Customer::addOrder(int index, Order* orderItem) // // add order 
 		return false;
 }
 
-void LinkedList_Customer::removeOrder(Order& orderItem) // remove order from linkedlist
+bool LinkedList_Customer::removeOrder(Order& orderItem) // remove order from linkedlist
 {
 	Node* curr = firstNode;
 	Node* prev = NULL;
@@ -88,7 +88,7 @@ void LinkedList_Customer::removeOrder(Order& orderItem) // remove order from lin
 
 			delete curr;
 			size--;
-			return;
+			return true;
 		}
 		
 		prev = curr;
@@ -96,6 +96,7 @@ void LinkedList_Customer::removeOrder(Order& orderItem) // remove order from lin
 	}
 	
 	cout << "Order not found in the linked list." << endl;
+	return false;
 }
 
 Order* LinkedList_Customer::getOrder(int orderID) // get order from linkedlist

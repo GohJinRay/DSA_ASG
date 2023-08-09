@@ -75,32 +75,33 @@ bool LinkedList_Order::addItem(int index, FoodItem& foodItem) // add fooditem in
 		return false;
 }
 
-void LinkedList_Order::removeItem(int index) // add fooditem into linkedlist via index
+bool LinkedList_Order::removeItem(int foodID) // remove food item from linked list based on item id
 {
-	if (index >= 0 && index < size)
-	{
-		int counter = 0;
-		Node* prev = firstNode;
-		Node* curr = firstNode->next;
+	if (firstNode == NULL)
+		return false;
 
-		if (index == 0)
+	Node* prev = NULL;
+	Node* curr = firstNode;
+
+	while (curr != NULL)
+	{
+		if (curr->foodItem.getFoodID() == foodID)
 		{
-			firstNode = prev->next;
-			delete prev;
-		}
-		else
-		{
-			while (curr->next != NULL && counter < index - 1)
-			{
-				prev = curr;
-				curr = curr->next;
-				counter++;
-			}
-			prev->next = curr->next;
+			if (prev == NULL) // if it's the first node
+				firstNode = curr->next;
+			else
+				prev->next = curr->next;
+
 			delete curr;
+			size--;
+			return true;
 		}
-		size--;
+
+		prev = curr;
+		curr = curr->next;
 	}
+	cout << endl << "Food item with " << foodID << " not found in cart!" << endl;
+	return false;
 }
 
 FoodItem LinkedList_Order::getItem(int index) // get fooditem via index

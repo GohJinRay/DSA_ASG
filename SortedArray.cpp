@@ -2,13 +2,13 @@
 #include <iostream>
 using namespace std;
 
-SortedArray::SortedArray() {
+SortedArray::SortedArray() { // constructor
     size = 0;
 }
  
-SortedArray::~SortedArray() { }
+SortedArray::~SortedArray() { } // deconstructor
 
-bool SortedArray::insert(FoodItem newItem)  
+bool SortedArray::insert(FoodItem newItem) // insert FoodItem based on their fooditem id
 {
     if (size >= MAX_ITEMS)
     {
@@ -28,7 +28,7 @@ bool SortedArray::insert(FoodItem newItem)
     return true;
 }
 
-FoodItem SortedArray::search(int foodID) 
+FoodItem SortedArray::search(int foodID) // search the fooditem via their ID
 {
     int left = 0;
     int right = size - 1;
@@ -46,7 +46,7 @@ FoodItem SortedArray::search(int foodID)
     return FoodItem();
 }
 
-bool SortedArray::remove(int foodID) {
+bool SortedArray::remove(int foodID) { // remove the fooditem via their ID
     int left = 0;
     int right = size - 1;
 
@@ -72,12 +72,12 @@ bool SortedArray::remove(int foodID) {
     return false;
 }
 
-int SortedArray::getSize()
+int SortedArray::getSize() // get size of array
 {
     return size;
 }
 
-void SortedArray::print() {
+void SortedArray::print() { // print all the fooditems details in the array
     for (int i = 0; i < size; i++) {
         foodItems[i].printFoodItem();
     }

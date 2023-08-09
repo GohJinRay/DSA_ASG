@@ -20,5 +20,6 @@ public:
 	string getUserName();
 	string getPassword();
 	int getPhoneNum();
+
 	virtual void printDetails();
 };

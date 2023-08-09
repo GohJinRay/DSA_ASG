@@ -15,12 +15,9 @@
 #include "Category.h"
 using namespace std;
 
-void invalidInput() {
+void invalidIntegerInput() {
 	cout << endl;
-	cout << "-----------------------------------" << endl;
-	cout << "Invalid input. Please enter a valid integer choice." << endl;
-	cout << "-----------------------------------" << endl;
-	cout << endl;
+	cout << "Invalid input. Please enter a valid integer." << endl << endl;
 }
 
 void Menu() 
@@ -74,59 +71,51 @@ int getMenuChoice()
 					break;
 
 				default:
-					invalidInput();
+					invalidIntegerInput();
 			}
 		}
 
 		else
 		{
-			invalidInput();
+			invalidIntegerInput();
 		}
 	} while (!validChoice);
 
 	return choice;
 }
 
-void adminMenu() // not done
+void adminMenu() 
 {
 	cout << "Please select an option:" << endl;
 	cout << "1. View the incoming orders" << endl;
 	cout << "2. Update status of the chosen order" << endl;
 	cout << "3. View customer information" << endl;
-	cout << "4. Exit" << endl;
+	cout << "4. Create new food item and add to menu" << endl; // Need to check whether a food item with the same order id exists first
+	cout << "5. Back" << endl;
 	cout << "-----------------------------------" << endl;
-	cout << "Enter your choice (1, 2, 3 or 4): ";
+	cout << "Enter your choice (1, 2, 3, 4 or 5): ";
 }
 
-void userMenu() // not done
+void userMenu() 
 {
 	cout << "Please select an option:" << endl;
 	cout << "1. Browse menu" << endl;
 	cout << "2. Create a new order" << endl;
 	cout << "3. Cancel order" << endl;
-	cout << "4. Exit" << endl;
+	cout << "4. View all orders" << endl;
+	cout << "5. Back" << endl;
 	cout << "-----------------------------------" << endl;
-	cout << "Enter your choice (1, 2, 3 or 4): ";
+	cout << "Enter your choice (1, 2, 3, 4 ot 5): ";
 }
 
-void viewMenu(FoodItem foodItems[])
+int adminInterface()
 {
-	cout << " Food ID |                 Food Name | Price ($)" << endl;
-	cout << "------------------------------------------------" << endl;
-	for (int i = 0; i < maxFoodItems; i++)
-	{
-		cout.width(8);
-		cout << foodItems[i].getFoodID();
-		cout << " | ";
-		cout.width(25);
-		cout << foodItems[i].getFoodName();
-		cout << " | $";
-		cout.precision(2);
-		cout << fixed;
-		cout << foodItems[i].getPrice();
-		cout << endl;
-	}
-	cout << endl;
+
+}
+
+int userInteface()
+{
+
 }
 
 ///////
@@ -144,17 +133,13 @@ void testing() {
 
 	customerDictionary.add(customer2.getUserName(), &customer2);
 
-
-
 	Order* order1 = customer1.createOrder(0);
 
 	Order* order2 = customer2.createOrder(1);
 
 	Admin admin("Admin Name", "adminpass", 999);
 
-
 	admin.viewCustInfo(customerDictionary);
-
 }
 ///////
 
@@ -202,37 +187,57 @@ int main()
 	////
 	testing(); // testing of xxxx
 	////
-	int choice;
+
+	int choice; // Used for all input fields relating to choices 
 	do
 	{
 		choice = getMenuChoice();
 		string username, password;
 		int phoneNum;
-		Customer newCustomer;
+		Customer* newCustomer;
 		const string adminUsername = "Admin", adminPassword = "hehehehaw";
 
 
 		switch (choice)
 		{
 			case 1: //Register
-				cout << "Please enter your username: "; 
-				cin >> username;
-
-				if (username == usersInfo.get(username)->getUserName())
+				while (true) // Error handling for username Input
 				{
-					cout << "Already exists! Please enter a new username!" << endl;
-					break;
+					cout << "Please enter your username: ";
+					cin >> username;
+
+					if (usersInfo.get(username) != NULL)
+					{
+						cout << "Already exists! Please enter a new username!" << endl << endl;
+					}
+					else
+					{
+						break;
+					}
 				}
 
 				cout << "Please enter your password: ";
 				cin >> password;
 
-				cout << "Please enter your phone number: ";
-				cin >> phoneNum;
+				while (true) // Error handling for phoneNum Input
+				{
+					cout << "Please enter your phone number: ";
 
-				newCustomer = Customer(username, password, phoneNum, orderList);
-				usersInfo.add(username, &newCustomer);
-				cout << "Registration complete!" << endl;
+					if (!(cin >> phoneNum))
+					{
+						invalidIntegerInput();
+						cin.clear(); // Clear error state
+						cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear input buffer
+					}
+					else
+					{
+						break;
+					}
+				}
+
+				newCustomer = new Customer(username, password, phoneNum, orderList);
+				usersInfo.add(username, newCustomer);
+				cout << "Registration complete! Please log in to your account to contiune using the services!" << endl << endl;
 
 				break;
 
@@ -245,19 +250,36 @@ int main()
 
 				if (username == adminUsername && password == adminPassword) //Admin login
 				{
-					cout << "Login successful. Welcome, Admin!" << endl;
+					cout << "Login successful. Welcome, Admin!" << endl << endl;
 					break;
 				}
 
-				if (username == usersInfo.get(username)->getUserName() && password == usersInfo.get(username)->getPassword()) //Customer login
+				else if (usersInfo.get(username) != NULL)
 				{
-					cout << "Login successful. Welcome " << username << "!" << endl;
-					break;
+					Customer* customer = usersInfo.get(username);
+
+					if (customer->getPassword() == password)
+					{
+						cout << "Login successful. Welcome " << username << "!" << endl << endl;
+						do {
+							userMenu();
+							if (!(cin >> choice))
+							{
+								invalidIntegerInput();
+								cin.clear(); // Clear error state
+								cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear input buffer
+							}
+						} while (choice != 4);
+					}
+					else
+					{
+						cout << "Invalid password. Login failed." << endl << endl;
+					}
 				}
 
 				else
 				{
-					cout << "Invalid username or password. Login failed." << endl;
+					cout << "Invalid username or password. Login failed." << endl << endl;
 				}
 				break;
 		}
@@ -340,7 +362,7 @@ int main()
 	cout << "Shows what's in the queue currently" << endl;
 	cout << "-----------------------------------" << endl;
 	newQueue.displayItems();
-	admin.updateStatus(newQueue); //Dequeue upon update
+	admin.updateStatus(newQueue); // Dequeue upon update
 	newQueue.displayItems();
 	cust1.getOrderList().orderListPrint();
 

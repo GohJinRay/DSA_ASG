@@ -19,21 +19,15 @@ private:
 	int size;
 
 public:
-
-	// constructor
 	Dictionary();
-
-	// destructor
 	~Dictionary();
 
 	int hash(KeyType key);
 
 	bool add(KeyType newKey, Customer* customer);
-
 	void remove(KeyType key);
 
 	Customer* get(KeyType key);
-
 	Customer* getCustomerByOrderID(int orderID);
 
 	bool isEmpty();
@@ -41,6 +35,5 @@ public:
 	int getLength();
 
 	void printAllOrders();
-
 	void print();
 };

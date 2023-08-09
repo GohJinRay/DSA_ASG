@@ -1,9 +1,12 @@
 #include "Order.h"
 
-Order::Order() { }
+Order::Order() { } // Default constructor
 
-Order::Order(int OrderID, string OrderDate, OrderStatus Status, Customer* Customer, LinkedList_Order FoodItemList)
+Order::Order(int OrderID, string OrderDate, OrderStatus Status, Customer* Customer, LinkedList_Order FoodItemList) 
 {
+	// Constructor to initialize Order attributes with provided values
+	// OrderID, OrderDate, Status, Customer pointer, and FoodItemList.
+
 	orderID = OrderID;
 	orderDate = OrderDate;
 	status = Status; 
@@ -11,14 +14,14 @@ Order::Order(int OrderID, string OrderDate, OrderStatus Status, Customer* Custom
 	foodItemList = FoodItemList;
 }
 
-bool Order::addFoodItem(FoodItem foodItem) 
+bool Order::addFoodItem(FoodItem foodItem)  // add fooditem to order
 {
 	foodItemList.addItem(foodItem);
 	cout << "Food item has been added to the order." << endl << endl;
 	return true;
 }
 
-bool Order::removeFoodItem(int option) 
+bool Order::removeFoodItem(int option)  // remove fooditem via index
 {
 	if (foodItemList.getLength() == 0) {
 		cout << "Food Item List is empty." << endl << endl;
@@ -36,7 +39,7 @@ bool Order::removeFoodItem(int option)
 	return true;
 }
 
-void Order::printOrder()
+void Order::printOrder() // printing the orders
 {
 	cout << "|Order ID: " << getOrderID() << endl;
 	cout << "|Order Date: " << getOrderDate();
@@ -46,10 +49,12 @@ void Order::printOrder()
 	getFoodItemList().print();
 }
 
+// setting methods that modify order attributes
 void Order::setOrderID(int OrderID) { orderID = OrderID; }
 void Order::setOrderDate(string OrderDate) { orderDate = OrderDate; }
 void Order::setStatus(OrderStatus Status) { status = Status; }
 
+// getting methods for retrieving order attributes
 int Order::getOrderID() { return orderID; }
 string Order::getOrderDate() { return orderDate; }
 string Order::getStatus() 

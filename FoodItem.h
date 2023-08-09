@@ -15,7 +15,7 @@ public:
 	FoodItem(int, string, double);
 	
 	void printFoodItem();
-	
+
 	void setFoodID(int);
 	void setFoodName(string);
 	void setPrice(double);

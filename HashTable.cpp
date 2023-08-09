@@ -137,9 +137,7 @@ Customer* Dictionary::getCustomerByOrderID(int orderID) { // get the customer ba
     }
 
     return nullptr;
-}
-
-
+}   
 
 bool Dictionary::isEmpty() { // check if Dictionary is empty
     return size == 0;
@@ -148,7 +146,6 @@ bool Dictionary::isEmpty() { // check if Dictionary is empty
 int Dictionary::getLength() { // get Dictionary length
     return size;
 }
-
 
 void Dictionary::printAllOrders() { // print all orders via customer in the Dictionary
     for (int i = 0; i < MAX_SIZE; i++) {
@@ -164,7 +161,6 @@ void Dictionary::printAllOrders() { // print all orders via customer in the Dict
         }
     }
 }
-
 
 void Dictionary::print() {  // print all the customer belonging in the Dictionary
     for (int i = 0; i < MAX_SIZE; i++) {

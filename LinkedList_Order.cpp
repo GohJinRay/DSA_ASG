@@ -2,13 +2,13 @@
 #include <iostream>
 using namespace std;
 
-LinkedList_Order::LinkedList_Order()
+LinkedList_Order::LinkedList_Order() // constructor
 { 
 	firstNode = NULL;
 	size = 0;
 }
 
-LinkedList_Order::~LinkedList_Order()
+LinkedList_Order::~LinkedList_Order() // deconstructor
 { 
 	Node* curr = firstNode;
 	Node* next;
@@ -22,7 +22,7 @@ LinkedList_Order::~LinkedList_Order()
 	firstNode = NULL;
 }
 
-bool LinkedList_Order::addItem(FoodItem& foodItem)
+bool LinkedList_Order::addItem(FoodItem& foodItem) // add fooditem into linkedlist
 {
 	Node* newNode = new Node;
 	newNode->foodItem = foodItem;
@@ -43,7 +43,7 @@ bool LinkedList_Order::addItem(FoodItem& foodItem)
 	return true;
 }
 
-bool LinkedList_Order::addItem(int index, FoodItem& foodItem)
+bool LinkedList_Order::addItem(int index, FoodItem& foodItem) // add fooditem into linkedlist based on index
 {
 	if (index >= 0 && index <= size)
 	{
@@ -75,7 +75,7 @@ bool LinkedList_Order::addItem(int index, FoodItem& foodItem)
 		return false;
 }
 
-void LinkedList_Order::removeItem(int index)
+void LinkedList_Order::removeItem(int index) // add fooditem into linkedlist via index
 {
 	if (index >= 0 && index < size)
 	{
@@ -103,7 +103,7 @@ void LinkedList_Order::removeItem(int index)
 	}
 }
 
-FoodItem LinkedList_Order::getItem(int index)
+FoodItem LinkedList_Order::getItem(int index) // get fooditem via index
 {
 	if (index >= 0 && index < size)
 	{
@@ -121,17 +121,17 @@ FoodItem LinkedList_Order::getItem(int index)
 	return FoodItem();
 }
 
-bool LinkedList_Order::isEmpty()
+bool LinkedList_Order::isEmpty() // checks if linkedlist is empty
 {
 	return size == 0;
 }
 
-int LinkedList_Order::getLength()
+int LinkedList_Order::getLength() // get length of linkedlist
 {
 	return size;
 }
 
-void LinkedList_Order::print()
+void LinkedList_Order::print() // print all the fooditem in the linkedlist
 {
 	Node* curr = firstNode;
 

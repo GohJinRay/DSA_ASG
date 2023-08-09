@@ -1,45 +1,32 @@
 #include "Category.h"
 
-Category::Category() {};
+Category::Category() {}; // Default constructor
 
-Category::Category(int CatID, string CatName, SortedArray CatArray) 
+Category::Category(int CatID, string CatName, SortedArray CatArray)  // Parameterized constructor that initializes Cateogry
 {
 	catID = CatID;
 	catName = CatName;
 	catArray = CatArray;
 }
 
-bool Category::addFoodItem(FoodItem foodItem)
+bool Category::addFoodItem(FoodItem foodItem) // Add fooditem to sorted array
 {
 	return catArray.insert(foodItem);
 }
 
-bool Category::removeFoodItem(int foodID)
+bool Category::removeFoodItem(int foodID) // remove fooditem via foodID in sorted array
 {
 	return catArray.remove(foodID);
 }
 
-FoodItem Category::getFoodItem(int foodID)
-{
-	return catArray.search(foodID);
-}
 
-int Category::getCatID()
-{
-	return catID;
-}
+// getting methods for retrieving category array attributes
+FoodItem Category::getFoodItem(int foodID) {return catArray.search(foodID);} // get fooditem via foodID
+int Category::getCatID() {return catID;}
+string Category::getCatName() {return catName;}
+SortedArray Category::getCatArray() {return catArray;}
 
-string Category::getCatName()
-{
-	return catName;
-}
-
-SortedArray Category::getCatArray()
-{
-	return catArray;
-}
-
-void Category::printDetails()
+void Category::printDetails() // print fooditem details
 {
 	cout << "Category ID: " << getCatID() << endl;
 	cout << "Category Name: " << getCatName() << endl;

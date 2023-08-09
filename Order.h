@@ -27,6 +27,7 @@ private:
 public:
 	Order();
 	Order(int, string, OrderStatus, Customer*, LinkedList_Order);
+
 	bool addFoodItem(FoodItem);
 	bool removeFoodItem(int);
 	void printOrder();

@@ -10,9 +10,13 @@ class Admin: public User
 public:
 	Admin();
 	Admin(string, string, int);
+
 	void viewOrders(Queue&);
+
 	void updateStatus(Queue&);
+
 	void viewCustInfo(Dictionary&);
+
 	virtual void printDetails();
 };
 

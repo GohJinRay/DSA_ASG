@@ -15,8 +15,11 @@ private:
 public:
     Customer();
     Customer(string, string, int, LinkedList_Customer); 
+
     Order* createOrder(int);
     bool cancelOrder(Queue&, int);
+
     LinkedList_Customer& getOrderList();
+
     virtual void printDetails();
 };

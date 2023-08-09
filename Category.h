@@ -18,6 +18,7 @@ public:
 
 	bool addFoodItem(FoodItem);
 	bool removeFoodItem(int);
+
 	FoodItem getFoodItem(int);
 	int getCatID();
 	string getCatName();

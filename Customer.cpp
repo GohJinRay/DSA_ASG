@@ -1,6 +1,6 @@
 #include "Customer.h"
 
-Customer::Customer() { }
+Customer::Customer() { } // Default constructor
 
 Customer::Customer(string UserName, string Password, int PhoneNum, LinkedList_Customer OrderList)
 	: User(UserName, Password, PhoneNum) 
@@ -8,12 +8,12 @@ Customer::Customer(string UserName, string Password, int PhoneNum, LinkedList_Cu
 	orderList = OrderList;
 }
 
-void Customer::printDetails()
+void Customer::printDetails() // print customer details
 {
 	User::printDetails();
 }
 
-Order* Customer::createOrder(int orderID) 
+Order* Customer::createOrder(int orderID)  // create order then add it into order linkedlist 
 {
 	time_t now = time(0);
 	char buffer[26]; // Use ctime_s to print human-readable date
@@ -28,7 +28,7 @@ Order* Customer::createOrder(int orderID)
 	return newOrder;
 }
 
-bool Customer::cancelOrder(Queue& queue, int orderID) 
+bool Customer::cancelOrder(Queue& queue, int orderID) // cancel the order
 {
 	Queue auxiliaryQueue;
 	bool foundOrder = false;
@@ -65,7 +65,7 @@ bool Customer::cancelOrder(Queue& queue, int orderID)
 	return foundOrder;
 }
 
-LinkedList_Customer& Customer::getOrderList()
+LinkedList_Customer& Customer::getOrderList() // get the customer order linkedlist
 {
 	return orderList;
 }

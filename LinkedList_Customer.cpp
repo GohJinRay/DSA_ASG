@@ -1,13 +1,13 @@
 #include "LinkedList_Customer.h"
 using namespace std;
 
-LinkedList_Customer::LinkedList_Customer()
+LinkedList_Customer::LinkedList_Customer() // constructor
 {
 	firstNode = NULL;
 	size = 0;
 }
 
-LinkedList_Customer::~LinkedList_Customer()
+LinkedList_Customer::~LinkedList_Customer() // deconstructor
 {
 	Node* curr = firstNode;
 	while (curr != NULL)
@@ -19,7 +19,7 @@ LinkedList_Customer::~LinkedList_Customer()
 	}
 }
 
-bool LinkedList_Customer::addOrder(Order* orderItem)
+bool LinkedList_Customer::addOrder(Order* orderItem) // add order to linkedlist
 {
 	Node* newNode = new Node;
 	newNode->orderItem = orderItem;
@@ -40,7 +40,7 @@ bool LinkedList_Customer::addOrder(Order* orderItem)
 	return true;
 }
 
-bool LinkedList_Customer::addOrder(int index, Order* orderItem)
+bool LinkedList_Customer::addOrder(int index, Order* orderItem) // // add order to linkedlist based off index
 {
 	if (index >= 0 && index <= size)
 	{
@@ -72,7 +72,7 @@ bool LinkedList_Customer::addOrder(int index, Order* orderItem)
 		return false;
 }
 
-void LinkedList_Customer::removeOrder(Order& orderItem)
+void LinkedList_Customer::removeOrder(Order& orderItem) // remove order from linkedlist
 {
 	Node* curr = firstNode;
 	Node* prev = NULL;
@@ -98,7 +98,7 @@ void LinkedList_Customer::removeOrder(Order& orderItem)
 	cout << "Order not found in the linked list." << endl;
 }
 
-Order* LinkedList_Customer::getOrder(int orderID)
+Order* LinkedList_Customer::getOrder(int orderID) // get order from linkedlist
 {
 	Node* curr = firstNode;
 
@@ -113,17 +113,17 @@ Order* LinkedList_Customer::getOrder(int orderID)
 	return NULL;
 }
 
-bool LinkedList_Customer::orderListIsEmpty()
+bool LinkedList_Customer::orderListIsEmpty() // check if order is empty
 {
 	return size == 0;
 }
 
-int LinkedList_Customer::orderListGetLength()
+int LinkedList_Customer::orderListGetLength() // get linkedlist length
 {
 	return size;
 }
 
-void LinkedList_Customer::orderListPrint()
+void LinkedList_Customer::orderListPrint() // print all orders from linkedlist
 {
 	Node* curr = firstNode;
 

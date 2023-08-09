@@ -1,8 +1,9 @@
 #include "Admin.h"
 
-Admin::Admin() { };
+Admin::Admin() { }; // Default constructor
 
-Admin::Admin(string UserName, string Password, int PhoneNum) : User(UserName, Password, PhoneNum) { };
+Admin::Admin(string UserName, string Password, int PhoneNum) : User(UserName, Password, PhoneNum) { }; // Parameterized constructorthat 
+                                                                                                       // that initializes Admin using User's constructor
 
 void Admin::printDetails() // print admin details
 {
@@ -81,10 +82,22 @@ void Admin::updateStatus(Queue& q) // allow admin to update orders in queue
 void Admin::viewCustInfo(Dictionary& customerDictionary) // allow admin to view customer info via orderID
 {   
     customerDictionary.printAllOrders();
+
     // Ask the admin to choose an order ID
     int chosenOrderID;
-    cout << "Enter the Order ID you want to view customer info for: ";
-    cin >> chosenOrderID;
+    while (true) // error handling
+    {
+        cout << "Enter the Order ID you want to view customer info for: ";
+
+        if (!(cin >> chosenOrderID))
+        {
+            cout << "Invalid input. Please enter a valid Order ID." << endl << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard invalid input
+        }
+        else
+            break;
+    }
 
     Customer* customer = customerDictionary.getCustomerByOrderID(chosenOrderID);
    

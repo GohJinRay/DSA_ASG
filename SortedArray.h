@@ -9,17 +9,17 @@ private:
     int size;
 
 public:
-    // Constructor
     SortedArray();
-
-    // Destructor
     ~SortedArray();
 
-    // Methods
     bool insert(FoodItem);
+
     FoodItem search(int);
+
     bool remove(int);
+
     int getSize();
+
     void print();
 };
 

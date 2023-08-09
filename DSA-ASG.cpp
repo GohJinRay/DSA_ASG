@@ -84,26 +84,38 @@ int getMenuChoice()
 	return choice;
 }
 
-void adminMenu() // not done
+void adminMenu() 
 {
 	cout << "Please select an option:" << endl;
 	cout << "1. View the incoming orders" << endl;
 	cout << "2. Update status of the chosen order" << endl;
 	cout << "3. View customer information" << endl;
-	cout << "4. Back" << endl;
+	cout << "4. Create new food item and add to menu" << endl; // Need to check whether a food item with the same order id exists first
+	cout << "5. Back" << endl;
 	cout << "-----------------------------------" << endl;
-	cout << "Enter your choice (1, 2, 3 or 4): ";
+	cout << "Enter your choice (1, 2, 3, 4 or 5): ";
 }
 
-void userMenu() // not done
+void userMenu() 
 {
 	cout << "Please select an option:" << endl;
 	cout << "1. Browse menu" << endl;
 	cout << "2. Create a new order" << endl;
 	cout << "3. Cancel order" << endl;
-	cout << "4. Back" << endl;
+	cout << "4. View all orders" << endl;
+	cout << "5. Back" << endl;
 	cout << "-----------------------------------" << endl;
-	cout << "Enter your choice (1, 2, 3 or 4): ";
+	cout << "Enter your choice (1, 2, 3, 4 ot 5): ";
+}
+
+int adminInterface()
+{
+
+}
+
+int userInteface()
+{
+
 }
 
 ///////
@@ -175,7 +187,8 @@ int main()
 	////
 	testing(); // testing of xxxx
 	////
-	int choice;
+
+	int choice; // Used for all input fields relating to choices 
 	do
 	{
 		choice = getMenuChoice();

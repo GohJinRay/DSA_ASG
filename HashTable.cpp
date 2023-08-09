@@ -126,22 +126,18 @@ Customer* Dictionary::getCustomerByOrderID(int orderID) {
         Node* currNode = customers[i];
         while (currNode != nullptr) {
             LinkedList_Customer& orderList = currNode->item->getOrderList();
-            int orderCount = orderList.orderListGetLength();
+            Order* order = orderList.getOrder(orderID);
 
-            for (int j = 0; j < orderCount; j++) {
-                Order* order = orderList.getOrder(j);
-
-                if (order != nullptr && order->getOrderID() == orderID) {
-                    return currNode->item;
-                }
+            if (order != nullptr) {
+                return currNode->item;
             }
+
             currNode = currNode->next;
         }
     }
 
     return nullptr;
 }   
-
 
 bool Dictionary::isEmpty() {
     return size == 0;
@@ -150,7 +146,6 @@ bool Dictionary::isEmpty() {
 int Dictionary::getLength() {
     return size;
 }
-
 
 void Dictionary::printAllOrders() {
     for (int i = 0; i < MAX_SIZE; i++) {
@@ -166,8 +161,6 @@ void Dictionary::printAllOrders() {
         }
     }
 }
-
-
 
 void Dictionary::print() {  // print all the customer belonging in the Dictionary
     for (int i = 0; i < MAX_SIZE; i++) {

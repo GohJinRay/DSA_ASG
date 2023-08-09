@@ -203,24 +203,46 @@ int main()
 		switch (choice)
 		{
 			case 1: //Register
-				cout << "Please enter your username: "; 
-				cin >> username;
-
-				if (usersInfo.get(username) != NULL)
+				while (true) // Error handling for Username Input
 				{
-					cout << "Already exists! Please enter a new username!" << endl;
-					break;
+					cout << "Please enter your username: ";
+					cin >> username;
+
+					if (usersInfo.get(username) != NULL)
+					{
+						cout << "Already exists! Please enter a new username!" << endl;
+					}
+					else
+					{
+						break;
+					}
 				}
 
 				cout << "Please enter your password: ";
 				cin >> password;
 
-				cout << "Please enter your phone number: ";
-				cin >> phoneNum;
+				int phoneNumInput;
+				while (true) // Error handling for Password Input
+				{
+					cout << "Please enter your phone number: ";
+					cin >> phoneNumInput;
+
+					if (cin.fail())
+					{
+						cout << "Invalid input. Please enter a valid integer." << endl;
+						cin.clear(); // Clear error state
+						cin.ignore(100, '\n'); // Clear input buffer
+					}
+					else
+					{
+						phoneNum = phoneNumInput;
+						break;
+					}
+				}
 
 				newCustomer = Customer(username, password, phoneNum, orderList);
 				usersInfo.add(username, &newCustomer);
-				cout << "Registration complete!" << endl;
+				cout << "Registration complete! Please log in to your account to contiune using the services!" << endl;
 
 				break;
 
@@ -334,7 +356,7 @@ int main()
 	cout << "Shows what's in the queue currently" << endl;
 	cout << "-----------------------------------" << endl;
 	newQueue.displayItems();
-	admin.updateStatus(newQueue); //Dequeue upon update
+	admin.updateStatus(newQueue); // Dequeue upon update
 	newQueue.displayItems();
 	cust1.getOrderList().orderListPrint();
 

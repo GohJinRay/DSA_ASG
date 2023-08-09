@@ -16,13 +16,10 @@ private:
 	int size;
 
 public:
-
 	LinkedList_Order();
-
 	~LinkedList_Order();
 
 	bool addItem(FoodItem& item);
-
 	bool addItem(int index, FoodItem& item);
 
 	void removeItem(int index);

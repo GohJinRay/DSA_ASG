@@ -78,9 +78,10 @@ void Admin::updateStatus(Queue& q)
     cout << "Order ID " << targetOrder.getOrderID() << "'s status changed from " << prevStat << " -> " << targetOrder.getStatus() << " sucessfully!" << endl << endl;
 }
 
-void Admin::viewCustInfo(Dictionary& customerDictionary) // not done
+void Admin::viewCustInfo(Dictionary& customerDictionary) 
 {   
     customerDictionary.printAllOrders();
+
     // Ask the admin to choose an order ID
     int chosenOrderID;
     cout << "Enter the Order ID you want to view customer info for: ";

@@ -17,13 +17,11 @@ private:
 
 public:
 	Queue();
-
 	~Queue();
 
 	bool enqueue(Order& item);
 
 	bool dequeue();
-
 	bool dequeue(Order& item);
 
 	void getFront(Order& item);

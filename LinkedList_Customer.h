@@ -15,11 +15,9 @@ private:
 
 public:
 	LinkedList_Customer();
-
 	~LinkedList_Customer();
 
 	bool addOrder(Order*);
-
 	bool addOrder(int, Order*);
 
 	void removeOrder(Order&);
@@ -31,5 +29,4 @@ public:
 	int orderListGetLength();
 
 	void orderListPrint();
-
 };

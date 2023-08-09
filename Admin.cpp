@@ -4,12 +4,12 @@ Admin::Admin() { };
 
 Admin::Admin(string UserName, string Password, int PhoneNum) : User(UserName, Password, PhoneNum) { };
 
-void Admin::printDetails()
+void Admin::printDetails() // print admin details
 {
 	User::printDetails();
 }
 
-void Admin::viewOrders(Queue& q)
+void Admin::viewOrders(Queue& q) // allow admin to view incoming orders
 {
     // check for incoming orders
     if (q.isEmpty()) { 
@@ -20,7 +20,7 @@ void Admin::viewOrders(Queue& q)
     q.displayItems();
 }
 
-void Admin::updateStatus(Queue& q)
+void Admin::updateStatus(Queue& q) // allow admin to update orders in queue
 {
     // check for incoming orders
     if (q.isEmpty()) {
@@ -78,7 +78,7 @@ void Admin::updateStatus(Queue& q)
     cout << "Order ID " << targetOrder.getOrderID() << "'s status changed from " << prevStat << " -> " << targetOrder.getStatus() << " sucessfully!" << endl << endl;
 }
 
-void Admin::viewCustInfo(Dictionary& customerDictionary) // not done
+void Admin::viewCustInfo(Dictionary& customerDictionary) // allow admin to view customer info via orderID
 {   
     customerDictionary.printAllOrders();
     // Ask the admin to choose an order ID

@@ -40,5 +40,7 @@ public:
 
 	int getLength();
 
+	void printAllOrders();
+
 	void print();
 };

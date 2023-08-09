@@ -12,7 +12,7 @@ public:
 	Admin(string, string, int);
 	void viewOrders(Queue&);
 	void updateStatus(Queue&);
-	void viewCustInfo(Dictionary&, int);
+	void viewCustInfo(Dictionary&);
 	virtual void printDetails();
 };
 

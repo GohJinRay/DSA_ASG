@@ -132,13 +132,16 @@ void testing() {
 
 	customerDictionary.add(customer2.getUserName(), &customer2);
 
+
+
 	Order* order1 = customer1.createOrder(0);
 
 	Order* order2 = customer2.createOrder(1);
 
 	Admin admin("Admin Name", "adminpass", 999);
 
-	admin.viewCustInfo(customerDictionary, 0);
+
+	admin.viewCustInfo(customerDictionary);
 
 }
 ///////

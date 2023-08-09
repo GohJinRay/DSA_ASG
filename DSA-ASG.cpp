@@ -106,15 +106,17 @@ void userMenu()
 	cout << "Enter your choice (1, 2, 3, 4 or 5): ";
 }
 
-//int adminInterface()
-//{
-//	int choice;
-//}
-//
-//int userInteface()
-//{
-//	int choice;
-//}
+int adminInterface()
+{
+	int choice;
+	return 0;
+}
+
+int userInteface()
+{
+	int choice;
+	return 0;
+}
 
 ///////
 void testing() {

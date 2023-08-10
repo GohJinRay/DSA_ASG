@@ -20,7 +20,6 @@ void FoodItem::printFoodItem() // print the fooditem with format
 	cout.precision(2);
 	cout << fixed;
 	cout << getPrice() << endl;
-	cout << "------------------------------------------------" << endl;
 }
 
 // setting methods that modify fooditem attributes

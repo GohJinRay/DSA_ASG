@@ -87,8 +87,8 @@ int main()
 	Category category3(3, "Deserts", desertsArray);
 
 	Queue newQueue; //New Queue
-	LinkedList_Customer orderList;
 	Dictionary usersInfo; //HashTable to store Customer objects
+	LinkedList_Customer orderList;
 	Admin admin("Admin", "hehehehaw", 12345678); //By default, create new admin
 	Order* order;
 	int orderID = 0; //Start at 0 by default
@@ -238,7 +238,7 @@ int main()
 							category3.getCatArray().print();
 							do {
 								string response;
-								cout << "Do you want to make an order? (yes/no): ";
+								cout << endl << "Do you want to make an order? (yes/no): ";
 								cin >> response;
 
 								if (response == "yes")
@@ -300,7 +300,7 @@ int main()
 											cout << "------------------------------------------------" << endl;
 											order->getFoodItemList().print();
 
-											cout << "Total Price: $" << order->getTotalCartPrice() << endl;
+											cout << endl << "Total Price: $" << order->getTotalCartPrice() << endl;
 
 											break;
 
@@ -310,7 +310,7 @@ int main()
 											cout << endl << "Order receipt: " << endl;
 											order->printOrder();
 
-											cout << "Total Price: $" << order->getTotalCartPrice() << endl;
+											cout << endl << "Total Price: $" << order->getTotalCartPrice() << endl;
 
 											break;
 

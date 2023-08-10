@@ -244,7 +244,6 @@ int main()
 								if (response == "yes")
 								{
 									order = customer->createOrder(orderID);
-									orderID++;
 									
 									int userChoice2;
 
@@ -295,12 +294,24 @@ int main()
 											break;
 
 										case 3: // View your current cart
-											order->printOrder();
+											cout << endl;
+											cout << "----------------- Current Cart -----------------" << endl << endl;
+											cout << " Food ID |                 Food Name | Price ($)" << endl;
+											cout << "------------------------------------------------" << endl;
+											order->getFoodItemList().print();
+
+											cout << "Total Price: $" << order->getTotalCartPrice() << endl;
 
 											break;
 
 										case 4: // Submit Order
-											cout << "yes" << endl;
+											newQueue.enqueue(*order);
+											orderID++;
+											cout << endl << "Order receipt: " << endl;
+											order->printOrder();
+
+											cout << "Total Price: $" << order->getTotalCartPrice() << endl;
+
 											break;
 
 										default:
@@ -317,10 +328,32 @@ int main()
 									
 							} while (true);
 
+							break;
+
 						case 2: // Cancel order
+							int cancelOrder_OrderID;
+							for (int i = 0; i < customer->getOrderList().orderListGetLength(); i++)
+								if (customer->getOrderList().getOrderByIndex(i)->getStatus() == "Not Prepared")
+									customer->getOrderList().getOrderByIndex(i)->printOrder();
+
+							cout << "Enter the Order ID to cancel it: ";
+							if (!(cin >> cancelOrder_OrderID))
+							{
+								invalidIntegerInput();
+								break;
+							}
+
+							if (customer->getOrderList().getOrderByOrderID(cancelOrder_OrderID) != NULL)
+							{
+								if (customer->cancelOrder(newQueue, cancelOrder_OrderID) == true) {}
+							}
+							else
+								cout << "Invalid Order ID!" << endl;
+
 							break;
 
 						case 3: // View all orders
+							customer->getOrderList().orderListPrint();
 							break;
 
 						case 4:

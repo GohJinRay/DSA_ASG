@@ -73,7 +73,7 @@ void Admin::updateStatus(Queue& q) // allow admin to update orders in queue
 
     // update the status of the corresponding order in the linked list
     LinkedList_Customer orderList = targetOrder.getCustomer()->getOrderList();
-    Order* linkedOrder = orderList.getOrder(targetOrder.getOrderID());
+    Order* linkedOrder = orderList.getOrderByOrderID(targetOrder.getOrderID());
     linkedOrder->setStatus(Prepared);
 
     cout << "Order ID " << targetOrder.getOrderID() << "'s status changed from " << prevStat << " -> " << targetOrder.getStatus() << " sucessfully!" << endl << endl;

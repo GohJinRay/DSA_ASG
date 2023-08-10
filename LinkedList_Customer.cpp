@@ -99,7 +99,7 @@ bool LinkedList_Customer::removeOrder(Order& orderItem) // remove order from lin
 	return false;
 }
 
-Order* LinkedList_Customer::getOrder(int orderID) // get order from linkedlist
+Order* LinkedList_Customer::getOrderByOrderID(int orderID) // get order from linkedlist
 {
 	Node* curr = firstNode;
 
@@ -111,6 +111,26 @@ Order* LinkedList_Customer::getOrder(int orderID) // get order from linkedlist
 		}
 		curr = curr->next;
 	}
+	return NULL;
+}
+
+Order* LinkedList_Customer::getOrderByIndex(int index) // get order from linkedlist
+{
+	if (index >= 0 && index < size)
+	{
+		int counter = 0;
+		Node* curr = firstNode;
+
+		while (curr != NULL && counter < index)
+		{
+			curr = curr->next;
+			counter++;
+		}
+
+		if (curr != NULL)
+			return curr->orderItem;
+	}
+
 	return NULL;
 }
 

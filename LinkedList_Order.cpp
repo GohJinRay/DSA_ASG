@@ -111,7 +111,7 @@ FoodItem LinkedList_Order::getItem(int index) // get fooditem via index
 		int counter = 0;
 		Node* curr = firstNode;
 
-		while (curr->next != NULL && counter <= index)
+		while (curr->next != NULL && counter < index)
 		{
 			curr = curr->next;
 			counter++;
@@ -143,5 +143,4 @@ void LinkedList_Order::print() // print all the fooditem in the linkedlist
 
 		curr = curr->next;
 	}
-	cout << endl;
 }

@@ -41,4 +41,6 @@ public:
 	string getStatus();
 	Customer* getCustomer();
 	LinkedList_Order getFoodItemList();
+
+	double getTotalCartPrice();
 };

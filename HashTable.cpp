@@ -126,7 +126,7 @@ Customer* Dictionary::getCustomerByOrderID(int orderID) { // get the customer ba
         Node* currNode = customers[i];
         while (currNode != nullptr) {
             LinkedList_Customer& orderList = currNode->item->getOrderList();
-            Order* order = orderList.getOrder(orderID);
+            Order* order = orderList.getOrderByOrderID(orderID);
 
             if (order != nullptr) {
                 return currNode->item;

@@ -41,6 +41,7 @@ bool Order::removeFoodItem(int foodID)  // remove fooditem via id
 
 void Order::printOrder() // printing the orders
 {
+	cout << endl;
 	cout << "|Order ID: " << getOrderID() << endl;
 	cout << "|Order Date: " << getOrderDate();
 	cout << "|Status: " << getStatus() << endl << endl;
@@ -73,3 +74,12 @@ string Order::getStatus()
 }
 Customer* Order::getCustomer() { return customer; }
 LinkedList_Order Order::getFoodItemList() { return foodItemList; }
+
+double Order::getTotalCartPrice()
+{
+	double totalCartPrice = 0.0;
+	for (int i = 0; i < getFoodItemList().getLength(); i++)
+		totalCartPrice += getFoodItemList().getItem(i).getPrice();
+
+	return totalCartPrice;
+}

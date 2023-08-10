@@ -44,7 +44,7 @@ bool Customer::cancelOrder(Queue& queue, int orderID) // cancel the order
 			// Remove order from linked list 
 			orderList.removeOrder(currOrder); 
 			foundOrder = true;
-			cout << "Order with ID " << orderID << " has been canceled." << endl;
+			cout << "Order with ID " << orderID << " has been cancelled." << endl;
 		}
 		else
 			auxiliaryQueue.enqueue(currOrder);

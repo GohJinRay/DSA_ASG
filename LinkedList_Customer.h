@@ -22,7 +22,9 @@ public:
 
 	bool removeOrder(Order&);
 
-	Order* getOrder(int);
+	Order* getOrderByOrderID(int);
+
+	Order* getOrderByIndex(int);
 
 	bool orderListIsEmpty();
 

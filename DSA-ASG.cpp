@@ -113,6 +113,7 @@ int main()
 		int phoneNum;
 		Customer* newCustomer;
 
+
 		do {
 			cout << endl;
 			cout << "Please select an option:" << endl;
@@ -219,7 +220,7 @@ int main()
 						}
 
 						int orderIdToView;
-						cout << "Enter the Order ID to view customer information: ";
+						cout << endl << "Enter the Order ID to view customer information: ";
 						
 						while (!(cin >> orderIdToView)) { // error handling
 							invalidIntegerInput();
@@ -243,17 +244,23 @@ int main()
 							cout << "Please enter a Category ID: ";
 						}
 
-						if (categoryChoice == 1) {
+
+						switch (categoryChoice) {
+						case 1:
 							selectedArray = &mainCourseArray;
-						}
-						else if (categoryChoice == 2) {
+							catName = "Main Course";
+							break;
+						case 2:
 							selectedArray = &drinksArray;
-						}
-						else if (categoryChoice == 3) {
+							catName = "Drinks";
+							break;
+						case 3:
 							selectedArray = &desertsArray;
-						}
-						else {
-							cout << "Invalid choice. Please select a valid category." << endl;
+							catName= "Desserts";
+							break;
+						default:
+							cout << "Invalid choice. Please select a valid Category ID." << endl;
+							break;
 						}
 
 						cout << "Enter Food ID: ";
@@ -263,22 +270,19 @@ int main()
 							cout << "Please enter a valid Food ID: ";
 						}
 
-						fooditem = selectedArray->search(foodID);
-						if (fooditem.getFoodID() != -1) {
-							cout << "Duplicate Food ID. Please enter a unique Food ID." << endl;
-							break;
+						if (selectedArray != nullptr) {
+							fooditem = selectedArray->search(foodID);
+							if (fooditem.getFoodID() != -1) {
+								cout << "Duplicate Food ID. Please enter a unique Food ID." << endl;
+								break;
+							}
+
+
+							cout << "Enter Price: ";
+							cin >> price;
+
+							admin.createNewFoodItem(foodID, foodName, price, *selectedArray);
 						}
-						
-						do {
-							cin.ignore(); // Clear the input buffer
-							cout << "Enter Food Name: ";
-							getline(cin, foodName);
-						} while (foodName.empty());
-
-						cout << "Enter Price: ";
-						cin >> price;
-
-						admin.createNewFoodItem(foodID, foodName, price, *selectedArray);
 					
 						break;
 

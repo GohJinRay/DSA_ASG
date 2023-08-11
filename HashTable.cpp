@@ -155,7 +155,7 @@ void Dictionary::printAllOrders() { // print all orders via customer in the Dict
             LinkedList_Customer& orderList = cust->getOrderList();
 
             for (int j = 0; j < orderList.orderListGetLength(); j++) {
-                orderList.orderListPrint();
+                orderList.getOrderByIndex(j)->printOrder();
             }
             curr = curr->next;
         }

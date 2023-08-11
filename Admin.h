@@ -18,8 +18,8 @@ public:
 
 	void viewCustInfo(Dictionary&, int);
 
-	virtual void printDetails();
-
 	bool createNewFoodItem(int, string, double, SortedArray&);
+
+	virtual void printDetails();
 };
 

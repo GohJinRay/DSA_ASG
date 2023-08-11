@@ -23,28 +23,28 @@ void invalidIntegerInput() {
 }
 
 ///////
-void testing() {
-
-	LinkedList_Customer orderList1; // Create order list instance for customer1
-	LinkedList_Customer orderList2; // Create order list instance for customer2
-
-	Customer customer1("John Doe", "password", 123456, orderList1);
-	Customer customer2("Jane Smith", "secret", 789012, orderList2);
-
-	Dictionary customerDictionary;
-
-	customerDictionary.add(customer1.getUserName(), &customer1);
-
-	customerDictionary.add(customer2.getUserName(), &customer2);
-
-	Order* order1 = customer1.createOrder(0);
-
-	Order* order2 = customer2.createOrder(1);
-
-	Admin admin("Admin Name", "adminpass", 999);
-
-	admin.viewCustInfo(customerDictionary);
-}
+//void testing() {
+//
+//	LinkedList_Customer orderList1; // Create order list instance for customer1
+//	LinkedList_Customer orderList2; // Create order list instance for customer2
+//
+//	Customer customer1("John Doe", "password", 123456, orderList1);
+//	Customer customer2("Jane Smith", "secret", 789012, orderList2);
+//
+//	Dictionary customerDictionary;
+//
+//	customerDictionary.add(customer1.getUserName(), &customer1);
+//
+//	customerDictionary.add(customer2.getUserName(), &customer2);
+//
+//	Order* order1 = customer1.createOrder(0);
+//
+//	Order* order2 = customer2.createOrder(1);
+//
+//	Admin admin("Admin Name", "adminpass", 999);
+//
+//	admin.viewCustInfo(customerDictionary);
+//}
 ///////
 
 int main()
@@ -92,9 +92,6 @@ int main()
 	Admin admin("Admin", "hehehehaw", 12345678); //By default, create new admin
 	Order* order;
 	int orderID = 0; //Start at 0 by default
-	////
-	testing(); // testing of xxxx
-	////
 
 	cout << "-----------------------------------" << endl;
 	cout << "            Welcome!" << endl;
@@ -104,6 +101,15 @@ int main()
 	do
 	{
 		string username, password;
+
+		// admin case 4
+		string catName, foodName;
+		int foodID;
+		double price;
+		FoodItem fooditem;
+		SortedArray* selectedArray = nullptr;
+		//
+
 		int phoneNum;
 		Customer* newCustomer;
 		const string adminUsername = "Admin", adminPassword = "hehehehaw";
@@ -186,15 +192,110 @@ int main()
 					switch (adminChoice1)
 					{
 					case 1: // View the incoming orders
+						admin.viewOrders(newQueue);
 						break;
 
 					case 2: // Update status of the chosen order
+
+						if (!newQueue.isEmpty()) { // checks if queue is not empty
+							admin.viewOrders(newQueue); // display all the incoming orders
+						}
+						else {
+							cout << "No incoming orders." << endl << endl;
+							break;
+						}
+
+						// updating the status of incoming orders
+						int orderIdToUpdate;
+						cout << "Enter the Order ID you want to update: ";
+
+						while (!(cin >> orderIdToUpdate)) {
+							invalidIntegerInput();
+							cout << "Please enter a valid Order ID: ";
+						}
+
+						admin.updateStatus(newQueue, orderIdToUpdate);
 						break;
 
 					case 3: // View customer information
+
+						
+						if (!usersInfo.isEmpty()) { 
+							usersInfo.printAllOrders(); // print all the orders in customer dictionary
+						}
+						else {
+							cout << "No Customer/Orders in this Dictionary" << endl << endl;
+							break;
+						}
+
+						int orderIdToView;
+						cout << "Enter the Order ID to view customer information: ";
+						
+						while (!(cin >> orderIdToView)) { // error handling
+							invalidIntegerInput();
+							cout << "Please enter a valid Order ID: ";
+						}
+
+						admin.viewCustInfo(usersInfo, orderIdToView);
 						break;
 
 					case 4: // Create new food item and add to menu
+						int categoryChoice;
+						cout << "Select a category:" << endl;
+						cout << "1. Main Course" << endl;
+						cout << "2. Drinks" << endl;
+						cout << "3. Desserts" << endl;
+						cout << "Enter your choice: ";
+
+
+						while (!(cin >> categoryChoice)) { // error handling
+							invalidIntegerInput();
+							cout << "Please enter a Category ID: ";
+						}
+
+
+						if (categoryChoice == 1) {
+							selectedArray = &mainCourseArray;
+							catName = "Main Course";
+						}
+						else if (categoryChoice == 2) {
+							selectedArray = &drinksArray;
+							catName = "Drinks";
+						}
+						else if (categoryChoice == 3) {
+							selectedArray = &desertsArray;
+							catName = "Desserts";
+						}
+						else {
+							cout << "Invalid choice. Please select a valid category." << endl;
+						}
+
+						cout << "Enter Food ID: ";
+
+						while (!(cin >> foodID)) { // error handling
+							invalidIntegerInput();
+							cout << "Please enter a valid Food ID: ";
+						}
+
+						if (selectedArray != nullptr) {
+							fooditem = selectedArray->search(foodID);
+							if (fooditem.getFoodID() != -1) {
+								cout << "Duplicate Food ID. Please enter a unique Food ID." << endl;
+								break;
+							}
+
+							do {
+								cin.ignore(); // Clear the input buffer
+								cout << "Enter Food Name: ";
+								getline(cin, foodName);
+							} while (foodName.empty());
+
+							cout << "Enter Price: ";
+							cin >> price;
+
+							admin.addFoodItem(*selectedArray, foodID, foodName, price);
+						}
+					
 						break;
 
 					case 5:
@@ -387,81 +488,81 @@ int main()
 	} while (choice != 3);
 
 /////////////////////////////////////////////////////////////////////////////////////////////
-	Customer cust1("John", "123", 123, orderList); // initialization
-	Customer cust2("Mary", "124", 124, orderList); // initialization
+	//Customer cust1("John", "123", 123, orderList); // initialization
+	//Customer cust2("Mary", "124", 124, orderList); // initialization
 
-	order = cust1.createOrder(orderID);
-	int option = 1;
-	if (option > 0 && option <= category1.getCatArray().getSize())
-		order->addFoodItem(category1.getFoodItem(option));
-	else if (option >= 100 && option < category2.getCatArray().getSize() + 100)
-		order->addFoodItem(category2.getFoodItem(option));
-	else if (option >= 200 && option < category3.getCatArray().getSize() + 200)
-		order->addFoodItem(category3.getFoodItem(option));
-	else
-		cout << "Invalid option. Please a valid one." << endl;
-	option = 200;
-	if (option > 0 && option <= category1.getCatArray().getSize())
-		order->addFoodItem(category1.getFoodItem(option));
-	else if (option >= 100 && option < category2.getCatArray().getSize() + 100)
-		order->addFoodItem(category2.getFoodItem(option));
-	else if (option >= 200 && option < category3.getCatArray().getSize() + 200)
-		order->addFoodItem(category3.getFoodItem(option));
-	else
-		cout << "Invalid option. Please a valid one." << endl;
-	newQueue.enqueue(*order); // enqueue the object by dereference the pointer
-	orderID++;
-	cust1.getOrderList().orderListPrint();
+	//order = cust1.createOrder(orderID);
+	//int option = 1;
+	//if (option > 0 && option <= category1.getCatArray().getSize())
+	//	order->addFoodItem(category1.getFoodItem(option));
+	//else if (option >= 100 && option < category2.getCatArray().getSize() + 100)
+	//	order->addFoodItem(category2.getFoodItem(option));
+	//else if (option >= 200 && option < category3.getCatArray().getSize() + 200)
+	//	order->addFoodItem(category3.getFoodItem(option));
+	//else
+	//	cout << "Invalid option. Please a valid one." << endl;
+	//option = 200;
+	//if (option > 0 && option <= category1.getCatArray().getSize())
+	//	order->addFoodItem(category1.getFoodItem(option));
+	//else if (option >= 100 && option < category2.getCatArray().getSize() + 100)
+	//	order->addFoodItem(category2.getFoodItem(option));
+	//else if (option >= 200 && option < category3.getCatArray().getSize() + 200)
+	//	order->addFoodItem(category3.getFoodItem(option));
+	//else
+	//	cout << "Invalid option. Please a valid one." << endl;
+	//newQueue.enqueue(*order); // enqueue the object by dereference the pointer
+	//orderID++;
+	//cust1.getOrderList().orderListPrint();
 
-	order = cust1.createOrder(orderID);
-	option = 100;
-	if (option > 0 && option <= category1.getCatArray().getSize())
-		order->addFoodItem(category1.getFoodItem(option));
-	else if (option >= 100 && option < category2.getCatArray().getSize() + 100)
-		order->addFoodItem(category2.getFoodItem(option));
-	else if (option >= 200 && option < category3.getCatArray().getSize() + 200)
-		order->addFoodItem(category3.getFoodItem(option));
-	else
-		cout << "Invalid option. Please a valid one." << endl;
-	option = 201;
-	if (option > 0 && option <= category1.getCatArray().getSize())
-		order->addFoodItem(category1.getFoodItem(option));
-	else if (option >= 100 && option < category2.getCatArray().getSize() + 100)
-		order->addFoodItem(category2.getFoodItem(option));
-	else if (option >= 200 && option < category3.getCatArray().getSize() + 200)
-		order->addFoodItem(category3.getFoodItem(option));
-	else
-		cout << "Invalid option. Please a valid one." << endl;
-	newQueue.enqueue(*order);
-	orderID++;
-	cust1.getOrderList().orderListPrint();
+	//order = cust1.createOrder(orderID);
+	//option = 100;
+	//if (option > 0 && option <= category1.getCatArray().getSize())
+	//	order->addFoodItem(category1.getFoodItem(option));
+	//else if (option >= 100 && option < category2.getCatArray().getSize() + 100)
+	//	order->addFoodItem(category2.getFoodItem(option));
+	//else if (option >= 200 && option < category3.getCatArray().getSize() + 200)
+	//	order->addFoodItem(category3.getFoodItem(option));
+	//else
+	//	cout << "Invalid option. Please a valid one." << endl;
+	//option = 201;
+	//if (option > 0 && option <= category1.getCatArray().getSize())
+	//	order->addFoodItem(category1.getFoodItem(option));
+	//else if (option >= 100 && option < category2.getCatArray().getSize() + 100)
+	//	order->addFoodItem(category2.getFoodItem(option));
+	//else if (option >= 200 && option < category3.getCatArray().getSize() + 200)
+	//	order->addFoodItem(category3.getFoodItem(option));
+	//else
+	//	cout << "Invalid option. Please a valid one." << endl;
+	//newQueue.enqueue(*order);
+	//orderID++;
+	//cust1.getOrderList().orderListPrint();
 
-	order = cust2.createOrder(orderID);
-	option = 202;
-	if (option > 0 && option <= category1.getCatArray().getSize())
-		order->addFoodItem(category1.getFoodItem(option));
-	else if (option >= 100 && option < category2.getCatArray().getSize() + 100)
-		order->addFoodItem(category2.getFoodItem(option));
-	else if (option >= 200 && option < category3.getCatArray().getSize() + 200)
-		order->addFoodItem(category3.getFoodItem(option));
-	else
-		cout << "Invalid option. Please a valid one." << endl;
-	newQueue.enqueue(*order);
-	orderID++;
-	cust2.getOrderList().orderListPrint();
+	//order = cust2.createOrder(orderID);
+	//option = 202;
+	//if (option > 0 && option <= category1.getCatArray().getSize())
+	//	order->addFoodItem(category1.getFoodItem(option));
+	//else if (option >= 100 && option < category2.getCatArray().getSize() + 100)
+	//	order->addFoodItem(category2.getFoodItem(option));
+	//else if (option >= 200 && option < category3.getCatArray().getSize() + 200)
+	//	order->addFoodItem(category3.getFoodItem(option));
+	//else
+	//	cout << "Invalid option. Please a valid one." << endl;
+	//newQueue.enqueue(*order);
+	//orderID++;
+	//cust2.getOrderList().orderListPrint();
 
-	cout << "Shows what's in the queue currently" << endl;
-	cout << "-----------------------------------" << endl;
-	newQueue.displayItems();
-	admin.updateStatus(newQueue); // Dequeue upon update
-	newQueue.displayItems();
-	cust1.getOrderList().orderListPrint();
+	//cout << "Shows what's in the queue currently" << endl;
+	//cout << "-----------------------------------" << endl;
+	//newQueue.displayItems();
+	//admin.updateStatus(newQueue); // Dequeue upon update
+	//newQueue.displayItems();
+	//cust1.getOrderList().orderListPrint();
 
-	cout << "Cancel Order" << endl;
-	cust1.cancelOrder(newQueue, 1); // Cancel orderID 1
+	//cout << "Cancel Order" << endl;
+	//cust1.cancelOrder(newQueue, 1); // Cancel orderID 1
 
-	newQueue.displayItems();
-	cust1.getOrderList().orderListPrint();
+	//newQueue.displayItems();
+	//cust1.getOrderList().orderListPrint();
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 

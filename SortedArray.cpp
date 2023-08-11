@@ -43,7 +43,7 @@ FoodItem SortedArray::search(int foodID) // search the fooditem via their ID
         else
             right = mid - 1;
     }
-    return FoodItem();
+    return FoodItem(-1, "", 0.0);
 }
 
 bool SortedArray::remove(int foodID) { // remove the fooditem via their ID

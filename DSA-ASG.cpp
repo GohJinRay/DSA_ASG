@@ -22,30 +22,16 @@ void invalidIntegerInput() {
 	cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear input buffer
 }
 
-///////
-//void testing() {
-//
-//	LinkedList_Customer orderList1; // Create order list instance for customer1
-//	LinkedList_Customer orderList2; // Create order list instance for customer2
-//
-//	Customer customer1("John Doe", "password", 123456, orderList1);
-//	Customer customer2("Jane Smith", "secret", 789012, orderList2);
-//
-//	Dictionary customerDictionary;
-//
-//	customerDictionary.add(customer1.getUserName(), &customer1);
-//
-//	customerDictionary.add(customer2.getUserName(), &customer2);
-//
-//	Order* order1 = customer1.createOrder(0);
-//
-//	Order* order2 = customer2.createOrder(1);
-//
-//	Admin admin("Admin Name", "adminpass", 999);
-//
-//	admin.viewCustInfo(customerDictionary);
-//}
-///////
+
+
+/////
+void testing() {
+
+
+
+	
+}
+/////
 
 int main()
 {
@@ -89,7 +75,7 @@ int main()
 	Queue newQueue; //New Queue
 	Dictionary usersInfo; //HashTable to store Customer objects
 	LinkedList_Customer orderList;
-	Admin admin("Admin", "hehehehaw", 12345678); //By default, create new admin
+	Admin admin("Admin", "admin", 1231);
 	Order* order;
 	int orderID = 0; //Start at 0 by default
 
@@ -112,7 +98,7 @@ int main()
 
 		int phoneNum;
 		Customer* newCustomer;
-		const string adminUsername = "Admin", adminPassword = "hehehehaw";
+
 
 		do {
 			cout << endl;
@@ -171,7 +157,7 @@ int main()
 			cout << "Please enter your password: ";
 			cin >> password;
 
-			if (username == adminUsername && password == adminPassword) // Admin login
+			if (username == admin.getUserName() && password == admin.getPassword()) // Admin login
 			{
 				int adminChoice1;
 				cout << endl << "Login successful. Welcome, Admin!" << endl;
@@ -218,7 +204,7 @@ int main()
 						break;
 
 					case 3: // View customer information
-
+					
 						
 						if (!usersInfo.isEmpty()) { 
 							usersInfo.printAllOrders(); // print all the orders in customer dictionary
@@ -229,6 +215,7 @@ int main()
 						}
 
 						int orderIdToView;
+						cout << endl;
 						cout << "Enter the Order ID to view customer information: ";
 						
 						while (!(cin >> orderIdToView)) { // error handling
@@ -254,20 +241,22 @@ int main()
 						}
 
 
-						if (categoryChoice == 1) {
+						switch (categoryChoice) {
+						case 1:
 							selectedArray = &mainCourseArray;
 							catName = "Main Course";
-						}
-						else if (categoryChoice == 2) {
+							break;
+						case 2:
 							selectedArray = &drinksArray;
 							catName = "Drinks";
-						}
-						else if (categoryChoice == 3) {
+							break;
+						case 3:
 							selectedArray = &desertsArray;
-							catName = "Desserts";
-						}
-						else {
-							cout << "Invalid choice. Please select a valid category." << endl;
+							catName= "Desserts";
+							break;
+						default:
+							cout << "Invalid choice. Please select a valid Category ID." << endl;
+							break;
 						}
 
 						cout << "Enter Food ID: ";
@@ -284,11 +273,6 @@ int main()
 								break;
 							}
 
-							do {
-								cin.ignore(); // Clear the input buffer
-								cout << "Enter Food Name: ";
-								getline(cin, foodName);
-							} while (foodName.empty());
 
 							cout << "Enter Price: ";
 							cin >> price;

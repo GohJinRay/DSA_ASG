@@ -1,7 +1,10 @@
 // DSA-ASG.cpp : This file contains the 'main' function. Program execution begins and ends there.
 
 #include <iostream>
+#include <sstream>
+#include <iomanip>
 #include <string>
+#include <regex>
 #include "Admin.h"
 #include "Customer.h"
 #include "User.h"
@@ -73,18 +76,18 @@ int main()
 	drinksArray.insert(food8);
 	drinksArray.insert(food9);
 
-	SortedArray desertsArray;
+	SortedArray dessertsArray;
 	FoodItem food10(200, "Chocolate Cake", 5.99);
 	FoodItem food11(201, "Ice Cream", 3.50);
 	FoodItem food12(202, "Mango Sticky Rice", 5.00);
 
-	desertsArray.insert(food10);
-	desertsArray.insert(food11);
-	desertsArray.insert(food12);
+	dessertsArray.insert(food10);
+	dessertsArray.insert(food11);
+	dessertsArray.insert(food12);
 
 	Category category1(1, "Main Course", mainCourseArray);
 	Category category2(2, "Drinks", drinksArray);
-	Category category3(3, "Deserts", desertsArray);
+	Category category3(3, "Desserts", dessertsArray);
 
 	Queue newQueue; //New Queue
 	Dictionary usersInfo; //HashTable to store Customer objects
@@ -105,9 +108,10 @@ int main()
 		// admin case 4
 		string catName, foodName;
 		int foodID;
-		double price;
+		string price; // string to match regex
 		FoodItem fooditem;
 		SortedArray* selectedArray = nullptr;
+		const regex doubleRegex("^[0-9]+(\\.[0-9]+)?$"); // regular expression for integers and doubles
 		//
 
 		int phoneNum;
@@ -237,7 +241,7 @@ int main()
 						cout << "2. Drinks" << endl;
 						cout << "3. Desserts" << endl;
 						cout << "Enter your choice: ";
-
+						
 
 						while (!(cin >> categoryChoice)) { // error handling
 							invalidIntegerInput();
@@ -247,13 +251,13 @@ int main()
 
 						switch (categoryChoice) {
 						case 1:
-							selectedArray = &mainCourseArray;
+							selectedArray = &category1.getCatArray();
 							break;
 						case 2:
-							selectedArray = &drinksArray;
+							selectedArray = &category2.getCatArray();
 							break;
 						case 3:
-							selectedArray = &desertsArray;
+							selectedArray = &category3.getCatArray();
 							break;
 						default:
 							cout << "Invalid choice. Please select a valid Category ID." << endl;
@@ -268,17 +272,44 @@ int main()
 						}
 
 						if (selectedArray != nullptr) {
-							fooditem = selectedArray->search(foodID);
+							fooditem = selectedArray->searchByFoodID(foodID);
 							if (fooditem.getFoodID() != -1) {
 								cout << "Duplicate Food ID. Please enter a unique Food ID." << endl;
 								break;
 							}
 
+							do {
+								cout << "Enter Food Name: ";
+								cin >> foodName;
+								if (selectedArray->searchByFoodName(foodName).getFoodName() == foodName) {
+									cout << "Duplicate Food Name found. Please enter a unique Food Name." << endl;
+									foodName = ""; // setting foodName string to empty
+								}
 
-							cout << "Enter Price: ";
-							cin >> price;
+								if (!foodName.empty()) { // checks if its not empty
+									break;
+								}
+							} while (true);
 
-							admin.createNewFoodItem(foodID, foodName, price, *selectedArray);
+							do {
+								cout << "Enter Price: ";
+								cin >> price;
+
+								if (!regex_match(price, doubleRegex)) {
+									cout << "Price is not a valid number. Please try again." << endl;
+								}
+								else
+									break;
+							} while (true);
+
+							double fPrice = stod(price); // final price being converted to double;
+
+							// changing it to 2 decimal place
+							ostringstream oss;
+							oss << fixed << setprecision(2) << fPrice;
+							
+							admin.createNewFoodItem(foodID, foodName, fPrice, *selectedArray);
+
 						}
 					
 						break;
@@ -359,11 +390,11 @@ int main()
 												invalidIntegerInput();
 
 											if (foodIDOption > 0 && foodIDOption <= category1.getCatArray().getSize())
-												order->addFoodItem(category1.getFoodItem(foodIDOption));
+												order->addFoodItem(category1.getFoodItemByFoodID(foodIDOption));
 											else if (foodIDOption >= 100 && foodIDOption < category2.getCatArray().getSize() + 100)
-												order->addFoodItem(category2.getFoodItem(foodIDOption));
+												order->addFoodItem(category2.getFoodItemByFoodID(foodIDOption));
 											else if (foodIDOption >= 200 && foodIDOption < category3.getCatArray().getSize() + 200)
-												order->addFoodItem(category3.getFoodItem(foodIDOption));
+												order->addFoodItem(category3.getFoodItemByFoodID(foodIDOption));
 											else
 												cout << "Invalid food ID option! Please choose from the menu!" << endl;
 

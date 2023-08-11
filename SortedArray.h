@@ -14,7 +14,9 @@ public:
 
     bool insert(FoodItem);
 
-    FoodItem search(int);
+    FoodItem searchByFoodID(int);
+
+    FoodItem searchByFoodName(string);
 
     bool remove(int);
 

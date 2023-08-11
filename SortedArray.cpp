@@ -28,7 +28,7 @@ bool SortedArray::insert(FoodItem newItem) // insert FoodItem based on their foo
     return true;
 }
 
-FoodItem SortedArray::search(int foodID) // search the fooditem via their ID
+FoodItem SortedArray::searchByFoodID(int foodID) // search the fooditem via their ID
 {
     int left = 0;
     int right = size - 1;
@@ -43,7 +43,16 @@ FoodItem SortedArray::search(int foodID) // search the fooditem via their ID
         else
             right = mid - 1;
     }
-    return FoodItem(-1, "", 0.0);
+    return FoodItem(-1, "", -1.0);
+}
+
+FoodItem SortedArray::searchByFoodName(string foodName)
+{
+    for (int i = 0; i < size; i++)
+        if (foodItems[i].getFoodName() == foodName)
+            return foodItems[i];
+
+    return FoodItem(-1, "", -1.0);
 }
 
 bool SortedArray::remove(int foodID) { // remove the fooditem via their ID

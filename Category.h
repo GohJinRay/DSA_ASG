@@ -19,10 +19,10 @@ public:
 	bool addFoodItem(FoodItem);
 	bool removeFoodItem(int);
 
-	FoodItem getFoodItem(int);
+	FoodItem getFoodItemByFoodID(int);
 	int getCatID();
 	string getCatName();
-	SortedArray getCatArray();
+	SortedArray& getCatArray();
 
 	void printDetails();
 	

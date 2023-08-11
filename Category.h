@@ -22,7 +22,7 @@ public:
 	FoodItem getFoodItem(int);
 	int getCatID();
 	string getCatName();
-	SortedArray getCatArray();
+	SortedArray& getCatArray();
 
 	void printDetails();
 	

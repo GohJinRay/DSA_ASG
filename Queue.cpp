@@ -94,8 +94,6 @@ void Queue::getFront(Order& orderItem)
 	else
 	{
 		orderItem.setOrderID(-1);
-		orderItem.setOrderDate("");
-		orderItem.setStatus(NotPrepared);
 	}
 }
 

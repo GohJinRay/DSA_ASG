@@ -50,8 +50,9 @@ void Membership::addLoyaltyPoints(int loyaltyPoints)
 	cout << "Congulations! You have attained the " << membershipStatus << "!" << endl;
 }
 
-void Membership::redeemLoyaltyPoints(int loyaltyPoints)
+void Membership::redeemLoyaltyPoints(Order& order, int loyaltyPoints)
 {
+	int option;
 	cout << "---------- Point redemption ---------- " << endl;
 	cout << "1. 10% discount off the order - 50 points" << endl;
 	cout << "2. 20% discount off the order - 90 points" << endl;
@@ -60,6 +61,14 @@ void Membership::redeemLoyaltyPoints(int loyaltyPoints)
 	cout << "5. Coca-Cola - 5 points" << endl;
 	cout << "6. Mango Sticky Rice - 15 points" << endl << endl;
 	cout << "Select option to redeem points (1, 2, 3, 4, 5 or 6): ";
+	cin >> option;
+
+	if (option == 1)
+		if (loyaltyPoints >= 50)
+		{
+			
+		}
+
 }
 
 int Membership::calculatePointsEarned(double totalPrice)

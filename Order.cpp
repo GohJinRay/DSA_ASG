@@ -2,7 +2,7 @@
 
 Order::Order() { } // Default constructor
 
-Order::Order(int OrderID, string OrderDate, OrderStatus Status, Customer* Customer, LinkedList_Order FoodItemList) 
+Order::Order(int OrderID, string OrderDate, OrderStatus Status, double TotalPrice, Customer* Customer, LinkedList_Order FoodItemList) 
 {
 	// Constructor to initialize Order attributes with provided values
 	// OrderID, OrderDate, Status, Customer pointer, and FoodItemList.
@@ -10,6 +10,7 @@ Order::Order(int OrderID, string OrderDate, OrderStatus Status, Customer* Custom
 	orderID = OrderID;
 	orderDate = OrderDate;
 	status = Status; 
+	totalPrice = TotalPrice;
 	customer = Customer;
 	foodItemList = FoodItemList;
 }
@@ -17,6 +18,7 @@ Order::Order(int OrderID, string OrderDate, OrderStatus Status, Customer* Custom
 bool Order::addFoodItem(FoodItem foodItem)  // add fooditem to order
 {
 	foodItemList.addItem(foodItem);
+	totalPrice += foodItem.getPrice();
 	cout << "Food item has been added to the order." << endl;
 	return true;
 }
@@ -28,8 +30,10 @@ bool Order::removeFoodItem(int foodID)  // remove fooditem via id
 		return false;
 	}
 
+	FoodItem removedItem = foodItemList.getItemByFoodID(foodID);
 	if (foodItemList.removeItem(foodID) == true)
 	{
+		totalPrice -= removedItem.getPrice();
 		cout << "Food item has been removed!" << endl;
 		return true;
 	}
@@ -44,7 +48,8 @@ void Order::printOrder() // printing the orders
 	cout << endl;
 	cout << "|Order ID: " << getOrderID() << endl;
 	cout << "|Order Date: " << getOrderDate();
-	cout << "|Status: " << getStatus() << endl << endl;
+	cout << "|Status: " << getStatus() << endl;
+	cout << "|Total Price: $" << getTotalPrice() << endl << endl;
 	cout << " Food ID |                 Food Name | Price ($)" << endl;
 	cout << "------------------------------------------------" << endl;
 	getFoodItemList().print();
@@ -75,14 +80,6 @@ string Order::getStatus()
 			return "Unknown";
 	}
 }
+double Order::getTotalPrice() { return totalPrice; }
 Customer* Order::getCustomer() { return customer; }
 LinkedList_Order Order::getFoodItemList() { return foodItemList; }
-
-double Order::getTotalCartPrice()
-{
-	double totalCartPrice = 0.0;
-	for (int i = 0; i < getFoodItemList().getLength(); i++)
-		totalCartPrice += getFoodItemList().getItem(i).getPrice();
-
-	return totalCartPrice;
-}

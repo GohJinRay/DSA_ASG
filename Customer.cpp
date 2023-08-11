@@ -22,7 +22,7 @@ Order* Customer::createOrder(int orderID)  // create order then add it into orde
 
 	// Create a new Order objects and initialize its foodItemList with an empty list
 	// and add it to the orderList
-	Order* newOrder = new Order(orderID, currTime, NotPrepared, this, LinkedList_Order());
+	Order* newOrder = new Order(orderID, currTime, NotPrepared, 0.0, this, LinkedList_Order());
 	orderList.addOrder(newOrder);
 
 	return newOrder;

@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include "Order.h"
 using namespace std;
 
 enum MembershipStatus
@@ -26,7 +27,7 @@ public:
 	int getCurrentLoyaltyPoints();
 	int getTotalLoyaltyPointsEarned();
 	void addLoyaltyPoints(int);
-	void redeemLoyaltyPoints(int);
+	void redeemLoyaltyPoints(Order&, int);
 	int calculatePointsEarned(double);
 };
 

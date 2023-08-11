@@ -200,7 +200,7 @@ int main()
 
 						// updating the status of incoming orders
 						int orderIdToUpdate;
-						cout << "Enter the Order ID you want to update: ";
+						cout << endl << "Enter the Order ID you want to update: ";
 
 						while (!(cin >> orderIdToUpdate)) {
 							invalidIntegerInput();
@@ -391,7 +391,7 @@ int main()
 											cout << "------------------------------------------------" << endl;
 											order->getFoodItemList().print();
 
-											cout << endl << "Total Price: $" << order->getTotalCartPrice() << endl;
+											cout << endl << "Total Price: $" << order->getTotalPrice() << endl;
 
 											break;
 
@@ -401,7 +401,7 @@ int main()
 											cout << endl << "Order receipt: " << endl;
 											order->printOrder();
 
-											cout << endl << "Total Price: $" << order->getTotalCartPrice() << endl;
+											cout << endl << "Total Price: $" << order->getTotalPrice() << endl;
 
 											break;
 
@@ -453,7 +453,7 @@ int main()
 								{
 									paymentFlag = true;
 									customer->getOrderList().getOrderByIndex(i)->printOrder();
-									totalAmountToPay += customer->getOrderList().getOrderByIndex(i)->getTotalCartPrice();
+									totalAmountToPay += customer->getOrderList().getOrderByIndex(i)->getTotalPrice();
 								}
 							if (paymentFlag == false)
 							{
@@ -461,8 +461,8 @@ int main()
 								break;
 							}
 
-							cout << "Total amount to pay: " << totalAmountToPay << endl;
-							cout << "Enter \"yes\" to confirm your payment or any key to exit. ";
+							cout << endl <<  "Total amount to pay: " << totalAmountToPay << endl;
+							cout << "Enter \"yes\" to confirm your payment or any key to exit: ";
 							cin >> paymentInput;
 
 							if (paymentInput == "yes")

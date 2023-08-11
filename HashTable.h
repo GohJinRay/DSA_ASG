@@ -22,13 +22,13 @@ public:
 	Dictionary();
 	~Dictionary();
 
-	int hash(KeyType key);
+	int hash(KeyType);
 
-	bool add(KeyType newKey, Customer* customer);
-	void remove(KeyType key);
+	bool add(KeyType, Customer*);
+	void remove(KeyType);
 
-	Customer* get(KeyType key);
-	Customer* getCustomerByOrderID(int orderID);
+	Customer* get(KeyType);
+	Customer* getCustomerByOrderID(int);
 
 	bool isEmpty();
 

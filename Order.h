@@ -22,12 +22,13 @@ private:
 	int orderID;
 	string orderDate;
 	OrderStatus status;
+	double totalPrice;
 	Customer* customer;
 	LinkedList_Order foodItemList;
 
 public:
 	Order();
-	Order(int, string, OrderStatus, Customer*, LinkedList_Order);
+	Order(int, string, OrderStatus, double, Customer*, LinkedList_Order);
 
 	bool addFoodItem(FoodItem);
 	bool removeFoodItem(int);
@@ -40,8 +41,7 @@ public:
 	int getOrderID();
 	string getOrderDate();
 	string getStatus();
+	double getTotalPrice();
 	Customer* getCustomer();
 	LinkedList_Order getFoodItemList();
-
-	double getTotalCartPrice();
 };

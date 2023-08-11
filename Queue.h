@@ -19,12 +19,12 @@ public:
 	Queue();
 	~Queue();
 
-	bool enqueue(Order& item);
+	bool enqueue(Order&);
 
 	bool dequeue();
-	bool dequeue(Order& item);
+	bool dequeue(Order&);
 
-	void getFront(Order& item);
+	void getFront(Order&);
 
 	bool isEmpty();
 	

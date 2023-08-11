@@ -104,7 +104,7 @@ bool LinkedList_Order::removeItem(int foodID) // remove food item from linked li
 	return false;
 }
 
-FoodItem LinkedList_Order::getItem(int index) // get fooditem via index
+FoodItem LinkedList_Order::getItemByIndex(int index) // get fooditem via index
 {
 	if (index >= 0 && index < size)
 	{
@@ -117,6 +117,20 @@ FoodItem LinkedList_Order::getItem(int index) // get fooditem via index
 			counter++;
 		}
 		return curr->foodItem;
+	}
+
+	return FoodItem();
+}
+
+FoodItem LinkedList_Order::getItemByFoodID(int foodID) // get fooditem by id
+{
+	Node* curr = firstNode;
+
+	while (curr != NULL)
+	{
+		if (curr->foodItem.getFoodID() == foodID)
+			return curr->foodItem;
+		curr = curr->next;
 	}
 
 	return FoodItem();

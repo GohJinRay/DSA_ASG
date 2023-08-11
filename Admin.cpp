@@ -72,7 +72,7 @@ void Admin::updateStatus(Queue& q, int orderIdToUpdate) // allow admin to update
     Order* linkedOrder = orderList.getOrderByOrderID(targetOrder.getOrderID());
     linkedOrder->setStatus(Prepared);
 
-    cout << "Order ID " << targetOrder.getOrderID() << "'s status changed from " << prevStat << " -> " << targetOrder.getStatus() << " sucessfully!" << endl << endl;
+    cout << endl << "Order ID " << targetOrder.getOrderID() << "'s status changed from " << prevStat << " -> " << targetOrder.getStatus() << " sucessfully!" << endl << endl;
 }
 
 void Admin::viewCustInfo(Dictionary& customerDictionary, int chosenOrderID) // allow admin to view customer info via orderID

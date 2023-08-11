@@ -24,7 +24,7 @@ bool Category::removeFoodItem(int foodID) // remove fooditem via foodID in sorte
 FoodItem Category::getFoodItem(int foodID) {return catArray.search(foodID);} // get fooditem via foodID
 int Category::getCatID() {return catID;}
 string Category::getCatName() {return catName;}
-SortedArray Category::getCatArray() {return catArray;}
+SortedArray& Category::getCatArray() {return catArray;}
 
 void Category::printDetails() // print fooditem details
 {

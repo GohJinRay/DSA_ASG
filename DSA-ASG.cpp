@@ -111,7 +111,8 @@ int main()
 		string price; // string to match regex
 		FoodItem fooditem;
 		SortedArray* selectedArray = nullptr;
-		const regex doubleRegex("^[0-9]+(\\.[0-9]+)?$"); // regular expression for integers and doubles
+		const regex numRegex("^[0-9]+(\\.[0-9]+)?$"); // regular expression for integers and doubles
+		const regex stringRegex("^[A-Za-z\\s]+$"); // regular expression for strings (letters and spaces)
 		//
 
 		int phoneNum;
@@ -119,7 +120,6 @@ int main()
 
 
 		do {
-			cout << endl;
 			cout << "Please select an option:" << endl;
 			cout << "1. Register" << endl;
 			cout << "2. Login" << endl;
@@ -196,10 +196,15 @@ int main()
 					switch (adminChoice1)
 					{
 					case 1: // View the incoming orders
+						cout << endl << endl;
 						admin.viewOrders(newQueue);
 						break;
 
 					case 2: // Update status of the chosen order
+						if (newQueue.isEmpty()) {
+							cout << endl << "No incoming orders." << endl;
+							break;
+						}
 						admin.viewOrders(newQueue); // display all the incoming orders
 
 						// updating the status of incoming orders
@@ -236,40 +241,55 @@ int main()
 
 					case 4: // Create new food item and add to menu
 						int categoryChoice;
-						cout << "Select a category:" << endl;
-						cout << "1. Main Course" << endl;
-						cout << "2. Drinks" << endl;
-						cout << "3. Desserts" << endl;
-						cout << "Enter your choice: ";
+						while (true) {
+							cout << "Select a category:" << endl;
+							cout << "1. Main Course" << endl;
+							cout << "2. Drinks" << endl;
+							cout << "3. Desserts" << endl;
+							cout << "Enter your choice: ";
+
+							if (!(cin >> categoryChoice)) { // error handling
+								invalidIntegerInput();
+							}
+							else {
+								// Clear the input buffer
+								cin.ignore(numeric_limits<streamsize>::max(), '\n');
+								
+								switch (categoryChoice) {
+								case 1:
+									selectedArray = &category1.getCatArray();
+									catName = "Main Course";
+									break;
+								case 2:
+									selectedArray = &category2.getCatArray();
+									catName = "Beverages";
+									break;
+								case 3:
+									selectedArray = &category3.getCatArray();
+									catName = "Desert";
+									break;
+								default:
+									cout << "Invalid choice. Please select a valid Category ID." << endl << endl;
+									continue; // Go back to the beginning of the loop
+								}
+
+								break; // Exit the loop if a valid choice was made
+							}
+						}
+
+						while (true) {
+							cout << "Enter Food ID: ";
+							if (!(cin >> foodID)) { // error handling for non-integer input
+								invalidIntegerInput();
+							}
+							else if (foodID <= 0) {
+								cout << "Please enter a Food ID that is a positive number!" << endl << endl;
+							}
+							else {
+								break;
+							}
+						}
 						
-
-						while (!(cin >> categoryChoice)) { // error handling
-							invalidIntegerInput();
-							cout << "Please enter a Category ID: ";
-						}
-
-
-						switch (categoryChoice) {
-						case 1:
-							selectedArray = &category1.getCatArray();
-							break;
-						case 2:
-							selectedArray = &category2.getCatArray();
-							break;
-						case 3:
-							selectedArray = &category3.getCatArray();
-							break;
-						default:
-							cout << "Invalid choice. Please select a valid Category ID." << endl;
-							break;
-						}
-
-						cout << "Enter Food ID: ";
-
-						while (!(cin >> foodID)) { // error handling
-							invalidIntegerInput();
-							cout << "Please enter a valid Food ID: ";
-						}
 
 						if (selectedArray != nullptr) {
 							fooditem = selectedArray->search(foodID);
@@ -280,14 +300,26 @@ int main()
 
 							do {
 								cout << "Enter Food Name: ";
-								cin >> foodName;
+								cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear input buffer
+								getline(cin, foodName); // Read a full line of input
+
 								for (int i = 0; i < selectedArray->getSize();i++) {
-									if (selectedArray->search(i).getFoodName() == foodName) {
+									if (selectedArray->search(i).getFoodName() == foodName) { // checks for duplicates
 										cout << "Duplicate Food Name found. Please enter a unique Food Name." << endl;
 										foodName = ""; // setting foodName string to empty
 										break;
 									}
 								}
+
+								// checks if its a valid string
+								if (!regex_match(foodName, stringRegex)) { 
+									cout << "Invalid input. Please enter a valid Food Name (letters & spaces only)." << endl;
+									foodName = "";
+								}
+								else {
+									break;
+								}
+									
 
 								if (!foodName.empty()) { // checks if its not empty
 									break;
@@ -298,7 +330,8 @@ int main()
 								cout << "Enter Price: ";
 								cin >> price;
 
-								if (!regex_match(price, doubleRegex)) {
+								// checks for 
+								if (!regex_match(price, numRegex)) {
 									cout << "Price is not a valid number. Please try again." << endl;
 								}
 								else
@@ -310,14 +343,17 @@ int main()
 							// changing it to 2 decimal place
 							ostringstream oss;
 							oss << fixed << setprecision(2) << fPrice;
+
 							
+							cout << endl << "Food Item of Name: " << foodName << " has been added to Category: " << catName << endl;
+							cout << "Updated " << catName << " Menu: " << endl;
 							admin.createNewFoodItem(foodID, foodName, fPrice, *selectedArray);
-
 						}
-					
 						break;
-
 					case 5:
+						cout << endl << "Logging out..." << endl;
+						cout << "Logged out sucessfully!" << endl;
+						cout << "-----------------------------------" << endl;
 						break;
 
 					default:

@@ -1,7 +1,10 @@
 // DSA-ASG.cpp : This file contains the 'main' function. Program execution begins and ends there.
 
 #include <iostream>
+#include <sstream>
+#include <iomanip>
 #include <string>
+#include <regex>
 #include "Admin.h"
 #include "Customer.h"
 #include "User.h"
@@ -105,9 +108,10 @@ int main()
 		// admin case 4
 		string catName, foodName;
 		int foodID;
-		double price;
+		string price; // string to match regex
 		FoodItem fooditem;
 		SortedArray* selectedArray = nullptr;
+		const regex doubleRegex("^[0-9]+(\\.[0-9]+)?$"); // regular expression for integers and doubles
 		//
 
 		int phoneNum;
@@ -237,7 +241,7 @@ int main()
 						cout << "2. Drinks" << endl;
 						cout << "3. Desserts" << endl;
 						cout << "Enter your choice: ";
-
+						
 
 						while (!(cin >> categoryChoice)) { // error handling
 							invalidIntegerInput();
@@ -247,13 +251,13 @@ int main()
 
 						switch (categoryChoice) {
 						case 1:
-							selectedArray = &mainCourseArray;
+							selectedArray = &category1.getCatArray();
 							break;
 						case 2:
-							selectedArray = &drinksArray;
+							selectedArray = &category2.getCatArray();
 							break;
 						case 3:
-							selectedArray = &desertsArray;
+							selectedArray = &category3.getCatArray();
 							break;
 						default:
 							cout << "Invalid choice. Please select a valid Category ID." << endl;
@@ -274,11 +278,41 @@ int main()
 								break;
 							}
 
+							do {
+								cout << "Enter Food Name: ";
+								cin >> foodName;
+								for (int i = 0; i < selectedArray->getSize();i++) {
+									if (selectedArray->search(i).getFoodName() == foodName) {
+										cout << "Duplicate Food Name found. Please enter a unique Food Name." << endl;
+										foodName = ""; // setting foodName string to empty
+										break;
+									}
+								}
 
-							cout << "Enter Price: ";
-							cin >> price;
+								if (!foodName.empty()) { // checks if its not empty
+									break;
+								}
+							} while (true);
 
-							admin.createNewFoodItem(foodID, foodName, price, *selectedArray);
+							do {
+								cout << "Enter Price: ";
+								cin >> price;
+
+								if (!regex_match(price, doubleRegex)) {
+									cout << "Price is not a valid number. Please try again." << endl;
+								}
+								else
+									break;
+							} while (true);
+
+							double fPrice = stod(price); // final price being converted to double;
+
+							// changing it to 2 decimal place
+							ostringstream oss;
+							oss << fixed << setprecision(2) << fPrice;
+							
+							admin.createNewFoodItem(foodID, foodName, fPrice, *selectedArray);
+
 						}
 					
 						break;

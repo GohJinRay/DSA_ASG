@@ -93,5 +93,6 @@ bool Admin::createNewFoodItem(int foodItemID, string foodName, double price, Sor
 {
     FoodItem newFoodItem(foodItemID, foodName, price);
     catArray.insert(newFoodItem);
+    catArray.print();
     return true;
 }

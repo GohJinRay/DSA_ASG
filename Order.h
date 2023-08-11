@@ -10,7 +10,8 @@ const int maxFoodItems = 12;
 enum OrderStatus 
 { 
 	Prepared,
-	NotPrepared
+	NotPrepared,
+	Paid
 };
 
 class Customer;

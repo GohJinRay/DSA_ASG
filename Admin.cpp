@@ -21,7 +21,7 @@ void Admin::viewOrders(Queue& q) // allow admin to view incoming orders
     q.displayItems();
 }
 
-void Admin::updateStatus(Queue& q) // allow admin to update orders in queue
+void Admin::updateStatus(Queue& q, int orderIdToUpdate) // allow admin to update orders in queue
 {
     // check for incoming orders
     if (q.isEmpty()) {
@@ -29,10 +29,6 @@ void Admin::updateStatus(Queue& q) // allow admin to update orders in queue
         return;
     }
     viewOrders(q);
-
-    int orderIdToUpdate;
-    cout << "Enter the Order ID you want to update: ";
-    cin >> orderIdToUpdate;
 
     Queue auxiliaryQueue;
     Order targetOrder;
@@ -79,33 +75,23 @@ void Admin::updateStatus(Queue& q) // allow admin to update orders in queue
     cout << "Order ID " << targetOrder.getOrderID() << "'s status changed from " << prevStat << " -> " << targetOrder.getStatus() << " sucessfully!" << endl << endl;
 }
 
-void Admin::viewCustInfo(Dictionary& customerDictionary) // allow admin to view customer info via orderID
+void Admin::viewCustInfo(Dictionary& customerDictionary, int chosenOrderID) // allow admin to view customer info via orderID
 {   
-    customerDictionary.printAllOrders();
-
-    // Ask the admin to choose an order ID
-    int chosenOrderID;
-    while (true) // error handling
-    {
-        cout << "Enter the Order ID you want to view customer info for: ";
-
-        if (!(cin >> chosenOrderID))
-        {
-            cout << "Invalid input. Please enter a valid Order ID." << endl << endl;
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard invalid input
-        }
-        else
-            break;
-    }
 
     Customer* customer = customerDictionary.getCustomerByOrderID(chosenOrderID);
    
     if (customer != nullptr) {
-        cout << "Customer Information:" << endl;
+        cout << endl << "Customer Information:" << endl;
         customer->printDetails();
     }
     else {
         cout << "Order ID does not exist" << endl;
     }
+}
+
+bool Admin::createNewFoodItem(int foodItemID, string foodName, double price, SortedArray& catArray)
+{
+    FoodItem newFoodItem(foodItemID, foodName, price);
+    catArray.insert(newFoodItem);
+    return true;
 }

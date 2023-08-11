@@ -135,6 +135,7 @@
     <ClCompile Include="HashTable.cpp" />
     <ClCompile Include="LinkedList_Customer.cpp" />
     <ClCompile Include="LinkedList_Order.cpp" />
+    <ClCompile Include="Membership.cpp" />
     <ClCompile Include="Order.cpp" />
     <ClCompile Include="Queue.cpp" />
     <ClCompile Include="SortedArray.cpp" />
@@ -148,6 +149,7 @@
     <ClInclude Include="HashTable.h" />
     <ClInclude Include="LinkedList_Customer.h" />
     <ClInclude Include="LinkedList_Order.h" />
+    <ClInclude Include="Membership.h" />
     <ClInclude Include="Order.h" />
     <ClInclude Include="Queue.h" />
     <ClInclude Include="SortedArray.h" />

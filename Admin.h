@@ -3,6 +3,7 @@
 #include "Queue.h"
 #include "Customer.h"
 #include "HashTable.h"
+#include "SortedArray.h"
 using namespace std;
 
 class Admin: public User
@@ -13,10 +14,12 @@ public:
 
 	void viewOrders(Queue&);
 
-	void updateStatus(Queue&);
+	void updateStatus(Queue&, int);
 
-	void viewCustInfo(Dictionary&);
+	void viewCustInfo(Dictionary&, int);
 
 	virtual void printDetails();
+
+	bool createNewFoodItem(int, string, double, SortedArray&);
 };
 

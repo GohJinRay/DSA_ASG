@@ -68,6 +68,9 @@ string Order::getStatus()
 		case NotPrepared:
 			return "Not Prepared";
 
+		case Paid:
+			return "Paid";
+
 		default:
 			return "Unknown";
 	}

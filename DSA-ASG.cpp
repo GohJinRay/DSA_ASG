@@ -248,15 +248,12 @@ int main()
 						switch (categoryChoice) {
 						case 1:
 							selectedArray = &mainCourseArray;
-							catName = "Main Course";
 							break;
 						case 2:
 							selectedArray = &drinksArray;
-							catName = "Drinks";
 							break;
 						case 3:
 							selectedArray = &desertsArray;
-							catName= "Desserts";
 							break;
 						default:
 							cout << "Invalid choice. Please select a valid Category ID." << endl;

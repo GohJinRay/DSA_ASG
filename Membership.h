@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include "Order.h"
+#include "Category.h"
 using namespace std;
 
 enum MembershipStatus
@@ -27,7 +28,7 @@ public:
 	int getCurrentLoyaltyPoints();
 	int getTotalLoyaltyPointsEarned();
 	void addLoyaltyPoints(int);
-	void redeemLoyaltyPoints(Order&, int);
+	void redeemLoyaltyPoints(Category&, Category&, Category&, Order&, int);
 	int calculatePointsEarned(double);
 };
 

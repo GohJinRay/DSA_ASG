@@ -76,18 +76,18 @@ int main()
 	drinksArray.insert(food8);
 	drinksArray.insert(food9);
 
-	SortedArray desertsArray;
+	SortedArray dessertsArray;
 	FoodItem food10(200, "Chocolate Cake", 5.99);
 	FoodItem food11(201, "Ice Cream", 3.50);
 	FoodItem food12(202, "Mango Sticky Rice", 5.00);
 
-	desertsArray.insert(food10);
-	desertsArray.insert(food11);
-	desertsArray.insert(food12);
+	dessertsArray.insert(food10);
+	dessertsArray.insert(food11);
+	dessertsArray.insert(food12);
 
 	Category category1(1, "Main Course", mainCourseArray);
 	Category category2(2, "Drinks", drinksArray);
-	Category category3(3, "Deserts", desertsArray);
+	Category category3(3, "Desserts", dessertsArray);
 
 	Queue newQueue; //New Queue
 	Dictionary usersInfo; //HashTable to store Customer objects
@@ -292,7 +292,7 @@ int main()
 						
 
 						if (selectedArray != nullptr) {
-							fooditem = selectedArray->search(foodID);
+							fooditem = selectedArray->searchByFoodID(foodID);
 							if (fooditem.getFoodID() != -1) {
 								cout << "Duplicate Food ID. Please enter a unique Food ID." << endl;
 								break;
@@ -300,6 +300,10 @@ int main()
 
 							do {
 								cout << "Enter Food Name: ";
+								cin >> foodName;
+								if (selectedArray->searchByFoodName(foodName).getFoodName() == foodName) {
+									cout << "Duplicate Food Name found. Please enter a unique Food Name." << endl;
+									foodName = ""; // setting foodName string to empty
 								cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear input buffer
 								getline(cin, foodName); // Read a full line of input
 
@@ -429,11 +433,11 @@ int main()
 												invalidIntegerInput();
 
 											if (foodIDOption > 0 && foodIDOption <= category1.getCatArray().getSize())
-												order->addFoodItem(category1.getFoodItem(foodIDOption));
+												order->addFoodItem(category1.getFoodItemByFoodID(foodIDOption));
 											else if (foodIDOption >= 100 && foodIDOption < category2.getCatArray().getSize() + 100)
-												order->addFoodItem(category2.getFoodItem(foodIDOption));
+												order->addFoodItem(category2.getFoodItemByFoodID(foodIDOption));
 											else if (foodIDOption >= 200 && foodIDOption < category3.getCatArray().getSize() + 200)
-												order->addFoodItem(category3.getFoodItem(foodIDOption));
+												order->addFoodItem(category3.getFoodItemByFoodID(foodIDOption));
 											else
 												cout << "Invalid food ID option! Please choose from the menu!" << endl;
 

@@ -21,10 +21,10 @@ bool Category::removeFoodItem(int foodID) // remove fooditem via foodID in sorte
 
 
 // getting methods for retrieving category array attributes
-FoodItem Category::getFoodItem(int foodID) {return catArray.search(foodID);} // get fooditem via foodID
-int Category::getCatID() {return catID;}
-string Category::getCatName() {return catName;}
-SortedArray& Category::getCatArray() {return catArray;}
+FoodItem Category::getFoodItemByFoodID(int foodID) { return catArray.searchByFoodID(foodID); } // get fooditem via foodID
+int Category::getCatID() { return catID; }
+string Category::getCatName() { return catName; }
+SortedArray& Category::getCatArray() { return catArray; }
 
 void Category::printDetails() // print fooditem details
 {

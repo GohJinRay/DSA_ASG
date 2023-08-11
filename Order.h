@@ -37,6 +37,7 @@ public:
 	void setOrderID(int);
 	void setOrderDate(string);
 	void setStatus(OrderStatus);
+	void setTotalPrice(double);
 
 	int getOrderID();
 	string getOrderDate();

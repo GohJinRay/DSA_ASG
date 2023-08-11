@@ -59,6 +59,7 @@ void Order::printOrder() // printing the orders
 void Order::setOrderID(int OrderID) { orderID = OrderID; }
 void Order::setOrderDate(string OrderDate) { orderDate = OrderDate; }
 void Order::setStatus(OrderStatus Status) { status = Status; }
+void Order::setTotalPrice(double TotalPrice) { totalPrice = TotalPrice; }
 
 // getting methods for retrieving order attributes
 int Order::getOrderID() { return orderID; }

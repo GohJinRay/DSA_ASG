@@ -98,20 +98,14 @@ FoodItem SortedArray::searchByFoodID(int foodID) // search the fooditem via thei
 
 FoodItem SortedArray::searchByFoodName(string foodName) // search the fooditem via their food name
 {
-    int left = 0;
-    int right = size - 1;
-    while (left <= right)
-    {
-        int mid = left + (right - left) / 2;
-        if (foodItems[mid].getFoodName() == foodName)
-            return foodItems[mid];
-        if (foodItems[mid].getFoodName()< foodName)
-            left = mid + 1;
-        else
-            right = mid - 1;
+    for (int i = 0; i < size; i++) {
+        if (foodItems[i].getFoodName() == foodName) {
+            return foodItems[i];
+        }
     }
-    return FoodItem(-1, "", -1.0);
+    return FoodItem(-1, "", -1.0); // Not found
 }
+
 
 FoodItem SortedArray::searchByIndex(int index) { // search the fooditem via index
     if (index >= 0 && index < size) {

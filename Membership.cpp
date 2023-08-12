@@ -84,6 +84,39 @@ void Membership::addLoyaltyPoints(double totalPrice)
 		return;
 }
 
+void Membership::redeemOption(Category& category1, Category& category2, Category& category3, Order& order, string& description, int requiredPoints)
+{
+	cout << description << " has been redeemed." << endl;
+
+	if (description.find("discount") != string::npos) {
+		double discountPercentage = 0.0;
+		if (description.find("10%") != string::npos) discountPercentage = 0.1;
+		else if (description.find("20%") != string::npos) discountPercentage = 0.2;
+		else if (description.find("30%") != string::npos) discountPercentage = 0.3;
+
+		order.setTotalPrice(order.getTotalPrice() * (1 - discountPercentage));
+	}
+	else {
+		// Add food item based on description
+		FoodItem foodItem;
+		if (description == "Nasi Lemak (Main Course)") {
+			foodItem = category1.getCatArray().searchByFoodName("Nasi Lemak");
+		}
+		else if (description == "Coca-Cola (Drink)") {
+			foodItem = category2.getCatArray().searchByFoodName("Coca-Cola");
+		}
+		else if (description == "Mango Sticky Rice (Desserts)") {
+			foodItem = category3.getCatArray().searchByFoodName("Mango Sticky Rice");
+		}
+
+		order.addFoodItem(foodItem);
+		order.setTotalPrice(order.getTotalPrice() - foodItem.getPrice());
+	}
+
+	setCurrLoyaltyPoints(getCurrentLoyaltyPoints() - requiredPoints);
+	cout << "Current Loyalty Points: " << getCurrentLoyaltyPoints() << endl;
+}
+
 /*
    Redeem loyalty points for various rewards.
 
@@ -95,111 +128,53 @@ void Membership::addLoyaltyPoints(double totalPrice)
 */
 void Membership::redeemLoyaltyPoints(Category& category1, Category& category2, Category& category3, Order& order)
 {
+	const int MAX_ITEMS = 6;
+
+	string redemptionDescriptions[MAX_ITEMS] = {
+		"10% discount off the order",
+		"20% discount off the order",
+		"30% discount off the order",
+		"Nasi Lemak (Main Course)",
+		"Coca-Cola (Drink)",
+		"Mango Sticky Rice (Desserts)"
+	};
+
+	int redemptionPoints[MAX_ITEMS] = { 50, 90, 130, 25, 15, 25 };
+
 	int option;
 
 	while (true)
 	{
+		cout << endl;
 		cout << "---------- Point redemption ---------- " << endl;
-		cout << "1. 10% discount off the order - 50 points" << endl;
-		cout << "2. 20% discount off the order - 90 points" << endl;
-		cout << "3. 30% discount off the order - 130 points" << endl;
-		cout << "4. Nasi Lemak (Main Course) - 25 points" << endl;
-		cout << "5. Coca-Cola (Drink) - 15 points" << endl;
-		cout << "6. Mango Sticky Rice (Desserts) - 25 points" << endl;
+		for (int i = 0; i < MAX_ITEMS; i++) {
+			cout << i + 1 << ". " << redemptionDescriptions[i] << " - " << redemptionPoints[i] << " points" << endl;
+		}
 		cout << "7. Exit" << endl << endl;
-		cout << "Select option to redeem points (1, 2, 3, 4, 5, 6 or 7): ";
+
+		cout << "Select option to redeem points: ";
 		cin >> option;
 
-		bool flag = false;
-
-		if (option == 1)
-			if (getCurrentLoyaltyPoints() >= 50)
-			{
-				order.setTotalPrice(order.getTotalPrice() * (1 - 0.1));
-				cout << "10% discount applied to the order." << endl;
-				setCurrLoyaltyPoints(getCurrentLoyaltyPoints() - 50);
-				cout << "Current Loyalty Points: " << getCurrentLoyaltyPoints() << endl;
-				break;
-			}
-			else
-				flag = true;
-
-		else if (option == 2)
-			if (getCurrentLoyaltyPoints() >= 90)
-			{
-				order.setTotalPrice(order.getTotalPrice() * (1 - 0.2));
-				cout << "20% discount applied to the order." << endl;
-				setCurrLoyaltyPoints(getCurrentLoyaltyPoints() - 90);
-				cout << "Current Loyalty Points: " << getCurrentLoyaltyPoints() << endl;
-				break;
-			}
-			else
-				flag = true;
-
-		else if (option == 3)
-			if (getCurrentLoyaltyPoints() >= 130)
-			{
-				order.setTotalPrice(order.getTotalPrice() * (1 - 0.3));
-				cout << "30% discount applied to the order." << endl;
-				setCurrLoyaltyPoints(getCurrentLoyaltyPoints() - 130);
-				cout << "Current Loyalty Points: " << getCurrentLoyaltyPoints() << endl;
-				break;
-			}
-			else
-				flag = true;
-
-		else if (option == 4)
-			if (getCurrentLoyaltyPoints() >= 25)
-			{
-				order.addFoodItem(category1.getCatArray().searchByFoodName("Nasi Lemak"));
-				cout << "Nasi Lemak (Main course) has been added to the order." << endl;
-				setCurrLoyaltyPoints(getCurrentLoyaltyPoints() - 25);
-				order.setTotalPrice(order.getTotalPrice() - category1.getCatArray().searchByFoodName("Nasi Lemak").getPrice());
-				cout << "Current Loyalty Points: " << getCurrentLoyaltyPoints() << endl;
-				break;
-			}
-			else
-				flag = true;
-
-		else if (option == 5)
-			if (getCurrentLoyaltyPoints() >= 15)
-			{
-				order.addFoodItem(category2.getCatArray().searchByFoodName("Coca-Cola"));
-				cout << "Coca-Cola (Drink) has been added to the order." << endl;
-				setCurrLoyaltyPoints(getCurrentLoyaltyPoints() - 15);
-				order.setTotalPrice(order.getTotalPrice() - category1.getCatArray().searchByFoodName("Coca-Cola").getPrice());
-				cout << "Current Loyalty Points: " << getCurrentLoyaltyPoints() << endl;
-				break;
-			}
-			else
-				flag = true;
-
-		else if (option == 6)
-			if (getCurrentLoyaltyPoints() >= 25)
-			{
-				order.addFoodItem(category3.getCatArray().searchByFoodName("Mango Sticky Rice"));
-				cout << "Mango Sticky Rice (Dessert) has been added to the order." << endl;
-				setCurrLoyaltyPoints(getCurrentLoyaltyPoints() - 25);
-				order.setTotalPrice(order.getTotalPrice() - category1.getCatArray().searchByFoodName("Mango Sticky Rice").getPrice());
-				cout << "Current Loyalty Points: " << getCurrentLoyaltyPoints() << endl;
-				break;
-			}
-			else
-				flag = true;
-
-		else if (option == 7)
-			break;
-
-		else
+		if (option >= 1 && option <= MAX_ITEMS)
 		{
-			cout << "Invalid Option selected." << endl << endl;
-			cin.clear(); // Clear error state
-			cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear input buffer
+			int requiredPoints = redemptionPoints[option - 1];
+			string description = redemptionDescriptions[option - 1];
+
+			if (getCurrentLoyaltyPoints() >= requiredPoints) {
+				redeemOption(category1, category2, category3, order, description, requiredPoints);
+				break;
+			}
+			else {
+				cout << "Insufficient loyalty points for this redemption." << endl << endl;
+			}
 		}
-
-		if (flag == true)
-		{
-			cout << "Insufficient loyalty points for this redemption." << endl << endl;
+		else if (option == MAX_ITEMS + 1) { // Exit option
+			return;
+		}
+		else {
+			cout << "Invalid Option selected." << endl << endl;
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		}
 	}
 }

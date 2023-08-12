@@ -5,6 +5,7 @@
 #include "Category.h"
 using namespace std;
 
+// Enumeration representing different membership status levels.
 enum MembershipStatus
 {
 	Bronze,
@@ -30,6 +31,7 @@ public:
 	int getCurrentLoyaltyPoints();
 	int getTotalLoyaltyPointsEarned();
 	void addLoyaltyPoints(double);
+	void redeemOption(Category&, Category&, Category&, Order&, string&, int);
 	void redeemLoyaltyPoints(Category&, Category&, Category&, Order&);
 	int calculatePointsEarned(double);
 	void printMembership();

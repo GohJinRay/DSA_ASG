@@ -5,8 +5,7 @@
 #include "FoodItem.h"
 using namespace std;
 
-const int maxFoodItems = 12;
-
+// Enumeration representing different order status values.
 enum OrderStatus 
 { 
 	Prepared,

@@ -551,7 +551,7 @@ int main()
 												cout << endl << "Your cart is empty!" << endl;
 												break;
 											}
-											cout << "You have " << customer->getMembership().getCurrentLoyaltyPoints() << " points currently." << endl;
+											cout << endl << "You have " << customer->getMembership().getCurrentLoyaltyPoints() << " points currently." << endl;
 											cout << "Do you want to redeem your loyalty points? Enter \"yes\" to reedeem or any key to exit: ";
 											cin >> response;
 											if (response == "yes")

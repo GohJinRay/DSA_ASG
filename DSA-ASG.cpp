@@ -261,15 +261,15 @@ int main()
 									selectedArray = &category2.getCatArray();
 									catName = category2.getCatName();
 									selectedArray->print();
-									minID = 99;
-									maxID = 200;
+									minID = 100;
+									maxID = 199;
 									break;
 								case 3:
 									selectedArray = &category3.getCatArray();
 									catName = category3.getCatName();
 									selectedArray->print();
-									minID = 199;
-									maxID = 300;
+									minID = 200;
+									maxID = 299;
 									break;
 								default:
 									cout << "Invalid choice. Please select a valid Category ID." << endl << endl;

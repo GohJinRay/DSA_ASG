@@ -110,7 +110,7 @@ int main()
 
 		// admin case 4
 		string catName, foodName;
-		int foodID, filterOption; // filter option for admins to decide if they want to filter or not
+		int foodID, maxID, filterOption; // filter option for admins to decide if they want to filter or not, maxID for each cat
 		string price, filterString; // string price to match regex, filterstring to get what admin wants to filter
 		bool foundMatch; // to keep track if there is any matches, for searching/filtering
 		FoodItem fooditem;
@@ -274,16 +274,19 @@ int main()
 									selectedArray = &category1.getCatArray();
 									catName = "Main Course";
 									selectedArray->print();
+									maxID = 99;
 									break;
 								case 2:
 									selectedArray = &category2.getCatArray();
 									catName = "Beverages";
 									selectedArray->print();
+									maxID = 200;
 									break;
 								case 3:
 									selectedArray = &category3.getCatArray();
 									catName = "Desert";
 									selectedArray->print();
+									maxID = 300;
 									break;
 								default:
 									cout << "Invalid choice. Please select a valid Category ID." << endl << endl;
@@ -363,17 +366,23 @@ int main()
 						while (true) {
 							cout << "Enter Food ID: ";
 							if (cin >> foodID) {
-								if (foodID <= 0) { // ensure its a positive foodID
-									cout << "Please enter a Food ID that is a positive number!" << endl << endl; 
+								if (foodID <= 0 || foodID > maxID) { // ensure its a positive foodID
+									cout << "Please enter a valid Food ID!" << endl << endl; 
+									cin.ignore();
 								}
 								else if (selectedArray != nullptr) { // checks for duplicates
 									fooditem = selectedArray->searchByFoodID(foodID);
 									if (fooditem.getFoodID() != -1) {
 										cout << "Duplicate Food ID. Please enter a unique Food ID." << endl; 
+										cin.ignore();
 									}
 									else {
 										break;
 									}
+								}
+								else {
+									cin.ignore();
+									cin.clear();
 								}
 							}
 							else {
@@ -386,18 +395,20 @@ int main()
 							// do while loop
 							do {
 								cout << "Enter Food Name: ";
-								cin.ignore(); // Clear the newline character and any remaining input
+								foodName.clear();
 								getline(cin, foodName); // Read a full line of input
 
 								// checks if its a valid string
 								if (!regex_match(foodName, stringRegex)) {
 									cout << "Invalid input. Please enter a valid Food Name (letters & spaces only)." << endl; // only accept more than 1 character
 									foodName.clear();
+									cin.ignore();
 								}
 
 								else if (selectedArray->searchByFoodName(foodName).getFoodID() != -1) { // checks for duplicate foodName via foodID
 									cout << "Duplicate Food Name found. Please enter a unique Food Name." << endl;
 									foodName.clear();
+									cin.ignore();
 								}
 								else {
 									break;

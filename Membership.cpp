@@ -1,7 +1,16 @@
 #include "Membership.h"
 
+// Default constructor for Membership class
 Membership::Membership() { }
 
+/*
+   Constructor to initialize Membership attributes with provided values.
+
+   Input Parameters:
+   - MembershipStatus: The membership status (Bronze, Silver, Gold).
+   - CurrLoyaltyPoints: The current loyalty points of the member.
+   - TotalLoyaltyPointsEarned: The total loyalty points earned by the member.
+*/
 Membership::Membership(MembershipStatus MembershipStatus, int CurrLoyaltyPoints, int TotalLoyaltyPointsEarned)
 {
 	membershipStatus = MembershipStatus;
@@ -9,12 +18,16 @@ Membership::Membership(MembershipStatus MembershipStatus, int CurrLoyaltyPoints,
 	totalLoyaltyPointsEarned = TotalLoyaltyPointsEarned;
 }
 
+// Set the membership status of the member.
 void Membership::setMembershipStatus(MembershipStatus MembershipStatus) { membershipStatus = MembershipStatus; }
 
+// Set the current loyalty points of the member.
 void Membership::setCurrLoyaltyPoints(int LoyaltyPoints) { currLoyaltyPoints = LoyaltyPoints; }
 
+// Set the total loyalty points earned by the member.
 void Membership::setTotalLoyaltyPointsEarned(int LoyaltyPoints) { totalLoyaltyPointsEarned = LoyaltyPoints; }
 
+// Retrieve the membership status as a string representation.
 string Membership::getMembershipStatus()
 {
 	switch (membershipStatus)
@@ -33,16 +46,28 @@ string Membership::getMembershipStatus()
 	}
 }
 
+// Retrieve the current loyalty points of the member.
 int Membership::getCurrentLoyaltyPoints() { return currLoyaltyPoints; }
 
+// Retrieve the total loyalty points earned by the member.
 int Membership::getTotalLoyaltyPointsEarned() { return totalLoyaltyPointsEarned; }
 
+/*
+   Add loyalty points based on the total price of an order.
+
+   Input Parameters:
+   - totalPrice: The total price of an order.
+*/
 void Membership::addLoyaltyPoints(double totalPrice)
 {
+	// Calculate points earned based on membership status
 	int pointsEarned = calculatePointsEarned(totalPrice);
+
+	// Update current and total loyalty points earned
 	setCurrLoyaltyPoints(pointsEarned + getCurrentLoyaltyPoints());
 	setTotalLoyaltyPointsEarned(pointsEarned + getTotalLoyaltyPointsEarned());
 
+	// Check for membership status upgrade
 	if (getTotalLoyaltyPointsEarned() >= 1000 && getMembershipStatus() == "Silver")
 	{
 		setMembershipStatus(Gold);
@@ -59,6 +84,15 @@ void Membership::addLoyaltyPoints(double totalPrice)
 		return;
 }
 
+/*
+   Redeem loyalty points for various rewards.
+
+   Input Parameters:
+   - category1: The first category of food items.
+   - category2: The second category of food items.
+   - category3: The third category of food items.
+   - order: The order for which points are being redeemed.
+*/
 void Membership::redeemLoyaltyPoints(Category& category1, Category& category2, Category& category3, Order& order)
 {
 	int option;
@@ -170,6 +204,15 @@ void Membership::redeemLoyaltyPoints(Category& category1, Category& category2, C
 	}
 }
 
+/*
+   Calculate points earned based on the total price of an order.
+
+   Input Parameters:
+   - totalPrice: The total price of an order.
+
+   Return Value:
+   The points earned based on the total price and membership status.
+*/
 int Membership::calculatePointsEarned(double totalPrice)
 {
 	int pointsEarned;
@@ -184,6 +227,8 @@ int Membership::calculatePointsEarned(double totalPrice)
 	return pointsEarned;
 }
 
+
+// Print the details of the membership status and loyalty points.
 void Membership::printMembership()
 {
 	cout << "Membership Status: " << getMembershipStatus() << endl;

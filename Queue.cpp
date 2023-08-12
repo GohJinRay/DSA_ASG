@@ -88,6 +88,7 @@ void Queue::getFront(Order& orderItem)
 
 	else
 	{
+		// If the queue is empty, set a default Order object with an ID of -1
 		orderItem.setOrderID(-1);
 	}
 }

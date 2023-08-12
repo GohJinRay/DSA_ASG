@@ -372,21 +372,22 @@ int main()
 						// checks for Food ID duplicates
 						if (selectedArray != nullptr) { // ensure select array contains something
 							// do while loop
+							cin.ignore(numeric_limits<streamsize>::max(), '\n');
 							do {
 								cout << "Enter Food Name: ";
-								cin.ignore();
 								getline(cin, foodName); // Read a full line of input
 
 								// checks if its a valid string
-								if (!regex_match(foodName, stringRegex)) {
-									cout << "Invalid input. Please enter a valid Food Name (letters & spaces only)." << endl; // only accept more than 1 character
-									foodName.clear();
+								if (selectedArray->searchByFoodName(foodName).getFoodID() != -1) { // checks for duplicate foodName 
+									cout << "Duplicate Food Name found. Please enter a unique Food Name." << endl;
+									cin.clear();
 								}
 
-								else if (selectedArray->searchByFoodName(foodName).getFoodID() != -1) { // checks for duplicate foodName 
-									cout << "Duplicate Food Name found. Please enter a unique Food Name." << endl;
-									foodName.clear();
+								else if (!regex_match(foodName, stringRegex)) {
+									cout << "Invalid input. Please enter a valid Food Name (letters & spaces only)." << endl; // only accept more than 1 character
+									cin.clear();
 								}
+
 								else {
 									break;
 								}

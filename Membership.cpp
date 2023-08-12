@@ -84,6 +84,20 @@ void Membership::addLoyaltyPoints(double totalPrice)
 		return;
 }
 
+/*
+	Redeem a loyalty points option based on the provided description.
+
+	This function handles the process of redeeming loyalty points for various options,
+	such as discounts or specific food items, based on the provided description.
+
+	Parameters:
+	- category1: The first category of food items.
+	- category2: The second category of food items.
+	- category3: The third category of food items.
+	- order: The order for which points are being redeemed.
+	- description: The description of the redemption option.
+	- requiredPoints: The number of loyalty points required for the redemption.
+*/
 void Membership::redeemOption(Category& category1, Category& category2, Category& category3, Order& order, string& description, int requiredPoints)
 {
 	cout << description << " has been redeemed." << endl;

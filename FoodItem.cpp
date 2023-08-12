@@ -1,15 +1,28 @@
 #include "FoodItem.h"
 
-FoodItem::FoodItem() { } // Default constructor
+// Default constructor for FoodItem class
+FoodItem::FoodItem() { } 
 
-FoodItem::FoodItem(int FoodID, string FoodName, double Price) // Initialize the food item with the given FoodID, FoodName, and Price
+/*
+   Initialize the food item with the given FoodID, FoodName, and Price.
+
+   Input Parameters:
+   - FoodID: The unique identifier for the food item.
+   - FoodName: The name of the food item.
+   - Price: The price of the food item.
+*/
+FoodItem::FoodItem(int FoodID, string FoodName, double Price) 
 {
 	foodID = FoodID;
 	foodName = FoodName;
 	price = Price;
 }
 
-void FoodItem::printFoodItem() // print the fooditem with format
+/*
+   Print the food item with a formatted display.
+   The output format: "FoodID |       FoodName        | $Price"
+*/
+void FoodItem::printFoodItem() 
 {
 	cout.width(8);
 	cout << getFoodID();
@@ -22,12 +35,50 @@ void FoodItem::printFoodItem() // print the fooditem with format
 	cout << getPrice() << endl;
 }
 
-// setting methods that modify fooditem attributes
+/*
+   Modify the food item's FoodID.
+
+   Input Parameters:
+   - FoodID: The new FoodID value to set.
+*/
 void FoodItem::setFoodID(int FoodID) { foodID = FoodID; }
+
+/*
+   Modify the food item's FoodName.
+
+   Input Parameters:
+   - FoodName: The new FoodName value to set.
+*/
 void FoodItem::setFoodName(string FoodName) { foodName = FoodName; }
+
+/*
+   Modify the food item's Price.
+
+   Input Parameters:
+   - Price: The new Price value to set.
+*/
 void FoodItem::setPrice(double Price) { price = Price; }
 
-// getting methods for retrieving fooditem attributes
+/*
+   Retrieve the food item's FoodID.
+
+   Return Value:
+   The FoodID of the food item.
+*/
 int FoodItem::getFoodID() { return foodID; }
+
+/*
+   Retrieve the food item's FoodName.
+
+   Return Value:
+   The FoodName of the food item.
+*/
 string FoodItem::getFoodName() { return foodName; }
+
+/*
+   Retrieve the food item's Price.
+
+   Return Value:
+   The Price of the food item.
+*/
 double FoodItem::getPrice() { return price; }

@@ -14,6 +14,8 @@ public:
 
     bool insert(FoodItem);
 
+    void mergeSort();
+
     FoodItem searchByFoodID(int);
 
     FoodItem searchByFoodName(string);

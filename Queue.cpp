@@ -1,7 +1,9 @@
 #include "Queue.h"
 
+// Default constructor for Queue class
 Queue::Queue() { };
 
+// Destructor for Queue class
 Queue::~Queue()
 {
 	while (!isEmpty())
@@ -10,6 +12,15 @@ Queue::~Queue()
 	}
 }
 
+/*
+   Enqueue an order item to the back of the queue.
+
+   Input Parameters:
+   - orderItem: The Order object to be enqueued.
+
+   Return Value:
+   Returns true after successfully enqueuing the order item.
+*/
 bool Queue::enqueue(Order& orderItem)
 {
 	Node* newNode = new Node;
@@ -30,6 +41,13 @@ bool Queue::enqueue(Order& orderItem)
 	return true;
 }
 
+/*
+   Dequeue an order item from the front of the queue.
+
+   Return Value:
+   Returns true after successfully dequeuing an order item.
+   Returns false if the queue is empty.
+*/
 bool Queue::dequeue()
 {
 	if (isEmpty())
@@ -57,6 +75,12 @@ bool Queue::dequeue()
 	return true;
 }
 
+/*
+   Retrieve the order item at the front of the queue without dequeuing it.
+
+   Input/Output Parameters:
+   - orderItem: A reference to an Order object to store the front order item.
+*/
 void Queue::getFront(Order& orderItem) 
 {
 	if (!isEmpty())
@@ -68,11 +92,21 @@ void Queue::getFront(Order& orderItem)
 	}
 }
 
+/*
+   Check if the queue is empty.
+
+   Return Value:
+   Returns true if the queue is empty, otherwise false.
+*/
 bool Queue::isEmpty()
 {
 	return (frontNode == NULL);
 }
 
+/*
+   Display the details of all order items in the queue.
+   Calls the printOrder() function for each order item to print the fooditems in the order too.
+*/
 void Queue::displayItems() 
 {
 	if (isEmpty())

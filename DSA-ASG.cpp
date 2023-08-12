@@ -165,25 +165,26 @@ int main()
 					break;
 			} while (true);
 
-			newCustomer = new Customer(username, password, phoneNum, orderList);
-			usersInfo.add(username, newCustomer);
+			newCustomer = new Customer(username, password, phoneNum, orderList); // creation of Customer object
+			usersInfo.add(username, newCustomer); // adding Customer object to Dictionary
 			cout << endl << "Registration complete! Please log in to your account to contiune using the services!" << endl;
-
 			break;
 
+
 		case 2: // login as customer or admin;
-			cout << "Please enter your username: ";
+			cout << "Please enter your username: "; // get user input username
 			cin >> username;
 
-			cout << "Please enter your password: ";
+			cout << "Please enter your password: "; // get user input password
 			cin >> password;
 
-			if (username == admin.getUserName() && password == admin.getPassword()) // Admin login
+			if (username == admin.getUserName() && password == admin.getPassword()) // Admin login //
 			{
 				int adminChoice1;
 				cout << endl << "Login successful. Welcome, Admin!" << endl;
 				do
 				{
+					// Menu for Admin
 					cout << endl;
 					cout << "Please select an option:" << endl;
 					cout << "1. View the incoming orders" << endl;
@@ -236,11 +237,15 @@ int main()
 						int orderIdToView;
 						cout << endl << "Enter the Order ID to view customer information: ";
 						
-						while (!(cin >> orderIdToView)) { // error handling
-							invalidIntegerInput();
-							cout << "Please enter a valid Order ID: ";
+						while (!(cin >> orderIdToView) || orderIdToView < 0) { // error handling
+							if (!cin) {
+								invalidIntegerInput();
+								cout << "Please enter a valid Order ID: ";
+							}
+							else {
+								cout << "Please enter a valid non-negative Order ID: ";
+							}
 						}
-
 						admin.viewCustInfo(usersInfo, orderIdToView);
 						break;
 
@@ -347,17 +352,17 @@ int main()
 							}
 						}
 						
-
+						// error handling for Food ID
 						while (true) {
 							cout << "Enter Food ID: ";
 							if (cin >> foodID) {
-								if (foodID <= 0) {
-									cout << "Please enter a Food ID that is a positive number!" << endl << endl;
+								if (foodID <= 0) { // ensure its a positive foodID
+									cout << "Please enter a Food ID that is a positive number!" << endl << endl; 
 								}
-								else if (selectedArray != nullptr) {
+								else if (selectedArray != nullptr) { // checks for duplicates
 									fooditem = selectedArray->searchByFoodID(foodID);
 									if (fooditem.getFoodID() != -1) {
-										cout << "Duplicate Food ID. Please enter a unique Food ID." << endl;
+										cout << "Duplicate Food ID. Please enter a unique Food ID." << endl; 
 									}
 									else {
 										break;
@@ -383,7 +388,7 @@ int main()
 									foodName.clear();
 								}
 
-								else if (selectedArray->searchByFoodName(foodName).getFoodID() != -1) {
+								else if (selectedArray->searchByFoodName(foodName).getFoodID() != -1) { // checks for duplicate foodName via foodID
 									cout << "Duplicate Food Name found. Please enter a unique Food Name." << endl;
 									foodName.clear();
 								}
@@ -396,7 +401,7 @@ int main()
 								cout << "Enter Price: ";
 								cin >> price;
 
-								// checks for 
+								// checks to see if its a valid integer/double
 								if (!regex_match(price, numRegex)) {
 									cout << "Price is not a valid number. Please try again." << endl;
 								}
@@ -413,17 +418,20 @@ int main()
 							
 							cout << endl << "Food Item of Name: " << foodName << " has been added to Category: " << catName << endl;
 							cout << "Updated " << catName << " Menu: " << endl;
-							admin.createNewFoodItem(foodID, foodName, fPrice, *selectedArray);
+							admin.createNewFoodItem(foodID, foodName, fPrice, *selectedArray); // creating new fooditem and adding it into the selected array
 						}
 						else {
 							cout << "Array is empty" << endl;
 						}
 						break;
-					case 5:
+
+
+					case 5: // log out
 						cout << endl << "Logging out..." << endl;
 						cout << "Logged out sucessfully!" << endl;
 						cout << "-----------------------------------" << endl;
 						break;
+
 
 					default:
 						invalidIntegerInput();

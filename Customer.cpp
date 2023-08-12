@@ -12,6 +12,7 @@ Customer::Customer(string UserName, string Password, int PhoneNum, Membership Me
 void Customer::printDetails() // print customer details
 {
 	User::printDetails();
+	membership.printMembership();
 }
 
 Order* Customer::createOrder(int orderID)  // create order then add it into order linkedlist 
@@ -65,6 +66,8 @@ bool Customer::cancelOrder(Queue& queue, int orderID) // cancel the order
 
 	return foundOrder;
 }
+
+Membership& Customer::getMembership() { return membership; }
 
 LinkedList_Customer& Customer::getOrderList() // get the customer order linkedlist
 {

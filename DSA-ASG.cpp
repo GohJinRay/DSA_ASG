@@ -125,6 +125,7 @@ int main()
 
 
 		do {
+			cout << endl;
 			cout << "Please select an option:" << endl;
 			cout << "1. Register" << endl;
 			cout << "2. Login" << endl;
@@ -230,7 +231,7 @@ int main()
 							usersInfo.printAllOrders(); // print all the orders in customer dictionary
 						}
 						else {
-							cout << "No Customer/Orders in this Dictionary" << endl << endl;
+							cout << endl << "No Customer/Orders in this Dictionary" << endl;
 							break;
 						}
 
@@ -265,26 +266,22 @@ int main()
 								case 1:
 									selectedArray = &category1.getCatArray();
 									catName = "Main Course";
-
 									selectedArray->print();
 									break;
 								case 2:
 									selectedArray = &category2.getCatArray();
 									catName = "Beverages";
-
 									selectedArray->print();
 									break;
 								case 3:
 									selectedArray = &category3.getCatArray();
 									catName = "Desert";
-
 									selectedArray->print();
 									break;
 								default:
 									cout << "Invalid choice. Please select a valid Category ID." << endl << endl;
 									continue; // Go back to the beginning of the loop
 								}
-
 								break; // Exit the loop if a valid choice was made
 							}
 						}
@@ -302,10 +299,10 @@ int main()
 									cout << "Enter Food Name to filter or type 'exit' to go exit: ";
 									cin >> filterString;
 
-									if (!regex_match(filterString, stringRegex)) {
+									if (!regex_match(filterString, stringRegex)) { // checks if it contain letters and spacing only
 										cout << "Invalid input. Please enter a valid Food Name (letters & spaces only)." << endl;
 									}
-									if (filterString == "exit") {
+									if (filterString == "exit") { // to exiting the search
 										break;
 									}
 									else {
@@ -319,7 +316,6 @@ int main()
 											if (foodName.find(filterString) != string::npos) {
 												selectedArray->searchByIndex(i).printFoodItem();
 												foundMatch = true;
-												cout << "test";
 											}
 										}
 										if (!foundMatch) {
@@ -451,6 +447,7 @@ int main()
 
 				if (customer->getPassword() == password) // User login
 				{
+					bool unpaidOrdersExist = false;
 					int userChoice1;
 					cout << endl << "Login successful. Welcome " << username << "!" << endl;
 					do
@@ -468,7 +465,8 @@ int main()
 
 						double totalAmountToPay = 0.0;
 						string paymentInput;
-						bool paymentFlag = false;
+						bool case2Flag = false;
+						bool case4Flag = false;
 
 						switch (userChoice1)
 						{
@@ -489,6 +487,7 @@ int main()
 								{
 									order = customer->createOrder(orderID);
 									
+									bool case1_4Flag = false;
 									int userChoice2;
 
 									do {
@@ -523,6 +522,11 @@ int main()
 											break;
 
 										case 2: // Remove Food Item
+											if (order->getFoodItemList().isEmpty())
+											{
+												cout << endl << "Your cart is empty!" << endl;
+												break;
+											}
 											cout << endl << "Enter the foodID to remove from cart: ";
 											if (!(cin >> foodIDOption))
 											{
@@ -549,26 +553,36 @@ int main()
 											break;
 
 										case 4: // Submit Order
+											if (order->getFoodItemList().isEmpty())
+											{
+												cout << endl << "Your cart is empty!" << endl;
+												break;
+											}
+											cout << "You have " << customer->getMembership().getCurrentLoyaltyPoints() << " points currently." << endl;
+											cout << "Do you want to redeem your loyalty points? Enter \"yes\" to reedeem or any key to exit: ";
+											cin >> response;
+											if (response == "yes")
+												customer->getMembership().redeemLoyaltyPoints(category1, category2, category3, *order);
+
 											newQueue.enqueue(*order);
 											orderID++;
 											cout << endl << "Order receipt: " << endl;
 											order->printOrder();
-
-											cout << endl << "Total Price: $" << order->getTotalPrice() << endl;
+											case1_4Flag = true;
 
 											break;
 
 										default:
 											invalidIntegerInput();
 										}
-									} while (userChoice2 != 4);
+									} while (userChoice2 != 4 || case1_4Flag == false);
 									
 									break;
 								}
 								else if (response == "no")
 									break;
 								else
-									cout << "Invalid response. Please enter \"yes\" or \"no\"." << endl << endl;
+									cout << "Invalid response. Please enter \"yes\" or \"no\"." << endl;
 									
 							} while (true);
 
@@ -578,8 +592,16 @@ int main()
 							int cancelOrder_OrderID;
 							for (int i = 0; i < customer->getOrderList().orderListGetLength(); i++)
 								if (customer->getOrderList().getOrderByIndex(i)->getStatus() == "Not Prepared")
+								{
 									customer->getOrderList().getOrderByIndex(i)->printOrder();
-
+									case2Flag = true;
+								}
+							if (case2Flag == false)
+							{
+								cout << endl << "You have no orders to cancel!" << endl;
+								break;
+							}
+									
 							cout << "Enter the Order ID to cancel it: ";
 							if (!(cin >> cancelOrder_OrderID))
 							{
@@ -597,6 +619,11 @@ int main()
 							break;
 
 						case 3: // View all orders
+							if (customer->getOrderList().orderListIsEmpty())
+							{
+								cout << endl << "You have no orders!" << endl;
+								break;
+							}
 							customer->getOrderList().orderListPrint();
 							break;
 
@@ -604,13 +631,13 @@ int main()
 							for (int i = 0; i < customer->getOrderList().orderListGetLength(); i++)
 								if (customer->getOrderList().getOrderByIndex(i)->getStatus() == "Prepared")
 								{
-									paymentFlag = true;
+									case4Flag = true;
 									customer->getOrderList().getOrderByIndex(i)->printOrder();
 									totalAmountToPay += customer->getOrderList().getOrderByIndex(i)->getTotalPrice();
 								}
-							if (paymentFlag == false)
+							if (case4Flag == false)
 							{
-								cout << "No orders to pay!" << endl;
+								cout << endl << "No orders to pay!" << endl;
 								break;
 							}
 
@@ -620,26 +647,38 @@ int main()
 
 							if (paymentInput == "yes")
 							{
+								customer->getMembership().addLoyaltyPoints(totalAmountToPay);
 								for (int i = 0; i < customer->getOrderList().orderListGetLength(); i++)
 									if (customer->getOrderList().getOrderByIndex(i)->getStatus() == "Prepared")
 									{
 										customer->getOrderList().getOrderByIndex(i)->setStatus(Paid);
 									}
 								cout << endl << "Payment successful!" << endl;
+								unpaidOrdersExist = false;
+								customer->getMembership().printMembership();
 							}
 
 							break;
 
 						case 5:
+							for (int i = 0; i < customer->getOrderList().orderListGetLength(); i++) {
+								if (customer->getOrderList().getOrderByIndex(i)->getStatus() == "Prepared") {
+									unpaidOrdersExist = true;
+									break; // No need to continue checking if one unpaid order is found
+								}
+							}
+							if (unpaidOrdersExist) {
+								cout << "You have unpaid orders. You cannot log out until all orders are paid." << endl;
+							}
 							break;
 
 						default:
 							invalidIntegerInput();
 						}
-					} while (userChoice1 != 5);
+					} while (userChoice1 != 5 || unpaidOrdersExist);
 				}
 				else
-					cout << "Invalid password. Login failed." << endl;
+					cout << "Invalid password. Login failed." << endl << endl;
 			}
 
 			else

@@ -380,10 +380,6 @@ int main()
 										break;
 									}
 								}
-								else {
-									cin.ignore();
-									cin.clear();
-								}
 							}
 							else {
 								invalidIntegerInput();
@@ -395,20 +391,18 @@ int main()
 							// do while loop
 							do {
 								cout << "Enter Food Name: ";
-								foodName.clear();
+								cin.ignore();
 								getline(cin, foodName); // Read a full line of input
 
 								// checks if its a valid string
 								if (!regex_match(foodName, stringRegex)) {
 									cout << "Invalid input. Please enter a valid Food Name (letters & spaces only)." << endl; // only accept more than 1 character
 									foodName.clear();
-									cin.ignore();
 								}
 
 								else if (selectedArray->searchByFoodName(foodName).getFoodID() != -1) { // checks for duplicate foodName via foodID
 									cout << "Duplicate Food Name found. Please enter a unique Food Name." << endl;
 									foodName.clear();
-									cin.ignore();
 								}
 								else {
 									break;

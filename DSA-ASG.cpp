@@ -257,6 +257,8 @@ int main()
 					case 4: // Create new food item and add to menu
 						int categoryChoice;
 						while (true) {
+
+							// Menu
 							cout << "Select a category:" << endl;
 							cout << "1. Main Course" << endl;
 							cout << "2. Drinks" << endl;
@@ -291,7 +293,9 @@ int main()
 							}
 						}
 
-						while (true) { // filtering if admin wants to. e.g. if admin enter chic, everything with foodname with c h i c in them will come out
+						while (true) { // filtering if admin wants to. 
+							// e.g. if admin enter chic, everything with foodname with c h i c in them will come out
+
 							cout << "Do you want to filter? (1 for yes) (2 for no): ";
 							cin >> filterOption;
 
@@ -314,7 +318,6 @@ int main()
 										break;
 									}
 									else {
-
 										transform(filterString.begin(), filterString.end(), filterString.begin(), ::tolower); // changing input to lowercase
 										for (int i = 0; i < selectedArray->getSize(); i++) {
 											foodName = selectedArray->searchByIndex(i).getFoodName();

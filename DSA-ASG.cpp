@@ -272,19 +272,19 @@ int main()
 								switch (categoryChoice) {
 								case 1:
 									selectedArray = &category1.getCatArray();
-									catName = "Main Course";
+									catName = category1.getCatName();
 									selectedArray->print();
 									maxID = 99;
 									break;
 								case 2:
 									selectedArray = &category2.getCatArray();
-									catName = "Beverages";
+									catName = category2.getCatName();
 									selectedArray->print();
 									maxID = 200;
 									break;
 								case 3:
 									selectedArray = &category3.getCatArray();
-									catName = "Desert";
+									catName = category3.getCatName();
 									selectedArray->print();
 									maxID = 300;
 									break;

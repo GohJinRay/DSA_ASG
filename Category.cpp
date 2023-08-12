@@ -18,20 +18,40 @@ Category::Category(int CatID, string CatName, SortedArray CatArray)
 	catArray = CatArray;
 }
 
-// Add a food item to the sorted array within the category.
+/*
+   Add a food item to the sorted array within the category.
+
+   Parameters:
+   - foodItem: The FoodItem object to be added.
+
+   Return Value: True if the food item is successfully added, false otherwise.
+*/
 bool Category::addFoodItem(FoodItem foodItem)
 {
 	return catArray.insert(foodItem);
 }
 
-// Remove a food item from the sorted array within the category using its foodID.
+/*
+   Remove a food item from the sorted array within the category using its foodID.
+
+   Parameters:
+   - foodID: The ID of the food item to be removed.
+
+   Return Value: True if the food item is successfully removed, false if not found.
+*/
 bool Category::removeFoodItem(int foodID) 
 {
 	return catArray.remove(foodID);
 }
 
+/*
+   Retrieve a food item from the category's sorted array using its foodID.
 
-// Retrieve a food item from the category's sorted array using its foodID.
+   Parameters:
+   - foodID: The ID of the food item to retrieve.
+
+   Return Value: The FoodItem object if found, otherwise a default FoodItem object.
+*/
 FoodItem Category::getFoodItemByFoodID(int foodID) { return catArray.searchByFoodID(foodID); } 
 
 // Retrieve the category's ID.

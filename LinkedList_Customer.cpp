@@ -1,13 +1,15 @@
 #include "LinkedList_Customer.h"
 using namespace std;
 
-LinkedList_Customer::LinkedList_Customer() // constructor
+// Constructor for LinkedList_Customer class
+LinkedList_Customer::LinkedList_Customer() 
 {
 	firstNode = NULL;
 	size = 0;
 }
 
-LinkedList_Customer::~LinkedList_Customer() // deconstructor
+// Destructor for LinkedList_Customer class
+LinkedList_Customer::~LinkedList_Customer() 
 {
 	Node* curr = firstNode;
 	while (curr != NULL)
@@ -19,7 +21,16 @@ LinkedList_Customer::~LinkedList_Customer() // deconstructor
 	}
 }
 
-bool LinkedList_Customer::addOrder(Order* orderItem) // add order to linkedlist
+/*
+	Add an order to the linked list.
+
+	Parameters:
+	- orderItem: Pointer to the Order object to be added.
+
+	Return Value: True if the order is successfully added, false otherwise.
+*/
+
+bool LinkedList_Customer::addOrder(Order* orderItem) 
 {
 	Node* newNode = new Node;
 	newNode->orderItem = orderItem;
@@ -34,13 +45,21 @@ bool LinkedList_Customer::addOrder(Order* orderItem) // add order to linkedlist
 		{
 			curr = curr->next;
 		}
-		curr->next = newNode;
+		curr->next = newNode;  // Adding the new node at the end of the list
 	}
 	size++;
 	return true;
 }
 
-bool LinkedList_Customer::removeOrder(Order& orderItem) // remove order from linkedlist
+/* 
+	Remove an order from the linked list.
+
+	Parameters:
+	- orderItem: Reference to the Order object to be removed.
+
+	Return Value: True if the order is successfully removed, false if the order is not found.
+*/
+bool LinkedList_Customer::removeOrder(Order& orderItem) 
 {
 	Node* curr = firstNode;
 	Node* prev = NULL;
@@ -67,7 +86,15 @@ bool LinkedList_Customer::removeOrder(Order& orderItem) // remove order from lin
 	return false;
 }
 
-Order* LinkedList_Customer::getOrderByOrderID(int orderID) // get order from linkedlist
+/*
+	Get an order from the linked list based on its orderID.
+
+	Parameters:
+	- orderID: The ID of the order to retrieve.
+
+	Return Value: Pointer to the Order object if found, NULL otherwise.
+*/
+Order* LinkedList_Customer::getOrderByOrderID(int orderID) 
 {
 	Node* curr = firstNode;
 
@@ -82,7 +109,15 @@ Order* LinkedList_Customer::getOrderByOrderID(int orderID) // get order from lin
 	return NULL;
 }
 
-Order* LinkedList_Customer::getOrderByIndex(int index) // get order from linkedlist
+/*
+	Get an order from the linked list based on its index.
+
+	Parameters:
+	- index: Index of the order to retrieve.
+
+	Return Value: Pointer to the Order object if found, NULL if index is out of bounds.
+*/
+Order* LinkedList_Customer::getOrderByIndex(int index)
 {
 	if (index >= 0 && index < size)
 	{
@@ -102,17 +137,27 @@ Order* LinkedList_Customer::getOrderByIndex(int index) // get order from linkedl
 	return NULL;
 }
 
-bool LinkedList_Customer::orderListIsEmpty() // check if order is empty
+/*
+	Check if the order list is empty.
+
+	Return Value: True if the order list is empty, false otherwise.
+*/
+bool LinkedList_Customer::orderListIsEmpty() 
 {
 	return size == 0;
 }
 
-int LinkedList_Customer::orderListGetLength() // get linkedlist length
+/*
+	Get the length of the linked list.
+	Return Value: The number of orders in the linked list.
+*/
+int LinkedList_Customer::orderListGetLength() 
 {
 	return size;
 }
 
-void LinkedList_Customer::orderListPrint() // print all orders from linkedlist
+// Print all orders in the linked list.
+void LinkedList_Customer::orderListPrint() 
 {
 	Node* curr = firstNode;
 

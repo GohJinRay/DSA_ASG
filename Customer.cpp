@@ -2,9 +2,10 @@
 
 Customer::Customer() { } // Default constructor
 
-Customer::Customer(string UserName, string Password, int PhoneNum, LinkedList_Customer OrderList)
+Customer::Customer(string UserName, string Password, int PhoneNum, Membership Membership, LinkedList_Customer OrderList)
 	: User(UserName, Password, PhoneNum) 
 { 
+	membership = Membership;
 	orderList = OrderList;
 }
 

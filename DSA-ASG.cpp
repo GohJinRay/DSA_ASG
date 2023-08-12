@@ -1,9 +1,9 @@
 // DSA-ASG.cpp : This file contains the 'main' function. Program execution begins and ends there.
 
 #include <iostream>
+#include <string>
 #include <sstream>
 #include <iomanip>
-#include <string>
 #include <regex>
 #include "Admin.h"
 #include "Customer.h"
@@ -16,6 +16,7 @@
 #include "HashTable.h"
 #include "SortedArray.h"
 #include "Category.h"
+#include "Membership.h"
 using namespace std;
 
 void invalidIntegerInput() {
@@ -107,8 +108,8 @@ int main()
 
 		// admin case 4
 		string catName, foodName;
-		int foodID;
-		string price; // string to match regex
+		int foodID, filterOption; // filter option for admins to decide if they want to filter or not
+		string price, filterString; // string price to match regex, filterstring to get what admin wants to filter
 		FoodItem fooditem;
 		SortedArray* selectedArray = nullptr;
 		const regex numRegex("^[0-9]+(\\.[0-9]+)?$"); // regular expression for integers and doubles
@@ -117,6 +118,7 @@ int main()
 
 		int phoneNum;
 		Customer* newCustomer;
+		Membership membership(Bronze, 0, 0);
 
 
 		do {
@@ -162,7 +164,8 @@ int main()
 					break;
 			} while (true);
 
-			newCustomer = new Customer(username, password, phoneNum, orderList);
+
+			newCustomer = new Customer(username, password, phoneNum, membership, orderList);
 			usersInfo.add(username, newCustomer);
 			cout << endl << "Registration complete! Please log in to your account to contiune using the services!" << endl;
 
@@ -186,7 +189,7 @@ int main()
 					cout << "1. View the incoming orders" << endl;
 					cout << "2. Update status of the chosen order" << endl;
 					cout << "3. View customer information" << endl;
-					cout << "4. Create new food item and add to menu" << endl; // Need to check whether a food item with the same order id exists first
+					cout << "4. Create new food item and add to menu" << endl; 
 					cout << "5. Logout" << endl;
 					cout << "-----------------------------------" << endl;
 					cout << "Enter your choice (1, 2, 3, 4 or 5): ";
@@ -259,14 +262,20 @@ int main()
 								case 1:
 									selectedArray = &category1.getCatArray();
 									catName = "Main Course";
+									cout << end; // formatting
+									selectedArray->print();
 									break;
 								case 2:
 									selectedArray = &category2.getCatArray();
 									catName = "Beverages";
+									cout << end; // formatting
+									selectedArray->print();
 									break;
 								case 3:
 									selectedArray = &category3.getCatArray();
 									catName = "Desert";
+									cout << end; // formatting
+									selectedArray->print();
 									break;
 								default:
 									cout << "Invalid choice. Please select a valid Category ID." << endl << endl;
@@ -276,6 +285,28 @@ int main()
 								break; // Exit the loop if a valid choice was made
 							}
 						}
+
+						while (true) { // filtering if admin wants to. e.g. if admin enter chic, everything foodname with chic in them will come out
+							cout << "Do you want to filter? (1 for yes) (2 for no)" << endl;
+							cin >> filterOption;
+							if (filterOption == 2) {
+								break;
+							}
+							else if (filterOption == 1) {
+								cout << "Enter Food Name to fitler: ";
+								cin >> filterString;
+								for (int i = 0; i < selectedArray->getSize(); i++) {
+									foodName = selectedArray->searchByIndex(i).getFoodName();
+									if (foodName.find(filterString) != npos) {
+										selectedArray->searchByIndex(i).printFoodItem();
+									}
+								}
+							}
+							else {
+								cout << "Invalid option. Please enter 1 or 2." << endl;
+							}
+
+						};
 
 						while (true) {
 							cout << "Enter Food ID: ";
@@ -308,7 +339,7 @@ int main()
 								getline(cin, foodName); // Read a full line of input
 
 								for (int i = 0; i < selectedArray->getSize();i++) {
-									if (selectedArray->search(i).getFoodName() == foodName) { // checks for duplicates
+									if (selectedArray->searchByFoodName(foodName).getFoodID() != -1) { // checks for duplicate food name by using its food ID
 										cout << "Duplicate Food Name found. Please enter a unique Food Name." << endl;
 										foodName = ""; // setting foodName string to empty
 										break;
@@ -580,85 +611,6 @@ int main()
 			invalidIntegerInput();
 		}
 	} while (choice != 3);
-
-/////////////////////////////////////////////////////////////////////////////////////////////
-	//Customer cust1("John", "123", 123, orderList); // initialization
-	//Customer cust2("Mary", "124", 124, orderList); // initialization
-
-	//order = cust1.createOrder(orderID);
-	//int option = 1;
-	//if (option > 0 && option <= category1.getCatArray().getSize())
-	//	order->addFoodItem(category1.getFoodItem(option));
-	//else if (option >= 100 && option < category2.getCatArray().getSize() + 100)
-	//	order->addFoodItem(category2.getFoodItem(option));
-	//else if (option >= 200 && option < category3.getCatArray().getSize() + 200)
-	//	order->addFoodItem(category3.getFoodItem(option));
-	//else
-	//	cout << "Invalid option. Please a valid one." << endl;
-	//option = 200;
-	//if (option > 0 && option <= category1.getCatArray().getSize())
-	//	order->addFoodItem(category1.getFoodItem(option));
-	//else if (option >= 100 && option < category2.getCatArray().getSize() + 100)
-	//	order->addFoodItem(category2.getFoodItem(option));
-	//else if (option >= 200 && option < category3.getCatArray().getSize() + 200)
-	//	order->addFoodItem(category3.getFoodItem(option));
-	//else
-	//	cout << "Invalid option. Please a valid one." << endl;
-	//newQueue.enqueue(*order); // enqueue the object by dereference the pointer
-	//orderID++;
-	//cust1.getOrderList().orderListPrint();
-
-	//order = cust1.createOrder(orderID);
-	//option = 100;
-	//if (option > 0 && option <= category1.getCatArray().getSize())
-	//	order->addFoodItem(category1.getFoodItem(option));
-	//else if (option >= 100 && option < category2.getCatArray().getSize() + 100)
-	//	order->addFoodItem(category2.getFoodItem(option));
-	//else if (option >= 200 && option < category3.getCatArray().getSize() + 200)
-	//	order->addFoodItem(category3.getFoodItem(option));
-	//else
-	//	cout << "Invalid option. Please a valid one." << endl;
-	//option = 201;
-	//if (option > 0 && option <= category1.getCatArray().getSize())
-	//	order->addFoodItem(category1.getFoodItem(option));
-	//else if (option >= 100 && option < category2.getCatArray().getSize() + 100)
-	//	order->addFoodItem(category2.getFoodItem(option));
-	//else if (option >= 200 && option < category3.getCatArray().getSize() + 200)
-	//	order->addFoodItem(category3.getFoodItem(option));
-	//else
-	//	cout << "Invalid option. Please a valid one." << endl;
-	//newQueue.enqueue(*order);
-	//orderID++;
-	//cust1.getOrderList().orderListPrint();
-
-	//order = cust2.createOrder(orderID);
-	//option = 202;
-	//if (option > 0 && option <= category1.getCatArray().getSize())
-	//	order->addFoodItem(category1.getFoodItem(option));
-	//else if (option >= 100 && option < category2.getCatArray().getSize() + 100)
-	//	order->addFoodItem(category2.getFoodItem(option));
-	//else if (option >= 200 && option < category3.getCatArray().getSize() + 200)
-	//	order->addFoodItem(category3.getFoodItem(option));
-	//else
-	//	cout << "Invalid option. Please a valid one." << endl;
-	//newQueue.enqueue(*order);
-	//orderID++;
-	//cust2.getOrderList().orderListPrint();
-
-	//cout << "Shows what's in the queue currently" << endl;
-	//cout << "-----------------------------------" << endl;
-	//newQueue.displayItems();
-	//admin.updateStatus(newQueue); // Dequeue upon update
-	//newQueue.displayItems();
-	//cust1.getOrderList().orderListPrint();
-
-	//cout << "Cancel Order" << endl;
-	//cust1.cancelOrder(newQueue, 1); // Cancel orderID 1
-
-	//newQueue.displayItems();
-	//cust1.getOrderList().orderListPrint();
-
-///////////////////////////////////////////////////////////////////////////////////////////////
 
 	return 0;
 }

@@ -8,13 +8,16 @@ private:
     FoodItem foodItems[MAX_ITEMS];
     int size;
 
+    void merge(int left, int middle, int right);
+    void mergeSort(int left, int right);
+
 public:
     SortedArray();
     ~SortedArray();
 
     bool insert(FoodItem);
 
-    void mergeSort();
+    void sortPriceAscending();
 
     FoodItem searchByFoodID(int);
 

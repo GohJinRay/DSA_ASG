@@ -46,7 +46,7 @@ FoodItem SortedArray::searchByFoodID(int foodID) // search the fooditem via thei
     return FoodItem(-1, "", -1.0);
 }
 
-FoodItem SortedArray::searchByFoodName(string foodName)
+FoodItem SortedArray::searchByFoodName(string foodName) // search the fooditem via their food name
 {
     for (int i = 0; i < size; i++)
         if (foodItems[i].getFoodName() == foodName)
@@ -54,6 +54,17 @@ FoodItem SortedArray::searchByFoodName(string foodName)
 
     return FoodItem(-1, "", -1.0);
 }
+
+FoodItem SortedArray::searchByIndex(int index) { // search the fooditem via index
+    if (index >= 0 && index < size) {
+        return foodItems[index];
+    }
+    else {
+        cout << "Invalid index." << endl;
+        return FoodItem(-1, "", -1.0);
+    }
+}
+
 
 bool SortedArray::remove(int foodID) { // remove the fooditem via their ID
     int left = 0;

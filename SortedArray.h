@@ -18,6 +18,8 @@ public:
 
     FoodItem searchByFoodName(string);
 
+    FoodItem searchByIndex(int);
+
     bool remove(int);
 
     int getSize();

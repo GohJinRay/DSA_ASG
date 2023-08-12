@@ -24,6 +24,7 @@ FoodItem::FoodItem(int FoodID, string FoodName, double Price)
 */
 void FoodItem::printFoodItem() 
 {
+	// Set the width and format of the output for each attribute
 	cout.width(8);
 	cout << getFoodID();
 	cout << " | ";

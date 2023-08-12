@@ -107,8 +107,8 @@ int main()
 
 		// admin case 4
 		string catName, foodName;
-		int foodID;
-		string price; // string to match regex
+		int foodID, filterOption; // filter option for admins to decide if they want to filter or not
+		string price, filterString; // string price to match regex, filterstring to get what admin wants to filter
 		FoodItem fooditem;
 		SortedArray* selectedArray = nullptr;
 		const regex numRegex("^[0-9]+(\\.[0-9]+)?$"); // regular expression for integers and doubles
@@ -186,7 +186,7 @@ int main()
 					cout << "1. View the incoming orders" << endl;
 					cout << "2. Update status of the chosen order" << endl;
 					cout << "3. View customer information" << endl;
-					cout << "4. Create new food item and add to menu" << endl; // Need to check whether a food item with the same order id exists first
+					cout << "4. Create new food item and add to menu" << endl; 
 					cout << "5. Logout" << endl;
 					cout << "-----------------------------------" << endl;
 					cout << "Enter your choice (1, 2, 3, 4 or 5): ";
@@ -259,14 +259,20 @@ int main()
 								case 1:
 									selectedArray = &category1.getCatArray();
 									catName = "Main Course";
+									cout << end; // formatting
+									selectedArray->print();
 									break;
 								case 2:
 									selectedArray = &category2.getCatArray();
 									catName = "Beverages";
+									cout << end; // formatting
+									selectedArray->print();
 									break;
 								case 3:
 									selectedArray = &category3.getCatArray();
 									catName = "Desert";
+									cout << end; // formatting
+									selectedArray->print();
 									break;
 								default:
 									cout << "Invalid choice. Please select a valid Category ID." << endl << endl;
@@ -276,6 +282,28 @@ int main()
 								break; // Exit the loop if a valid choice was made
 							}
 						}
+
+						while (true) { // filtering if admin wants to. e.g. if admin enter chic, everything foodname with chic in them will come out
+							cout << "Do you want to filter? (1 for yes) (2 for no)" << endl;
+							cin >> filterOption;
+							if (filterOption == 2) {
+								break;
+							}
+							else if (filterOption == 1) {
+								cout << "Enter Food Name to fitler: ";
+								cin >> filterString;
+								for (int i = 0; i < selectedArray->getSize(); i++) {
+									foodName = selectedArray->searchByIndex(i).getFoodName();
+									if (foodName.find(filterString) != npos) {
+										selectedArray->searchByIndex(i).printFoodItem();
+									}
+								}
+							}
+							else {
+								cout << "Invalid option. Please enter 1 or 2." << endl;
+							}
+
+						};
 
 						while (true) {
 							cout << "Enter Food ID: ";
@@ -308,7 +336,7 @@ int main()
 								getline(cin, foodName); // Read a full line of input
 
 								for (int i = 0; i < selectedArray->getSize();i++) {
-									if (selectedArray->search(i).getFoodName() == foodName) { // checks for duplicates
+									if (selectedArray->searchByFoodName(foodName).getFoodID() != -1) { // checks for duplicate food name by using its food ID
 										cout << "Duplicate Food Name found. Please enter a unique Food Name." << endl;
 										foodName = ""; // setting foodName string to empty
 										break;

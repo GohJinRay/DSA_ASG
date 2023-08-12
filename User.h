@@ -13,10 +13,6 @@ public:
 	User();
 	User(string, string, int);
 
-	void setUserName(string);
-	void setPassword(string);
-	void setPhoneNum(int);
-
 	string getUserName();
 	string getPassword();
 	int getPhoneNum();

@@ -18,7 +18,6 @@ public:
 	~LinkedList_Customer();
 
 	bool addOrder(Order*);
-	bool addOrder(int, Order*);
 
 	bool removeOrder(Order&);
 

@@ -40,38 +40,6 @@ bool LinkedList_Customer::addOrder(Order* orderItem) // add order to linkedlist
 	return true;
 }
 
-bool LinkedList_Customer::addOrder(int index, Order* orderItem) // // add order to linkedlist based off index
-{
-	if (index >= 0 && index <= size)
-	{
-		Node* newNode = new Node;
-		newNode->orderItem = orderItem;
-		newNode->next = NULL;
-		int counter = 0;
-
-		if (index == 0)
-		{
-			newNode->next = firstNode;
-			firstNode = newNode;
-		}
-		else
-		{
-			Node* curr = firstNode;
-			while (curr->next != NULL && counter < index - 1)
-			{
-				curr = curr->next;
-				counter++;
-			}
-			newNode->next = curr->next;
-			curr->next = newNode;
-		}
-		size++;
-		return true;
-	}
-	else
-		return false;
-}
-
 bool LinkedList_Customer::removeOrder(Order& orderItem) // remove order from linkedlist
 {
 	Node* curr = firstNode;

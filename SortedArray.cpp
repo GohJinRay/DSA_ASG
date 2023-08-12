@@ -28,7 +28,55 @@ bool SortedArray::insert(FoodItem newItem) // insert FoodItem based on their foo
     return true;
 }
 
-void SortedArray::mergeSort() {}
+
+void SortedArray::merge(int first, int mid, int last) {
+    FoodItem tempArray[MAX_ITEMS]; // temp array
+
+    // Initialize the local indexes to indicate the subarrays
+    int first1 = first;         // beginning of first subarray
+    int last1 = mid;           // end of first subarray
+    int first2 = mid + 1;       // beginning of second subarray
+    int last2 = last;          // end of second subarray
+
+    // While both subarrays are not empty, copy the smaller item into the temporary array
+    int index = first1; // next available location in tempArray
+    for (; (first1 <= last1) && (first2 <= last2); index++) {
+        if (foodItems[first1].getPrice() < foodItems[first2].getPrice()) { // ascending
+            tempArray[index] = foodItems[first1];
+            first1++;
+        }
+        else {
+            tempArray[index] = foodItems[first2];
+            first2++;
+        }
+    }   
+
+    // Finish off the nonempty subarray
+    // Finish off the first subarray, if necessary
+    for (; first1 <= last1; ++first1, index++)
+        tempArray[index] = foodItems[first1];
+    // Finish off the second subarray, if necessary
+    for (; first2 <= last2; ++first2, index++)
+        tempArray[index] = foodItems[first2];
+    // Copy the result back into the original array
+    for (index = first; index <= last; index++)
+        foodItems[index] = tempArray[index];
+}
+
+void SortedArray::mergeSort(int left, int right) {
+    if (left < right) {
+        int middle = left + (right - left) / 2;
+
+        mergeSort(left, middle);
+        mergeSort(middle + 1, right);
+
+        merge(left, middle, right);
+    }
+}
+
+void SortedArray::sortPriceAscending() {
+    mergeSort(0, size - 1);
+}
 
 FoodItem SortedArray::searchByFoodID(int foodID) // search the fooditem via their ID
 {
@@ -50,10 +98,18 @@ FoodItem SortedArray::searchByFoodID(int foodID) // search the fooditem via thei
 
 FoodItem SortedArray::searchByFoodName(string foodName) // search the fooditem via their food name
 {
-    for (int i = 0; i < size; i++)
-        if (foodItems[i].getFoodName() == foodName)
-            return foodItems[i];
-
+    int left = 0;
+    int right = size - 1;
+    while (left <= right)
+    {
+        int mid = left + (right - left) / 2;
+        if (foodItems[mid].getFoodName() == foodName)
+            return foodItems[mid];
+        if (foodItems[mid].getFoodName()< foodName)
+            left = mid + 1;
+        else
+            right = mid - 1;
+    }
     return FoodItem(-1, "", -1.0);
 }
 

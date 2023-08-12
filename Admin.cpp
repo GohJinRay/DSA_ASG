@@ -28,7 +28,7 @@ void Admin::updateStatus(Queue& q, int orderIdToUpdate) // allow admin to update
         cout << "No incoming orders." << endl << endl;
         return;
     }
-    viewOrders(q);
+
 
     Queue auxiliaryQueue;
     Order targetOrder;

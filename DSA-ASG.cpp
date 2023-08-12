@@ -207,6 +207,7 @@ int main()
 						admin.viewOrders(newQueue);
 						break;
 
+
 					case 2: // Update status of the chosen order
 						if (newQueue.isEmpty()) {
 							cout << endl << "No incoming orders." << endl;
@@ -225,6 +226,7 @@ int main()
 
 						admin.updateStatus(newQueue, orderIdToUpdate);
 						break;
+
 
 					case 3: // View customer information
 						if (!usersInfo.isEmpty()) { 
@@ -246,6 +248,7 @@ int main()
 						admin.viewCustInfo(usersInfo, orderIdToView);
 						break;
 
+
 					case 4: // Create new food item and add to menu
 						int categoryChoice;
 						while (true) {
@@ -258,10 +261,7 @@ int main()
 							if (!(cin >> categoryChoice)) { // error handling
 								invalidIntegerInput();
 							}
-							else {
-								// Clear the input buffer
-								cin.ignore(numeric_limits<streamsize>::max(), '\n');
-								
+							else {								
 								switch (categoryChoice) {
 								case 1:
 									selectedArray = &category1.getCatArray();
@@ -294,6 +294,8 @@ int main()
 								break;
 							}
 							else if (filterOption == 1) {
+
+								// filtering/searching by name
 								while (true) {
 									foundMatch = false;
 									cout << "Enter Food Name to filter or type 'exit' to go exit: ";
@@ -301,6 +303,7 @@ int main()
 
 									if (!regex_match(filterString, stringRegex)) { // checks if it contain letters and spacing only
 										cout << "Invalid input. Please enter a valid Food Name (letters & spaces only)." << endl;
+										foundMatch = true; // prevent it to print
 									}
 									if (filterString == "exit") { // to exiting the search
 										break;
@@ -329,78 +332,66 @@ int main()
 							}
 						};
 
-						while (true) { // filtering if admin wants to. e.g. if admin enter chic, everything foodname with chic in them will come out
-							cout << "Do you want to filter? (1 for yes) (2 for no)" << endl;
+						// sort price by ascending order
+						while (true) {
+							cout << "Do you want to sort the Menu by price in ascending order? (1 for yes, 2 for no): ";
 							cin >> filterOption;
-							if (filterOption == 2) {
+
+							if (filterOption == 1) {
+								selectedArray->sortPriceAscending();
+								cout << endl << "Filtered results sorted by price in ascending order:" << endl;
+								selectedArray->print(); // Print the sorted results
+								cout << endl;
+							}
+							else if (filterOption == 2) {
 								break;
 							}
-							else if (filterOption == 1) {
-								cout << "Enter Food Name to fitler: ";
-								cin >> filterString;
-								for (int i = 0; i < selectedArray->getSize(); i++) {
-									foodName = selectedArray->searchByIndex(i).getFoodName();
-									if (foodName.find(filterString) != string::npos) {
-										selectedArray->searchByIndex(i).printFoodItem();
+							else {
+								invalidIntegerInput();
+							}
+						}
+						
+
+						while (true) {
+							cout << "Enter Food ID: ";
+							if (cin >> foodID) {
+								if (foodID <= 0) {
+									cout << "Please enter a Food ID that is a positive number!" << endl << endl;
+								}
+								else if (selectedArray != nullptr) {
+									fooditem = selectedArray->searchByFoodID(foodID);
+									if (fooditem.getFoodID() != -1) {
+										cout << "Duplicate Food ID. Please enter a unique Food ID." << endl;
+									}
+									else {
+										break;
 									}
 								}
 							}
 							else {
-								cout << "Invalid option. Please enter 1 or 2." << endl;
-							}
-
-						};
-
-						while (true) {
-							cout << "Enter Food ID: ";
-							if (!(cin >> foodID)) { // error handling for non-integer input
 								invalidIntegerInput();
 							}
-							else if (foodID <= 0) {
-								cout << "Please enter a Food ID that is a positive number!" << endl << endl;
-							}
-							
-							else if (selectedArray != nullptr) {
-								fooditem = selectedArray->searchByFoodID(foodID);
-								if (fooditem.getFoodID() != -1) {
-									cout << "Duplicate Food ID. Please enter a unique Food ID." << endl;
-									continue;
-								}
-							}
-							else {
-								break;
-							}
 						}
-						
-						// checks for Food ID duplicates
-						if (selectedArray != nullptr) {
 
+						// checks for Food ID duplicates
+						if (selectedArray != nullptr) { // ensure select array contains something
 							// do while loop
 							do {
 								cout << "Enter Food Name: ";
-								cin >> foodName;
-
+								cin.ignore(); // Clear the newline character and any remaining input
 								getline(cin, foodName); // Read a full line of input
 
-
-								// test this shit also
-								if (selectedArray->searchByFoodName(foodName).getFoodID() != -1) {
-									cout << "Duplicate Food Name found. Please enter a unique Food Name." << endl;
-									foodName = ""; // setting foodName string to empty
-									break;
+								// checks if its a valid string
+								if (!regex_match(foodName, stringRegex)) {
+									cout << "Invalid input. Please enter a valid Food Name (letters & spaces only)." << endl; // only accept more than 1 character
+									foodName.clear();
 								}
 
-								// checks if its a valid string
-								if (!regex_match(foodName, stringRegex)) { 
-									cout << "Invalid input. Please enter a valid Food Name (letters & spaces only)." << endl;
-									foodName = "";
+								else if (selectedArray->searchByFoodName(foodName).getFoodID() != -1) {
+									cout << "Duplicate Food Name found. Please enter a unique Food Name." << endl;
+									foodName.clear();
 								}
 								else {
-									break;
-								}
-									
-
-								if (!foodName.empty()) { // checks if its not empty
 									break;
 								}
 							} while (true);
@@ -427,6 +418,9 @@ int main()
 							cout << endl << "Food Item of Name: " << foodName << " has been added to Category: " << catName << endl;
 							cout << "Updated " << catName << " Menu: " << endl;
 							admin.createNewFoodItem(foodID, foodName, fPrice, *selectedArray);
+						}
+						else {
+							cout << "Array is empty" << endl;
 						}
 						break;
 					case 5:

@@ -90,7 +90,7 @@ int main()
 
 		// admin case 4
 		string catName, foodName;
-		int foodID, maxID, filterOption; // filter option for admins to decide if they want to filter or not, maxID for each cat
+		int foodID, maxID, minID, filterOption; // filter option for admins to decide if they want to filter or not, maxID for each cat
 		string price, filterString; // string price to match regex, filterstring to get what admin wants to filter
 		bool foundMatch; // to keep track if there is any matches, for searching/filtering
 		FoodItem fooditem;
@@ -252,20 +252,23 @@ int main()
 								switch (categoryChoice) {
 								case 1:
 									selectedArray = &category1.getCatArray();
-									catName = "Main Course";
+									catName = category1.getCatName();
 									selectedArray->print();
+									minID = 0;
 									maxID = 99;
 									break;
 								case 2:
 									selectedArray = &category2.getCatArray();
-									catName = "Beverages";
+									catName = category2.getCatName();
 									selectedArray->print();
+									minID = 99;
 									maxID = 200;
 									break;
 								case 3:
 									selectedArray = &category3.getCatArray();
-									catName = "Desert";
+									catName = category3.getCatName();
 									selectedArray->print();
+									minID = 199;
 									maxID = 300;
 									break;
 								default:
@@ -346,7 +349,7 @@ int main()
 						while (true) {
 							cout << "Enter Food ID: ";
 							if (cin >> foodID) {
-								if (foodID <= 0 || foodID > maxID) { // ensure its a positive foodID
+								if (foodID <= 0 || foodID > maxID || foodID < minID) { // ensure its a positive foodID
 									cout << "Please enter a valid Food ID!" << endl << endl; 
 									cin.ignore();
 								}

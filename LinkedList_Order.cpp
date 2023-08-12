@@ -2,13 +2,15 @@
 #include <iostream>
 using namespace std;
 
-LinkedList_Order::LinkedList_Order() // constructor
+// Constructor for LinkedList_Order class
+LinkedList_Order::LinkedList_Order()
 { 
 	firstNode = NULL;
 	size = 0;
 }
 
-LinkedList_Order::~LinkedList_Order() // deconstructor
+// Destructor for LinkedList_Order class
+LinkedList_Order::~LinkedList_Order() 
 { 
 	Node* curr = firstNode;
 	Node* next;
@@ -22,7 +24,15 @@ LinkedList_Order::~LinkedList_Order() // deconstructor
 	firstNode = NULL;
 }
 
-bool LinkedList_Order::addItem(FoodItem& foodItem) // add fooditem into linkedlist
+/*
+   Add a food item to the linked list.
+
+   Parameters:
+   - foodItem: Reference to the FoodItem object to be added.
+
+   Return Value: True if the food item is successfully added, false otherwise.
+*/
+bool LinkedList_Order::addItem(FoodItem& foodItem)
 {
 	Node* newNode = new Node;
 	newNode->foodItem = foodItem;
@@ -37,13 +47,21 @@ bool LinkedList_Order::addItem(FoodItem& foodItem) // add fooditem into linkedli
 		{
 			curr = curr->next;
 		}
-		curr->next = newNode;
+		curr->next = newNode; // Add the new node to the end
 	}
 	size++;
 	return true;
 }
 
-bool LinkedList_Order::removeItem(int foodID) // remove food item from linked list based on item id
+/*
+   Remove a food item from the linked list based on its foodID.
+
+   Parameters:
+   - foodID: The ID of the food item to be removed.
+
+   Return Value: True if the food item is successfully removed, false if not found.
+*/
+bool LinkedList_Order::removeItem(int foodID) 
 {
 	if (firstNode == NULL)
 		return false;
@@ -55,8 +73,8 @@ bool LinkedList_Order::removeItem(int foodID) // remove food item from linked li
 	{
 		if (curr->foodItem.getFoodID() == foodID)
 		{
-			if (prev == NULL) // if it's the first node
-				firstNode = curr->next;
+			if (prev == NULL)
+				firstNode = curr->next; // Update the first node if the matching node is the first one
 			else
 				prev->next = curr->next;
 
@@ -72,7 +90,15 @@ bool LinkedList_Order::removeItem(int foodID) // remove food item from linked li
 	return false;
 }
 
-FoodItem LinkedList_Order::getItemByIndex(int index) // get fooditem via index
+/*
+   Retrieve a food item from the linked list based on its index.
+
+   Parameters:
+   - index: Index of the food item to retrieve.
+
+   Return Value: The FoodItem object at the specified index, or a default FoodItem object if index is out of bounds.
+*/
+FoodItem LinkedList_Order::getItemByIndex(int index)
 {
 	if (index >= 0 && index < size)
 	{
@@ -84,13 +110,21 @@ FoodItem LinkedList_Order::getItemByIndex(int index) // get fooditem via index
 			curr = curr->next;
 			counter++;
 		}
-		return curr->foodItem;
+		return curr->foodItem; 
 	}
 
-	return FoodItem();
+	return FoodItem(); // Return a default FoodItem object if index is out of bounds
 }
 
-FoodItem LinkedList_Order::getItemByFoodID(int foodID) // get fooditem by id
+/*
+   Retrieve a food item from the linked list based on its foodID.
+
+   Parameters:
+   - foodID: The ID of the food item to retrieve.
+
+   Return Value: The FoodItem object with the specified foodID, or a default FoodItem object if not found.
+*/
+FoodItem LinkedList_Order::getItemByFoodID(int foodID) 
 {
 	Node* curr = firstNode;
 
@@ -101,27 +135,38 @@ FoodItem LinkedList_Order::getItemByFoodID(int foodID) // get fooditem by id
 		curr = curr->next;
 	}
 
-	return FoodItem();
+	return FoodItem(); // Return a default FoodItem object if not found
 }
 
-bool LinkedList_Order::isEmpty() // checks if linkedlist is empty
+/*
+   Check if the linked list is empty.
+
+   Return Value: True if the linked list is empty, false otherwise.
+*/
+bool LinkedList_Order::isEmpty() 
 {
 	return size == 0;
 }
 
-int LinkedList_Order::getLength() // get length of linkedlist
+/*
+   Get the length of the linked list.
+
+   Return Value: The number of items in the linked list.
+*/
+int LinkedList_Order::getLength() 
 {
 	return size;
 }
 
-void LinkedList_Order::print() // print all the fooditem in the linkedlist
+// Print all the food items in the linked list
+void LinkedList_Order::print() 
 {
 	Node* curr = firstNode;
 
 	while (curr != NULL)
 	{
 		FoodItem item = curr->foodItem;
-		item.printFoodItem();
+		item.printFoodItem(); // Print details of the food item
 
 		curr = curr->next;
 	}

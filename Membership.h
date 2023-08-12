@@ -24,11 +24,14 @@ public:
 	Membership(MembershipStatus, int, int);
 
 	void setMembershipStatus(MembershipStatus);
+	void setCurrLoyaltyPoints(int);
+	void setTotalLoyaltyPointsEarned(int);
 	string getMembershipStatus();
 	int getCurrentLoyaltyPoints();
 	int getTotalLoyaltyPointsEarned();
-	void addLoyaltyPoints(int);
-	void redeemLoyaltyPoints(Category&, Category&, Category&, Order&, int);
+	void addLoyaltyPoints(double);
+	void redeemLoyaltyPoints(Category&, Category&, Category&, Order&);
 	int calculatePointsEarned(double);
+	void printMembership();
 };
 

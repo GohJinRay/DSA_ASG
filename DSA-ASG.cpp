@@ -1,9 +1,9 @@
 // DSA-ASG.cpp : This file contains the 'main' function. Program execution begins and ends there.
 
 #include <iostream>
+#include <string>
 #include <sstream>
 #include <iomanip>
-#include <string>
 #include <regex>
 #include <algorithm> // for transform
 #include <cctype>    // for tolower
@@ -18,6 +18,7 @@
 #include "HashTable.h"
 #include "SortedArray.h"
 #include "Category.h"
+#include "Membership.h"
 using namespace std;
 
 void invalidIntegerInput() {
@@ -120,9 +121,11 @@ int main()
 
 		int phoneNum;
 		Customer* newCustomer;
+		Membership membership(Bronze, 0, 0);
 
 
 		do {
+			cout << endl;
 			cout << "Please select an option:" << endl;
 			cout << "1. Register" << endl;
 			cout << "2. Login" << endl;
@@ -165,7 +168,8 @@ int main()
 					break;
 			} while (true);
 
-			newCustomer = new Customer(username, password, phoneNum, orderList); // creation of Customer object
+
+			newCustomer = new Customer(username, password, phoneNum, membership, orderList); // creation of Customer object
 			usersInfo.add(username, newCustomer); // adding Customer object to Dictionary
 			cout << endl << "Registration complete! Please log in to your account to contiune using the services!" << endl;
 			break;
@@ -230,7 +234,7 @@ int main()
 							usersInfo.printAllOrders(); // print all the orders in customer dictionary
 						}
 						else {
-							cout << "No Customer/Orders in this Dictionary" << endl << endl;
+							cout << endl << "No Customer/Orders in this Dictionary" << endl;
 							break;
 						}
 
@@ -445,6 +449,7 @@ int main()
 
 				if (customer->getPassword() == password) // User login
 				{
+					bool unpaidOrdersExist = false;
 					int userChoice1;
 					cout << endl << "Login successful. Welcome " << username << "!" << endl;
 					do
@@ -462,7 +467,8 @@ int main()
 
 						double totalAmountToPay = 0.0;
 						string paymentInput;
-						bool paymentFlag = false;
+						bool case2Flag = false;
+						bool case4Flag = false;
 
 						switch (userChoice1)
 						{
@@ -483,6 +489,7 @@ int main()
 								{
 									order = customer->createOrder(orderID);
 									
+									bool case1_4Flag = false;
 									int userChoice2;
 
 									do {
@@ -517,6 +524,11 @@ int main()
 											break;
 
 										case 2: // Remove Food Item
+											if (order->getFoodItemList().isEmpty())
+											{
+												cout << endl << "Your cart is empty!" << endl;
+												break;
+											}
 											cout << endl << "Enter the foodID to remove from cart: ";
 											if (!(cin >> foodIDOption))
 											{
@@ -543,26 +555,36 @@ int main()
 											break;
 
 										case 4: // Submit Order
+											if (order->getFoodItemList().isEmpty())
+											{
+												cout << endl << "Your cart is empty!" << endl;
+												break;
+											}
+											cout << "You have " << customer->getMembership().getCurrentLoyaltyPoints() << " points currently." << endl;
+											cout << "Do you want to redeem your loyalty points? Enter \"yes\" to reedeem or any key to exit: ";
+											cin >> response;
+											if (response == "yes")
+												customer->getMembership().redeemLoyaltyPoints(category1, category2, category3, *order);
+
 											newQueue.enqueue(*order);
 											orderID++;
 											cout << endl << "Order receipt: " << endl;
 											order->printOrder();
-
-											cout << endl << "Total Price: $" << order->getTotalPrice() << endl;
+											case1_4Flag = true;
 
 											break;
 
 										default:
 											invalidIntegerInput();
 										}
-									} while (userChoice2 != 4);
+									} while (userChoice2 != 4 || case1_4Flag == false);
 									
 									break;
 								}
 								else if (response == "no")
 									break;
 								else
-									cout << "Invalid response. Please enter \"yes\" or \"no\"." << endl << endl;
+									cout << "Invalid response. Please enter \"yes\" or \"no\"." << endl;
 									
 							} while (true);
 
@@ -572,8 +594,16 @@ int main()
 							int cancelOrder_OrderID;
 							for (int i = 0; i < customer->getOrderList().orderListGetLength(); i++)
 								if (customer->getOrderList().getOrderByIndex(i)->getStatus() == "Not Prepared")
+								{
 									customer->getOrderList().getOrderByIndex(i)->printOrder();
-
+									case2Flag = true;
+								}
+							if (case2Flag == false)
+							{
+								cout << endl << "You have no orders to cancel!" << endl;
+								break;
+							}
+									
 							cout << "Enter the Order ID to cancel it: ";
 							if (!(cin >> cancelOrder_OrderID))
 							{
@@ -591,6 +621,11 @@ int main()
 							break;
 
 						case 3: // View all orders
+							if (customer->getOrderList().orderListIsEmpty())
+							{
+								cout << endl << "You have no orders!" << endl;
+								break;
+							}
 							customer->getOrderList().orderListPrint();
 							break;
 
@@ -598,13 +633,13 @@ int main()
 							for (int i = 0; i < customer->getOrderList().orderListGetLength(); i++)
 								if (customer->getOrderList().getOrderByIndex(i)->getStatus() == "Prepared")
 								{
-									paymentFlag = true;
+									case4Flag = true;
 									customer->getOrderList().getOrderByIndex(i)->printOrder();
 									totalAmountToPay += customer->getOrderList().getOrderByIndex(i)->getTotalPrice();
 								}
-							if (paymentFlag == false)
+							if (case4Flag == false)
 							{
-								cout << "No orders to pay!" << endl;
+								cout << endl << "No orders to pay!" << endl;
 								break;
 							}
 
@@ -614,26 +649,38 @@ int main()
 
 							if (paymentInput == "yes")
 							{
+								customer->getMembership().addLoyaltyPoints(totalAmountToPay);
 								for (int i = 0; i < customer->getOrderList().orderListGetLength(); i++)
 									if (customer->getOrderList().getOrderByIndex(i)->getStatus() == "Prepared")
 									{
 										customer->getOrderList().getOrderByIndex(i)->setStatus(Paid);
 									}
 								cout << endl << "Payment successful!" << endl;
+								unpaidOrdersExist = false;
+								customer->getMembership().printMembership();
 							}
 
 							break;
 
 						case 5:
+							for (int i = 0; i < customer->getOrderList().orderListGetLength(); i++) {
+								if (customer->getOrderList().getOrderByIndex(i)->getStatus() == "Prepared") {
+									unpaidOrdersExist = true;
+									break; // No need to continue checking if one unpaid order is found
+								}
+							}
+							if (unpaidOrdersExist) {
+								cout << "You have unpaid orders. You cannot log out until all orders are paid." << endl;
+							}
 							break;
 
 						default:
 							invalidIntegerInput();
 						}
-					} while (userChoice1 != 5);
+					} while (userChoice1 != 5 || unpaidOrdersExist);
 				}
 				else
-					cout << "Invalid password. Login failed." << endl;
+					cout << "Invalid password. Login failed." << endl << endl;
 			}
 
 			else
@@ -653,85 +700,6 @@ int main()
 			invalidIntegerInput();
 		}
 	} while (choice != 3);
-
-/////////////////////////////////////////////////////////////////////////////////////////////
-	//Customer cust1("John", "123", 123, orderList); // initialization
-	//Customer cust2("Mary", "124", 124, orderList); // initialization
-
-	//order = cust1.createOrder(orderID);
-	//int option = 1;
-	//if (option > 0 && option <= category1.getCatArray().getSize())
-	//	order->addFoodItem(category1.getFoodItem(option));
-	//else if (option >= 100 && option < category2.getCatArray().getSize() + 100)
-	//	order->addFoodItem(category2.getFoodItem(option));
-	//else if (option >= 200 && option < category3.getCatArray().getSize() + 200)
-	//	order->addFoodItem(category3.getFoodItem(option));
-	//else
-	//	cout << "Invalid option. Please a valid one." << endl;
-	//option = 200;
-	//if (option > 0 && option <= category1.getCatArray().getSize())
-	//	order->addFoodItem(category1.getFoodItem(option));
-	//else if (option >= 100 && option < category2.getCatArray().getSize() + 100)
-	//	order->addFoodItem(category2.getFoodItem(option));
-	//else if (option >= 200 && option < category3.getCatArray().getSize() + 200)
-	//	order->addFoodItem(category3.getFoodItem(option));
-	//else
-	//	cout << "Invalid option. Please a valid one." << endl;
-	//newQueue.enqueue(*order); // enqueue the object by dereference the pointer
-	//orderID++;
-	//cust1.getOrderList().orderListPrint();
-
-	//order = cust1.createOrder(orderID);
-	//option = 100;
-	//if (option > 0 && option <= category1.getCatArray().getSize())
-	//	order->addFoodItem(category1.getFoodItem(option));
-	//else if (option >= 100 && option < category2.getCatArray().getSize() + 100)
-	//	order->addFoodItem(category2.getFoodItem(option));
-	//else if (option >= 200 && option < category3.getCatArray().getSize() + 200)
-	//	order->addFoodItem(category3.getFoodItem(option));
-	//else
-	//	cout << "Invalid option. Please a valid one." << endl;
-	//option = 201;
-	//if (option > 0 && option <= category1.getCatArray().getSize())
-	//	order->addFoodItem(category1.getFoodItem(option));
-	//else if (option >= 100 && option < category2.getCatArray().getSize() + 100)
-	//	order->addFoodItem(category2.getFoodItem(option));
-	//else if (option >= 200 && option < category3.getCatArray().getSize() + 200)
-	//	order->addFoodItem(category3.getFoodItem(option));
-	//else
-	//	cout << "Invalid option. Please a valid one." << endl;
-	//newQueue.enqueue(*order);
-	//orderID++;
-	//cust1.getOrderList().orderListPrint();
-
-	//order = cust2.createOrder(orderID);
-	//option = 202;
-	//if (option > 0 && option <= category1.getCatArray().getSize())
-	//	order->addFoodItem(category1.getFoodItem(option));
-	//else if (option >= 100 && option < category2.getCatArray().getSize() + 100)
-	//	order->addFoodItem(category2.getFoodItem(option));
-	//else if (option >= 200 && option < category3.getCatArray().getSize() + 200)
-	//	order->addFoodItem(category3.getFoodItem(option));
-	//else
-	//	cout << "Invalid option. Please a valid one." << endl;
-	//newQueue.enqueue(*order);
-	//orderID++;
-	//cust2.getOrderList().orderListPrint();
-
-	//cout << "Shows what's in the queue currently" << endl;
-	//cout << "-----------------------------------" << endl;
-	//newQueue.displayItems();
-	//admin.updateStatus(newQueue); // Dequeue upon update
-	//newQueue.displayItems();
-	//cust1.getOrderList().orderListPrint();
-
-	//cout << "Cancel Order" << endl;
-	//cust1.cancelOrder(newQueue, 1); // Cancel orderID 1
-
-	//newQueue.displayItems();
-	//cust1.getOrderList().orderListPrint();
-
-///////////////////////////////////////////////////////////////////////////////////////////////
 
 	return 0;
 }

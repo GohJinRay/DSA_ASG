@@ -44,6 +44,8 @@ Order* Customer::createOrder(int orderID)
 	string currTime(buffer); //Convert to string format
 
 	Order* newOrder = new Order(orderID, currTime, NotPrepared, 0.0, this, LinkedList_Order());
+	
+	// Add the newly created order to the order list
 	orderList.addOrder(newOrder);
 
 	return newOrder;
@@ -59,7 +61,7 @@ Order* Customer::createOrder(int orderID)
 	Return Value:
 	Returns true if the order was found and cancelled, otherwise false.
 */
-bool Customer::cancelOrder(Queue& queue, int orderID) // cancel the order
+bool Customer::cancelOrder(Queue& queue, int orderID) 
 {
 	Queue auxiliaryQueue;
 	bool foundOrder = false;
@@ -72,7 +74,7 @@ bool Customer::cancelOrder(Queue& queue, int orderID) // cancel the order
 
 		if (currOrder.getOrderID() == orderID)
 		{
-			// Remove order from linked list 
+			// Remove the cancelled order from the linked list of orders associated with the customer
 			orderList.removeOrder(currOrder); 
 			foundOrder = true;
 			cout << "Order with ID " << orderID << " has been cancelled." << endl;
@@ -110,7 +112,7 @@ Membership& Customer::getMembership() { return membership; }
 	Return Value:
 	Reference to the LinkedList_Customer containing customer's orders.
 */
-LinkedList_Customer& Customer::getOrderList() // get the customer order linkedlist
+LinkedList_Customer& Customer::getOrderList() 
 {
 	return orderList;
 }

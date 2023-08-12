@@ -28,6 +28,8 @@ bool SortedArray::insert(FoodItem newItem) // insert FoodItem based on their foo
     return true;
 }
 
+void SortedArray::mergeSort() {}
+
 FoodItem SortedArray::searchByFoodID(int foodID) // search the fooditem via their ID
 {
     int left = 0;

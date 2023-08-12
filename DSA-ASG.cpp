@@ -262,26 +262,22 @@ int main()
 								case 1:
 									selectedArray = &category1.getCatArray();
 									catName = "Main Course";
-
 									selectedArray->print();
 									break;
 								case 2:
 									selectedArray = &category2.getCatArray();
 									catName = "Beverages";
-
 									selectedArray->print();
 									break;
 								case 3:
 									selectedArray = &category3.getCatArray();
 									catName = "Desert";
-
 									selectedArray->print();
 									break;
 								default:
 									cout << "Invalid choice. Please select a valid Category ID." << endl << endl;
 									continue; // Go back to the beginning of the loop
 								}
-
 								break; // Exit the loop if a valid choice was made
 							}
 						}
@@ -299,10 +295,10 @@ int main()
 									cout << "Enter Food Name to filter or type 'exit' to go exit: ";
 									cin >> filterString;
 
-									if (!regex_match(filterString, stringRegex)) {
+									if (!regex_match(filterString, stringRegex)) { // checks if it contain letters and spacing only
 										cout << "Invalid input. Please enter a valid Food Name (letters & spaces only)." << endl;
 									}
-									if (filterString == "exit") {
+									if (filterString == "exit") { // to exiting the search
 										break;
 									}
 									else {

@@ -203,6 +203,7 @@ int main()
 						admin.viewOrders(newQueue);
 						break;
 
+
 					case 2: // Update status of the chosen order
 						if (newQueue.isEmpty()) {
 							cout << endl << "No incoming orders." << endl;
@@ -221,6 +222,7 @@ int main()
 
 						admin.updateStatus(newQueue, orderIdToUpdate);
 						break;
+
 
 					case 3: // View customer information
 						if (!usersInfo.isEmpty()) { 
@@ -241,6 +243,7 @@ int main()
 
 						admin.viewCustInfo(usersInfo, orderIdToView);
 						break;
+
 
 					case 4: // Create new food item and add to menu
 						int categoryChoice;
@@ -287,6 +290,8 @@ int main()
 								break;
 							}
 							else if (filterOption == 1) {
+
+								// filtering/searching by name
 								while (true) {
 									foundMatch = false;
 									cout << "Enter Food Name to filter or type 'exit' to go exit: ";
@@ -294,6 +299,7 @@ int main()
 
 									if (!regex_match(filterString, stringRegex)) { // checks if it contain letters and spacing only
 										cout << "Invalid input. Please enter a valid Food Name (letters & spaces only)." << endl;
+										foundMatch = true; // prevent it to print
 									}
 									if (filterString == "exit") { // to exiting the search
 										break;
@@ -309,7 +315,6 @@ int main()
 											if (foodName.find(filterString) != string::npos) {
 												selectedArray->searchByIndex(i).printFoodItem();
 												foundMatch = true;
-												cout << "test";
 											}
 										}
 										if (!foundMatch) {
@@ -323,6 +328,7 @@ int main()
 							}
 						};
 
+						// sort price by ascending order
 						while (true) {
 							cout << "Do you want to sort the Menu by price in ascending order? (1 for yes, 2 for no): ";
 							cin >> filterOption;
@@ -354,7 +360,7 @@ int main()
 										cout << "Duplicate Food ID. Please enter a unique Food ID." << endl;
 									}
 									else {
-										break; // Valid and unique Food ID
+										break;
 									}
 								}
 							}
@@ -363,58 +369,25 @@ int main()
 							}
 						}
 
-						do {
-							cout << "Enter Food Name: ";
-							cin >> foodName;
-							cin.ignore();
-							getline(cin, foodName); // Read a full line of input
-							// test this shit also
-							if (selectedArray->searchByFoodName(foodName).getFoodID() != -1) {
-								cout << "Duplicate Food Name found. Please enter a unique Food Name." << endl;
-								foodName = ""; // setting foodName string to empty
-								break;
-							}
-
-							// checks if its a valid string
-							if (!regex_match(foodName, stringRegex)) {
-								cout << "Invalid input. Please enter a valid Food Name (letters & spaces only)." << endl;
-								foodName = "";
-							}
-							else {
-								break;
-							}
-
-							if (!foodName.empty()) { // checks if its not empty
-								break;
-							}
-						} while (true);
-
-
 						// checks for Food ID duplicates
 						if (selectedArray != nullptr) { // ensure select array contains something
 							// do while loop
 							do {
 								cout << "Enter Food Name: ";
-								cin >> foodName;
-								cin.ignore();
+								cin.ignore(); // Clear the newline character and any remaining input
 								getline(cin, foodName); // Read a full line of input
-								// test this shit also
-								if (selectedArray->searchByFoodName(foodName).getFoodID() != -1) {
-									cout << "Duplicate Food Name found. Please enter a unique Food Name." << endl;
-									foodName = ""; // setting foodName string to empty
-									break;
-								}
 
 								// checks if its a valid string
-								if (!regex_match(foodName, stringRegex)) { 
-									cout << "Invalid input. Please enter a valid Food Name (letters & spaces only)." << endl;
-									foodName = "";
+								if (!regex_match(foodName, stringRegex)) {
+									cout << "Invalid input. Please enter a valid Food Name (letters & spaces only)." << endl; // only accept more than 1 character
+									foodName.clear();
+								}
+
+								else if (selectedArray->searchByFoodName(foodName).getFoodID() != -1) {
+									cout << "Duplicate Food Name found. Please enter a unique Food Name." << endl;
+									foodName.clear();
 								}
 								else {
-									break;
-								}
-									
-								if (!foodName.empty()) { // checks if its not empty
 									break;
 								}
 							} while (true);

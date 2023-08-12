@@ -1,4 +1,9 @@
-// DSA-ASG.cpp : This file contains the 'main' function. Program execution begins and ends there.
+/*
+Group number: 9
+Team member's name: Darrel Neo Yuzhe and Goh Jin Ray
+Respective student's id: S10241995 and S10247558
+*/
+
 
 #include <iostream>
 #include <string>
@@ -27,31 +32,6 @@ void invalidIntegerInput() {
 	cin.clear(); // Clear error state
 	cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear input buffer
 }
-
-///////
-//void testing() {
-//
-//	LinkedList_Customer orderList1; // Create order list instance for customer1
-//	LinkedList_Customer orderList2; // Create order list instance for customer2
-//
-//	Customer customer1("John Doe", "password", 123456, orderList1);
-//	Customer customer2("Jane Smith", "secret", 789012, orderList2);
-//
-//	Dictionary customerDictionary;
-//
-//	customerDictionary.add(customer1.getUserName(), &customer1);
-//
-//	customerDictionary.add(customer2.getUserName(), &customer2);
-//
-//	Order* order1 = customer1.createOrder(0);
-//
-//	Order* order2 = customer2.createOrder(1);
-//
-//	Admin admin("Admin Name", "adminpass", 999);
-//
-//	admin.viewCustInfo(customerDictionary);
-//}
-///////
 
 int main()
 {
@@ -121,7 +101,7 @@ int main()
 
 		int phoneNum;
 		Customer* newCustomer;
-		Membership membership(Bronze, 0, 0);
+		Membership membership(Bronze, 0, 0); // All the new customers will start at this level
 
 
 		do {
@@ -403,7 +383,7 @@ int main()
 									foodName.clear();
 								}
 
-								else if (selectedArray->searchByFoodName(foodName).getFoodID() != -1) { // checks for duplicate foodName via foodID
+								else if (selectedArray->searchByFoodName(foodName).getFoodID() != -1) { // checks for duplicate foodName 
 									cout << "Duplicate Food Name found. Please enter a unique Food Name." << endl;
 									foodName.clear();
 								}
@@ -444,7 +424,6 @@ int main()
 					case 5: // log out
 						cout << endl << "Logging out..." << endl;
 						cout << "Logged out sucessfully!" << endl;
-						cout << "-----------------------------------" << endl;
 						break;
 
 

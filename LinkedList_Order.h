@@ -20,7 +20,6 @@ public:
 	~LinkedList_Order();
 
 	bool addItem(FoodItem&);
-	bool addItem(int, FoodItem&);
 
 	bool removeItem(int);
 

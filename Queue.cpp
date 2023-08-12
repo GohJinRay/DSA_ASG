@@ -57,35 +57,6 @@ bool Queue::dequeue()
 	return true;
 }
 
-bool Queue::dequeue(Order& orderItem)
-{
-	if (isEmpty())
-	{
-		cout << "No nodes to dequeue!" << endl;
-		return false;
-	}
-
-	else if (frontNode == backNode)
-	{
-		orderItem = frontNode->orderItem;
-		frontNode = NULL;
-		backNode = NULL;
-
-		delete frontNode;
-	}
-
-	else
-	{
-		Node* temp = frontNode;
-		orderItem = temp->orderItem;
-		frontNode = frontNode->next;
-
-		temp->next = NULL;
-		delete temp;
-	}
-	return true;
-}
-
 void Queue::getFront(Order& orderItem) 
 {
 	if (!isEmpty())

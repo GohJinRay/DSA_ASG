@@ -22,7 +22,6 @@ public:
 	bool enqueue(Order&);
 
 	bool dequeue();
-	bool dequeue(Order&);
 
 	void getFront(Order&);
 

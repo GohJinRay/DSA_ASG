@@ -43,38 +43,6 @@ bool LinkedList_Order::addItem(FoodItem& foodItem) // add fooditem into linkedli
 	return true;
 }
 
-bool LinkedList_Order::addItem(int index, FoodItem& foodItem) // add fooditem into linkedlist based on index
-{
-	if (index >= 0 && index <= size)
-	{
-		Node* newNode = new Node;
-		newNode->foodItem = foodItem;
-		newNode->next = NULL;
-		int counter = 0;
-
-		if (index == 0)
-		{
-			newNode->next = firstNode;
-			firstNode = newNode;
-		}
-		else
-		{
-			Node* curr = firstNode;
-			while (curr->next != NULL && counter < index - 1)
-			{
-				curr = curr->next;
-				counter++;
-			}
-			newNode->next = curr->next;
-			curr->next = newNode;
-		}
-		size++;
-		return true;
-	}
-	else
-		return false;
-}
-
 bool LinkedList_Order::removeItem(int foodID) // remove food item from linked list based on item id
 {
 	if (firstNode == NULL)

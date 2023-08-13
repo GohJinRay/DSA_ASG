@@ -3,12 +3,11 @@
 using namespace std;
 
 // Constructor for SortedArray class
-SortedArray::SortedArray() { // 
+SortedArray::SortedArray() { 
     size = 0;
 }
  // Deconstructor for SortedArray class
 SortedArray::~SortedArray() { }
-
 
 /*
    Add a food item to the Sorted Array

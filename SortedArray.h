@@ -8,8 +8,8 @@ private:
     FoodItem foodItems[MAX_ITEMS];
     int size;
 
-    void merge(int left, int middle, int right);
-    void mergeSort(int left, int right);
+    void merge(int, int, int);
+    void mergeSort(int, int);
 
 public:
     SortedArray();

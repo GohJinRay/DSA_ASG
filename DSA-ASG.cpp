@@ -2,6 +2,7 @@
 Group number: 9
 Team member's name: Darrel Neo Yuzhe and Goh Jin Ray
 Respective student's id: S10241995 and S10247558
+Advance Feature: Loyalty Point System (Darrel), Sorting & Searching (Jin Ray)
 */
 
 #include <iostream>

@@ -16,9 +16,6 @@ public:
 	Category();
 	Category(int, string, SortedArray);
 
-	bool addFoodItem(FoodItem);
-	bool removeFoodItem(int);
-
 	FoodItem getFoodItemByFoodID(int);
 	int getCatID();
 	string getCatName();

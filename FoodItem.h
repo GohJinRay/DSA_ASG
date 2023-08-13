@@ -16,10 +16,6 @@ public:
 	
 	void printFoodItem();
 
-	void setFoodID(int);
-	void setFoodName(string);
-	void setPrice(double);
-
 	int getFoodID();
 	string getFoodName();
 	double getPrice();

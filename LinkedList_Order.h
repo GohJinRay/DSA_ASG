@@ -23,8 +23,6 @@ public:
 
 	bool removeItem(int);
 
-	FoodItem getItemByIndex(int);
-
 	FoodItem getItemByFoodID(int);
 
 	bool isEmpty();

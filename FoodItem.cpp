@@ -37,30 +37,6 @@ void FoodItem::printFoodItem()
 }
 
 /*
-   Modify the food item's FoodID.
-
-   Input Parameters:
-   - FoodID: The new FoodID value to set.
-*/
-void FoodItem::setFoodID(int FoodID) { foodID = FoodID; }
-
-/*
-   Modify the food item's FoodName.
-
-   Input Parameters:
-   - FoodName: The new FoodName value to set.
-*/
-void FoodItem::setFoodName(string FoodName) { foodName = FoodName; }
-
-/*
-   Modify the food item's Price.
-
-   Input Parameters:
-   - Price: The new Price value to set.
-*/
-void FoodItem::setPrice(double Price) { price = Price; }
-
-/*
    Retrieve the food item's FoodID.
 
    Return Value:

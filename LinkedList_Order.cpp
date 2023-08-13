@@ -91,32 +91,6 @@ bool LinkedList_Order::removeItem(int foodID)
 }
 
 /*
-   Retrieve a food item from the linked list based on its index.
-
-   Parameters:
-   - index: Index of the food item to retrieve.
-
-   Return Value: The FoodItem object at the specified index, or a default FoodItem object if index is out of bounds.
-*/
-FoodItem LinkedList_Order::getItemByIndex(int index)
-{
-	if (index >= 0 && index < size)
-	{
-		int counter = 0;
-		Node* curr = firstNode;
-
-		while (curr->next != NULL && counter < index)
-		{
-			curr = curr->next;
-			counter++;
-		}
-		return curr->foodItem; 
-	}
-
-	return FoodItem(); // Return a default FoodItem object if index is out of bounds
-}
-
-/*
    Retrieve a food item from the linked list based on its foodID.
 
    Parameters:

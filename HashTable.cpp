@@ -144,7 +144,7 @@ void Dictionary::remove(KeyType key) { // remove customer based of key
    Return value:
    - customer object
 */
-Customer* Dictionary::get(KeyType key) { // get customer based of key
+Customer* Dictionary::getCustomerByKey(KeyType key) { // get customer based of key
 
     int index = hash(key);
 
@@ -197,10 +197,6 @@ bool Dictionary::isEmpty() { // check if Dictionary is empty
     return size == 0;
 }
 
-int Dictionary::getLength() { // get Dictionary length
-    return size;
-}
-
 void Dictionary::printAllOrders() { // print all orders via customer in the Dictionary
     for (int i = 0; i < MAX_SIZE; i++) {
         Node* curr = customers[i];
@@ -211,17 +207,6 @@ void Dictionary::printAllOrders() { // print all orders via customer in the Dict
             for (int j = 0; j < orderList.orderListGetLength(); j++) {
                 orderList.getOrderByIndex(j)->printOrder();
             }
-            curr = curr->next;
-        }
-    }
-}
-
-void Dictionary::print() {  // print all the customer belonging in the Dictionary
-    for (int i = 0; i < MAX_SIZE; i++) {
-        Node* curr = customers[i];
-        while (curr != nullptr) {
-            Customer* cust = curr->item;
-            cust->printDetails();
             curr = curr->next;
         }
     }

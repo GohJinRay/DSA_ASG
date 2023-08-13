@@ -4,7 +4,6 @@ Team member's name: Darrel Neo Yuzhe and Goh Jin Ray
 Respective student's id: S10241995 and S10247558
 */
 
-
 #include <iostream>
 #include <string>
 #include <sstream>
@@ -128,7 +127,7 @@ int main()
 				cout << "Please enter your username: ";
 				cin >> username;
 
-				if (usersInfo.get(username) != NULL || username == admin.getUserName())
+				if (usersInfo.getCustomerByKey(username) != NULL || username == admin.getUserName())
 					cout << "Already exists! Please enter a new username!" << endl;
 				else
 					break;
@@ -435,9 +434,9 @@ int main()
 				} while (adminChoice1 != 5);
 			}
 
-			else if (usersInfo.get(username) != NULL)
+			else if (usersInfo.getCustomerByKey(username) != NULL)
 			{
-				Customer* customer = usersInfo.get(username);
+				Customer* customer = usersInfo.getCustomerByKey(username);
 
 				if (customer->getPassword() == password) // User login
 				{
@@ -560,25 +559,11 @@ int main()
 
 									// format
 									cout << endl << "Filtered results sorted by price in ascending order:" << endl;
-									cout << "\n" << category1.getCatName() << "\n";
-									cout << "------------------------------------------------" << endl;
-									cout << " Food ID |                 Food Name | Price ($)" << endl;
-									cout << "------------------------------------------------" << endl;
-									category1.getCatArray().print();
 
-									// format
-									cout << "\n" << category2.getCatName() << "\n";
-									cout << "------------------------------------------------" << endl;
-									cout << " Food ID |                 Food Name | Price ($)" << endl;
-									cout << "------------------------------------------------" << endl;
-									category2.getCatArray().print();
-
-									// format
-									cout << "\n" << category3.getCatName() << "\n";
-									cout << "------------------------------------------------" << endl;
-									cout << " Food ID |                 Food Name | Price ($)" << endl;
-									cout << "------------------------------------------------" << endl;
-									category3.getCatArray().print();
+									category1.printDetails();
+									category2.printDetails();
+									category3.printDetails();	
+								
 									cout << endl;
 									break;
 								}
@@ -813,4 +798,3 @@ int main()
 
 	return 0;
 }
-

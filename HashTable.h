@@ -27,13 +27,10 @@ public:
 	bool add(KeyType, Customer*);
 	void remove(KeyType);
 
-	Customer* get(KeyType);
+	Customer* getCustomerByKey(KeyType);
 	Customer* getCustomerByOrderID(int);
 
 	bool isEmpty();
 
-	int getLength();
-
 	void printAllOrders();
-	void print();
 };

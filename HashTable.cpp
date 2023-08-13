@@ -1,6 +1,7 @@
 #include "HashTable.h"
 
-Dictionary::Dictionary() { // constructor
+// Constructor for Dictionary class
+Dictionary::Dictionary() { 
 
     size = 0;
 
@@ -9,7 +10,9 @@ Dictionary::Dictionary() { // constructor
     }
 }
 
-Dictionary::~Dictionary() { // deconstructor
+
+// Deconstructor for Dictionary class
+Dictionary::~Dictionary() {
 
     for (int i = 0; i < MAX_SIZE; i++) {
         Node* currNode = customers[i];
@@ -22,7 +25,17 @@ Dictionary::~Dictionary() { // deconstructor
     }
 }
 
-int Dictionary::hash(KeyType key) { // hashing the key
+
+/*
+   Hashing of key
+
+   Parameters:
+   - key: The key of the customer object.
+
+   Return value:
+   - hashValue: the hash value of the key
+*/
+int Dictionary::hash(KeyType key) { 
 
     int sum = 0;
 
@@ -37,7 +50,20 @@ int Dictionary::hash(KeyType key) { // hashing the key
     return hashValue;
 }
 
-bool Dictionary::add(KeyType newKey, Customer* customer) { // add the customer into the dictionary
+
+/*
+   Adding of Customer object into the Dictionary by using the key
+   to indicate the position in the Dictionary
+
+   Parameters:
+   - newKey:   The key of the customer object.
+   - customer: Customer object
+
+   Return value:
+   - True:  When its successfully added
+   - False: When there's a duplicate key that exists in the Dictionary
+*/
+bool Dictionary::add(KeyType newKey, Customer* customer) { 
 
 	int index = hash(newKey);
 
@@ -72,6 +98,14 @@ bool Dictionary::add(KeyType newKey, Customer* customer) { // add the customer i
     return true;
 }
 
+
+/*
+   Removing of Customer object based on the key
+
+   Parameters:
+   - key:   The key of the customer object.
+
+*/
 void Dictionary::remove(KeyType key) { // remove customer based of key
 
     int index = hash(key);
@@ -100,6 +134,16 @@ void Dictionary::remove(KeyType key) { // remove customer based of key
     }
 }
 
+
+/*
+   Getting of Customer object based on the key
+
+   Parameters:
+   - Key:   The key of the customer object.
+
+   Return value:
+   - customer object
+*/
 Customer* Dictionary::get(KeyType key) { // get customer based of key
 
     int index = hash(key);
@@ -121,6 +165,16 @@ Customer* Dictionary::get(KeyType key) { // get customer based of key
     return NULL;
 }
 
+
+/*
+   Getting of Customer object based on the their orderID
+
+   Parameters:
+   - orderID: ID of the order
+
+   Return value:
+   - customer object
+*/
 Customer* Dictionary::getCustomerByOrderID(int orderID) { // get the customer based off OrderID
     for (int i = 0; i < MAX_SIZE; i++) {
         Node* currNode = customers[i];

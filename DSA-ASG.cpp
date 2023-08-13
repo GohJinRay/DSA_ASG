@@ -285,7 +285,7 @@ int main()
 							cout << "Do you want to filter? (1 for yes) (2 for no): ";
 							cin >> filterOption;
 
-							if (filterOption == 2) {
+							if (filterOption == 2) { // exits the loop
 								break;
 							}
 							else if (filterOption == 1) {
@@ -316,13 +316,13 @@ int main()
 											}
 										}
 										if (!foundMatch) {
-											cout << "No food name matches the search string: " << filterString << endl;
+											cout << "No food name matches the search string: " << filterString << endl; // if there is no match
 										}
 									}
 								}
 							}
 							else {
-								invalidIntegerInput();
+								invalidIntegerInput(); // error handling
 							}
 						};
 
@@ -336,12 +336,13 @@ int main()
 								cout << endl << "Filtered results sorted by price in ascending order:" << endl;
 								selectedArray->print(); // Print the sorted results
 								cout << endl;
+								break;
 							}
-							else if (filterOption == 2) {
+							else if (filterOption == 2) { // exits the loop
 								break;
 							}
 							else {
-								invalidIntegerInput();
+								invalidIntegerInput(); // error handling
 							}
 						}
 						
@@ -365,7 +366,7 @@ int main()
 								}
 							}
 							else {
-								invalidIntegerInput();
+								invalidIntegerInput(); // error handling
 							}
 						}
 
@@ -479,7 +480,124 @@ int main()
 								if (response == "yes")
 								{
 									order = customer->createOrder(orderID);
+
+									// Filtering/ Searching
+									while (true) { // filtering if customer wants to. 
+										// e.g. if custoemr enter chic, everything with foodname with c h i c in them will come out
+
+										cout << "Do you want to filter? (1 for yes) (2 for no): ";
+										cin >> filterOption;
+
+										if (filterOption == 2) { // exits the loop
+											break;
+										}
+										else if (filterOption == 1) {
+
+											// filtering/searching by name
+											while (true) {
+												foundMatch = false;
+												cout << "Enter Food Name to filter or type 'exit' to go exit: ";
+												cin >> filterString;
+
+												if (!regex_match(filterString, stringRegex)) { // checks if it contain letters and spacing only
+													cout << "Invalid input. Please enter a valid Food Name (letters & spaces only)." << endl;
+													foundMatch = true; // prevent it to print
+												}
+												if (filterString == "exit") { // to exiting the search
+													break;
+												}
+
+												else {
+													transform(filterString.begin(), filterString.end(), filterString.begin(), ::tolower); // changing input to lowercase
+
+													// for Main Course
+													for (int i = 0; i < category1.getCatArray().getSize(); i++) {
+														foodName = category1.getCatArray().searchByIndex(i).getFoodName();
+
+														// ensure that it will not be case sensitive
+														transform(foodName.begin(), foodName.end(), foodName.begin(), ::tolower); // changing food name to lowercase
+														if (foodName.find(filterString) != string::npos) {
+															category1.getCatArray().searchByIndex(i).printFoodItem();
+															foundMatch = true;
+														}
+													}
+
+													// for Drinks
+													for (int i = 0; i < category2.getCatArray().getSize(); i++) {
+														foodName = category2.getCatArray().searchByIndex(i).getFoodName();
+
+														// ensure that it will not be case sensitive
+														transform(foodName.begin(), foodName.end(), foodName.begin(), ::tolower); // changing food name to lowercase
+														if (foodName.find(filterString) != string::npos) {
+															category2.getCatArray().searchByIndex(i).printFoodItem();
+															foundMatch = true;
+														}
+													}
+
+													// for Deserts
+													for (int i = 0; i < category3.getCatArray().getSize(); i++) {
+														foodName = category3.getCatArray().searchByIndex(i).getFoodName();
+
+														// ensure that it will not be case sensitive
+														transform(foodName.begin(), foodName.end(), foodName.begin(), ::tolower); // changing food name to lowercase
+														if (foodName.find(filterString) != string::npos) {
+															category3.getCatArray().searchByIndex(i).printFoodItem();
+															foundMatch = true;
+														}
+													}
+													if (!foundMatch) {
+														cout << "No food name matches the search string: " << filterString << endl; // if there is no match
+													}
+												}
+											}
+										}
+										else {
+											invalidIntegerInput(); // error handling
+										}
+									};
 									
+									// sort price by ascending order
+									while (true) {
+										cout << "Do you want to sort the Menu by price in ascending order? (1 for yes, 2 for no): ";
+										cin >> filterOption;
+
+										if (filterOption == 1) {
+											category1.getCatArray().sortPriceAscending();
+											category2.getCatArray().sortPriceAscending();
+											category3.getCatArray().sortPriceAscending();
+											
+											// format
+											cout << endl << "Filtered results sorted by price in ascending order:" << endl;
+											cout << "\n" << category1.getCatName() << "\n";
+											cout << "---------------------------------------------\n";
+											cout << "ID       |   Food Name               | Price\n";
+											cout << "---------------------------------------------\n";
+											category1.getCatArray().print();
+
+											// format
+											cout << "\n" << category2.getCatName() << "\n";
+											cout << "---------------------------------------------\n";
+											cout << "ID       |   Food Name               | Price\n";
+											cout << "---------------------------------------------\n";
+											category2.getCatArray().print();
+
+											// format
+											cout << "\n" << category3.getCatName() << "\n";
+											cout << "---------------------------------------------\n";
+											cout << "ID       |   Food Name               | Price\n";
+											cout << "---------------------------------------------\n";
+											category3.getCatArray().print();
+											cout << endl;
+											break;
+										}
+										else if (filterOption == 2) { // exits the loop
+											break;
+										}
+										else {
+											invalidIntegerInput(); // error handling
+										}
+									}
+
 									bool case1_4Flag = false;
 									int userChoice2;
 

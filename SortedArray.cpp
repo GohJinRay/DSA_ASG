@@ -32,6 +32,7 @@ bool SortedArray::insert(FoodItem newItem)
         insertIndex--;
     }
 
+    // Insert the new item at the correct position
     foodItems[insertIndex] = newItem;
     size++;
     return true;

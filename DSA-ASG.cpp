@@ -489,9 +489,9 @@ int main()
 							cout << "------------------------------------------------" << endl;
 
 							// Display food items from all categories
-							category1.getCatArray().print();
-							category2.getCatArray().print();
-							category3.getCatArray().print();
+							category1.getCatArray().print(); // Main Course
+							category2.getCatArray().print(); // Drinks
+							category3.getCatArray().print(); // Desserts
 
 							// Filtering/Searching
 							while (true) { // Loop for filtering if customer wants to. 
